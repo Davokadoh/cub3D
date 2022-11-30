@@ -43,6 +43,9 @@ cub3D
 *.idb
 *.pdb
 
+#temporary file
+*.swp
+
 # Kernel Module Compile Results
 *.mod*
 *.cmd
