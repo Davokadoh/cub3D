@@ -6,11 +6,11 @@
 #    By: jleroux <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 11:31:44 by jleroux           #+#    #+#              #
-#    Updated: 2022/11/29 12:28:13 by jleroux          ###   ########.fr        #
+#    Updated: 2022/11/30 12:30:57 by jleroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	cub3dD
+NAME		:=	cub3D
 
 LIBS        :=	m ft mlx
 LIBS_TARGET :=	lib/libft/libft.a \
