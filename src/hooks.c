@@ -12,16 +12,19 @@
 
 #include "mlx.h"
 #include "keys.h"
+#include "stdlib.h"
 #include "cub3D.h"
 
 int	hook_keydown(int key, t_data data)
 {
-	if (key == K_ESC)
+	if (key == KEY_ESC)
 		exit(EXIT_SUCCESS);
-	if (move(key, data))
-		render(data);
+	//if (move(key, data))
+	//	render(data);
+	return (0);
 }
 
 int	hook_mousemove(int key, t_data data)
 {
+	return (0);
 }

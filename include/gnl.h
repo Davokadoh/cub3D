@@ -1,0 +1,20 @@
+#ifndef GET_NEXT_LINE_H
+
+# define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 2
+# endif
+
+# include   <stdlib.h>
+# include   <unistd.h>
+
+typedef struct  s_read
+{
+    int     fd;
+    int     max;
+    int     pos;
+    char    backup[BUFFER_SIZE];
+}               t_read;
+
+#endif

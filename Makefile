@@ -29,6 +29,7 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/hooks.c \
 				$(SRC_DIR)/rgb.c \
 				$(SRC_DIR)/gnl.c \
+				$(SRC_DIR)/error.c \
 
 CC          :=	gcc
 CFLAGS      :=	-Wall -Wextra -Werror
@@ -83,6 +84,6 @@ re:
 	@$(MAKE) all
 
 run: all
-	@-./$(NAME) test
+	@-./$(NAME) test.cub
 
 .PHONY: all clean fclean re debug release

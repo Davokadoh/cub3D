@@ -36,9 +36,14 @@ static int	add_path(char *line, char *textures[7])
 	char	**splited;
 	int		index;
 
+	printf("A\n");
 	splited = ft_split(line, ' ');
+	printf("B\n");
 	index = get_texture_index(splited[0]);
-	textures[index] = splited[1];
+	printf("C\n");
+	textures[index] = ft_strdup(splited[1]);
+	printf("D\n");
+	ft_free_tab(splited);
 	return (0);
 }
 
@@ -49,6 +54,7 @@ static void	textures_init(char *textures[7])
 	i = -1;
 	while (textures[++i])
 		textures[i] = NULL;
+	textures[6] = "1";
 }
 
 static int	is_map_char(char c)
@@ -78,18 +84,10 @@ static int	is_map(char *line)
 	i = -1;
 	while (line[++i])
 		if (!is_map_char(line[i]))
-				return (1);
-	return (0);
-}
-
-static int	is_only_whitespaces(char *line)
-{
-	int	i;
-
-	i = -1;
-	while (line[++i])
-		if (line[i] != 32 && !(9 <= line[i] && line[i] <= 13))
+		{
+			printf("'Not map char': '%c'\n", line[i]);
 			return (0);
+		}
 	return (1);
 }
 
@@ -98,17 +96,22 @@ int	get_textures(int fd, char *textures[7])
 {
 	char	*line;
 
-	textures_init(textures); //Set all to NULL, important for index 6
+	textures_init(textures);
 	line = get_next_line(fd);
 	while (line != NULL && !is_map(line))
 	{
-		if (is_only_whitespaces(line))
-			continue ;
-		add_path(line, textures);
+		printf("%s\n", line);
+		if (*line != '\n')
+			if (add_path(line, textures))
+				return (1);
 		line = get_next_line(fd); //Need to add to project
 	}
+	int i = -1;
+	while (textures[++i])
+		printf("textures[%i] = %s\n", i, textures[i]);
 	if (!textures[0] || !textures[1] || !textures[2] || !textures[3]\
 			|| !textures[4] || !textures[5])
-		textures[6] = "1";
-	return (textures[6] != NULL);
+		textures[6] = NULL;
+	printf("textures[6] = %s\n", textures[6]);
+	return (textures[6] == NULL);
 }

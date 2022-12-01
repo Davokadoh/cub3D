@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 int	put_error(char *err_msg, int err_code)
 {
-	printf(err_msg);
+	printf("%s\n", err_msg);
 	return (err_code);
 }
