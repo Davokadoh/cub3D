@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "mlx.h"
+#include "libft.h"
 #include "cub3D.h"
 
 static void	put_pixel_img(t_img *img, int x, int y, int color)
@@ -22,16 +23,16 @@ static void	put_pixel_img(t_img *img, int x, int y, int color)
 
 static int	get_color()
 {
-	return (1);
+	return (0x00FF0000);
 }
 
-void	render(t_data data)
+void	render(t_data *data)
 {
 	int		x;
 	int		y;
 	t_img	img;
 
-	img.img = mlx_new_image(data.mlx, WIN_W, WIN_H);
+	img.img = mlx_new_image(data->mlx, WIN_W, WIN_H);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_size,
 								&img.endian);
 	y = -1;
@@ -41,5 +42,8 @@ void	render(t_data data)
 		while (++x < WIN_W)
 			put_pixel_img(&img, x, y, get_color());
 	}
-	mlx_put_image_to_window(data.mlx, data.win, img.addr, 0, 0);
+	printf("A\n");
+	mlx_put_image_to_window(data->mlx, data->win, img.addr, 0, 0);
+	printf("B\n");
+	//mlx_destroy_window();
 }

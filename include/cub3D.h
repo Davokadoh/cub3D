@@ -44,7 +44,7 @@ typedef struct	s_img
 }				t_img;
 
 //Main logic
-void	render(t_data data);
+void	render(t_data *data);
 //void	cast_rays();
 //void	draw_walls();
 

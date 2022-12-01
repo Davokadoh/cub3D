@@ -24,13 +24,15 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	if (parse(ac, av, &data))
-		return (1);
+	//if (parse(ac, av, &data))
+	//	return (1);
 	data.mlx = mlx_init();
 	if (!data.mlx) //Prevents env -i crash
 		return (1);
 	data.win = mlx_new_window(data.mlx, WIN_W, WIN_H, av[1]);
-	render(data);
+	if (!data.win)
+		return (1);
+	render(&data);
 	hooks(&data);
     mlx_loop(data.mlx);
 }
