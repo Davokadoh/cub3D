@@ -34,6 +34,15 @@ typedef struct	s_data
 	t_cam	camera;
 }				t_data;
 
+typedef struct	s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+}				t_img;
+
 //Main logic
 void	render(t_data data);
 //void	cast_rays();
@@ -46,6 +55,9 @@ char	**get_map(int fd, char **map);
 
 //Utils
 int		put_error(char *err_msg, int err_code);
+char	*get_next_line(int fd);
+
+//MLX
 int		rgb_to_int(double r, double g, double b);
 int		hook_keydown(int key, t_data data);
 int		hook_mousemove(int key, t_data data);

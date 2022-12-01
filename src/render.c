@@ -11,26 +11,35 @@
 /* ************************************************************************** */
 
 #include "mlx.h"
+#include "cub3D.h"
 
 static void	put_pixel_img(t_img *img, int x, int y, int color)
 {
 	if (x >= 0 && y >= 0 && x < WIN_W && y < WIN_H)
-		*(unsigned int *)(img->ptr + 
-				(y * img->line_size + x * img->bpp / 8)) = color;
+		*(unsigned int *)(img->addr + 
+				(y * img->line_size + x * img->bits_per_pixel / 8)) = color;
 }
 
-void	render(void *mlx, void *win)
+static int	get_color()
+{
+	return (1);
+}
+
+void	render(t_data data)
 {
 	int		x;
 	int		y;
-	void	*img;
+	t_img	img;
 
+	img.img = mlx_new_image(data.mlx, WIN_W, WIN_H);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_size,
+								&img.endian);
 	y = -1;
 	while (++y < WIN_H)
 	{
 		x = -1;
 		while (++x < WIN_W)
-			put_pixel_img(img, x, y, get_color());
+			put_pixel_img(&img, x, y, get_color());
 	}
-	mlx_put_image_to_window(mlx, win, img->bff, 0, 0);
+	mlx_put_image_to_window(data.mlx, data.win, img.addr, 0, 0);
 }

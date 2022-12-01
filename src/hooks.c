@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "mlx.h"
+#include "keys.h"
+#include "cub3D.h"
 
 int	hook_keydown(int key, t_data data)
 {

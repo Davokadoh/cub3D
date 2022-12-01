@@ -28,6 +28,7 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/render.c \
 				$(SRC_DIR)/hooks.c \
 				$(SRC_DIR)/rgb.c \
+				$(SRC_DIR)/gnl.c \
 
 CC          :=	gcc
 CFLAGS      :=	-Wall -Wextra -Werror
