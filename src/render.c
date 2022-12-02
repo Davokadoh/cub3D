@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/02 14:30:22 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/02 15:36:53 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,4 @@ void	render(t_data *data)
 			put_pixel_img(&img, x, y, get_color());
 	}
 	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
-	//mlx_destroy_window();
 }
