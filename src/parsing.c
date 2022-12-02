@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleroux <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/11/30 17:34:02 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/02 14:15:56 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,20 @@ int	parse(int ac, char **av, t_data *data)
 	map_start = get_map_start(av[1]);
 	if (get_textures(av[1], data->textures, map_start) > 0) //Need to pass map_start
 		return (put_error("Can't get textures", 4));
+<<<<<<< HEAD
 	/*
 	if (get_map(av[1], data->map) > 0) //Need to pass map_start
 		return (put_error("Can't get map", 5));
 	if (get_camera(data) > 0) 
 		return (put_error("Can't get camera", 6)); //Need to pass map_start
 	*/
+=======
+	*/
+	if (get_map(fd, &data->map) > 0)
+		return (put_error("Can't get map", 5));
+	printf("BYE\n");
+	if (get_camera(data) > 0)
+		return (put_error("Can't get camera", 6));
+>>>>>>> 1eb0c13e325230e74e942f8347900d70df6a8195
 	return (0);
 }

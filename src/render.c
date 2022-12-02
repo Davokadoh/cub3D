@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleroux <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/11/30 14:39:27 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/02 15:36:53 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "libft.h"
 #include "cub3D.h"
 
-static void	put_pixel_img(t_img *img, int x, int y, int color)
+void	put_pixel_img(t_img *img, int x, int y, int color)
 {
 	if (x >= 0 && y >= 0 && x < WIN_W && y < WIN_H)
-		*(unsigned int *)(img->addr + 
+		*(unsigned int *)(img->addr +
 				(y * img->line_size + x * img->bits_per_pixel / 8)) = color;
 }
 
