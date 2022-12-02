@@ -42,8 +42,5 @@ void	render(t_data *data)
 		while (++x < WIN_W)
 			put_pixel_img(&img, x, y, get_color());
 	}
-	printf("A\n");
-	mlx_put_image_to_window(data->mlx, data->win, img.addr, 0, 0);
-	printf("B\n");
-	//mlx_destroy_window();
+	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
 }
