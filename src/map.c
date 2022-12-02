@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleroux <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/11/30 17:32:08 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/02 14:14:58 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,38 +21,38 @@ static int	check_around(char **map, int x, int y)
 	return (0);
 }
 
-static void	print_map(char **map)
-{
-	int	x;
+// static void	print_map(char **map)
+// {
+// 	int	x;
 
-	x = -1;
-	printf("HELLO\n");
-	while (map[++x])
-	{
-		printf("HELLO\n");
-		printf("%i %s\n", x, map[x]);
-	}
-	printf("BYE\n");
-}
+// 	x = -1;
+// 	printf("HELLO\n");
+// 	while (map[++x])
+// 	{
+// 		printf("HELLO\n");
+// 		printf("%i %s\n", x, map[x]);
+// 	}
+// 	printf("BYE\n");
+// }
 
-static int	check_closed_map(char **map)
-{
-	int	x;
-	int	y;
+// static int	check_closed_map(char **map)
+// {
+// 	int	x;
+// 	int	y;
 
-	x = -1;
-	while (map[++x][0])
-	{
-		y = -1;
-		while (map[x][++y])
-			if (map[x][y] == ' ')
-				if (check_around(map, x, y))
-					return (1);
-	}
-	return (0);
-}
+// 	x = -1;
+// 	while (map[++x][0])
+// 	{
+// 		y = -1;
+// 		while (map[x][++y])
+// 			if (map[x][y] == ' ')
+// 				if (check_around(map, x, y))
+// 					return (1);
+// 	}
+// 	return (0);
+// }
 
-int	get_map(int fd, char **map)
+int	get_map(int fd, char ***map)
 {
 	char	**tmp_map;
 
@@ -68,11 +68,12 @@ int	get_map(int fd, char **map)
 	tmp_map[7] = "1000000001";
 	tmp_map[8] = "1000000001";
 	tmp_map[9] = "1111111111";
+	tmp_map[10] = NULL;
 
 	(void) fd;
 	map = tmp_map;
-	print_map(map);
-	if (check_closed_map(map))
-		return (1);
+	// print_map(map);
+	// // if (check_closed_map(map))
+	// // 	return (1);
 	return (0);
 }
