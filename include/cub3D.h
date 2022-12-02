@@ -13,8 +13,10 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <unistd.h>
 # include <fcntl.h>
 # include <stddef.h>
+# include "libft.h"
 
 # define WIN_W 640
 # define WIN_H 360
@@ -51,7 +53,7 @@ void	render(t_data *data);
 //Parsing
 int		parse(int ac, char **av, t_data *data);
 int		get_textures(int fd, char *textures[7]);
-char	**get_map(int fd, char **map);
+int		get_map(int fd, char ***map);
 
 //Utils
 int		put_error(char *err_msg, int err_code);
