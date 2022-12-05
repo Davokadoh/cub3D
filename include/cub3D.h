@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/02 14:55:40 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/05 18:04:21 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 # define WIN_H 720
 # define MM_W 400
 # define MM_H 400
-# define PI 3.14159265359
-# define DR	0,0174533
+# define DR	M_PI / 180
 
 typedef struct	s_cam
 {
