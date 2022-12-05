@@ -21,10 +21,16 @@
 # define WIN_W 640
 # define WIN_H 360
 
+typedef struct	s_vec2d
+{
+	float	x;
+	float	y;
+}				t_vec2d;
+
 typedef struct	s_cam
 {
-	float	pos[2]; //Position vector
-	float	dir[2]; //Looking direction verctor
+	vec2d	pos[2]; //Position vector
+	vec2d	dir[2]; //Looking direction verctor
 }				t_cam;
 
 typedef struct	s_data

@@ -33,11 +33,56 @@ static int	check_unique_camera(char **map)
 	return (camera);
 }
 
-//Doesn't add camera pos to data
-//Doesn't add camera dir to data
+static t_vec2d	new_vec(float x, float y)
+{
+	t_vec2d	vec;
+
+	vec.x = x;
+	vec.y = y;
+	return (vec);
+}
+
+static t_vec2d	get_pos(char **map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[j][i] == "NSWE") //WRONG
+				return (new_vec(i, j);
+		}
+	}
+	return (new_vec(i, j));
+}
+
+static t_vec2d	get_dir(char c)
+{
+	t_vec2d dir;
+
+	if (c == 'N')
+		dir = new_vec(-1, 0);
+	else if (c == 'S')
+		dir = new_vec(1, 0);
+	else if (c == 'W')
+		dir = new_vec(0, -1);
+	else if (c == 'E')
+		dir = new_vec(0, 1);
+	return (dir);
+}
+
 int	get_camera(t_data *data)
 {
+	t_vec2d	pos;
+
 	if (check_unique_camera(data->map))
-		return (put_error("There is more than one camera", 7));
+		return (put_error("", 7));
+	pos = get_pos(data->map);
+	data->cam.pos = pos;
+	data->cam.dir = get_dir(data->map[pos.y][pos.x]);
 	return (0);
 }
