@@ -57,31 +57,24 @@ static int	add_path(char *line, char *textures[7])
 	return (0);
 }
 
-static int	get_map_start(char *file_path)
+static void	print_textures(char *textures[7])
 {
-	char	*line;
-	int		line_nbr;
-	int		fd;
-
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-		return (put_error("Can't open file", -1));
-	line_nbr = 0;
-	line = get_next_line(fd);
-	while (line != NULL)
-		line_nbr++;
-	return (line_nbr);
+	int	path = -1;
+	while (textures[++path])
+		printf("textures[%i] = %s\n", path, textures[path]);
 }
 
-//Need to stop when we get to map
-int	get_textures(char *file_path, char *textures[7], int map_start)
+int	get_textures(char *file_path, size_t map_start, char *textures[7])
 {
 	char	*line;
-	int		map_start;
-	int		line_nbr;
+	size_t	line_nbr;
+	int		fd;
 
 	textures_init(textures);
 	line_nbr = 0;
+	fd = open(file_path, O_RDONLY);
+	if (fd < 0)
+		return (put_error("Can't open file", 1));
 	line = get_next_line(fd);
 	while (line != NULL && line_nbr < map_start)
 	{
@@ -90,13 +83,9 @@ int	get_textures(char *file_path, char *textures[7], int map_start)
 		line = get_next_line(fd);
 		line_nbr++;
 	}
-	{
-	int	path = -1;
-	while (textures[++path])
-		printf("textures[%i] = %s\n", path, textures[path]);
-	}
 	if (!textures[0] || !textures[1] || !textures[2] || !textures[3] || !textures[4] || !textures[5])
 		textures[6] = "1";
-	printf("textures[6] = %s\n", textures[6]);
+	print_textures(textures);
+	printf("textures[6] = %s\n\n", textures[6]);
 	return (textures[6] != NULL);
 }

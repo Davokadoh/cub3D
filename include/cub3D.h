@@ -46,14 +46,16 @@ typedef struct	s_img
 }				t_img;
 
 //Main logic
+int		move(int key, t_data *data); //bool
 void	render(t_data *data);
 //void	cast_rays();
 //void	draw_walls();
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
-int		get_textures(int fd, char *textures[7]);
-int		get_map(int fd, char ***map);
+int		get_textures(char *file_path, size_t map_start, char *textures[7]);
+int		get_map(char *file_path, size_t map_start, size_t map_end, char ***map);
+int		get_camera(t_data *data);
 
 //Utils
 int		put_error(char *err_msg, int err_code);
@@ -61,7 +63,6 @@ char	*get_next_line(int fd);
 
 //MLX
 int		rgb_to_int(double r, double g, double b);
-int		hook_keydown(int key, t_data data);
-int		hook_mousemove(int key, t_data data);
+int		hook_keydown(int key, t_data *data);
 
 #endif

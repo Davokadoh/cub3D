@@ -15,16 +15,19 @@
 #include "stdlib.h"
 #include "cub3D.h"
 
-int	hook_keydown(int key, t_data data)
+int	hook_keydown(int key, t_data *data)
 {
 	if (key == KEY_ESC)
 		exit(EXIT_SUCCESS);
-	//if (move(key, data))
-	//	render(data);
+	if (move(key, data))
+		render(data);
 	return (0);
 }
 
-int	hook_mousemove(int key, t_data data)
-{
-	return (0);
-}
+/*
+ * Useful prototypes to work with mouse
+ *
+ * int		mlx_mouse_hide();
+ * int		mlx_mouse_show();
+ * int		mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
+*/

@@ -35,7 +35,7 @@ static int	check_unique_camera(char **map)
 
 //Doesn't add camera pos to data
 //Doesn't add camera dir to data
-static int	get_camera(t_data *data)
+int	get_camera(t_data *data)
 {
 	if (check_unique_camera(data->map))
 		return (put_error("There is more than one camera", 7));

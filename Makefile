@@ -26,6 +26,7 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/textures.c \
 				$(SRC_DIR)/map.c \
 				$(SRC_DIR)/camera.c \
+				$(SRC_DIR)/move.c \
 				$(SRC_DIR)/render.c \
 				$(SRC_DIR)/hooks.c \
 				$(SRC_DIR)/rgb.c \
@@ -43,13 +44,13 @@ MAKEFLAGS   += --no-print-directory #--silent
 
 all: $(NAME)
 
-debug: all
+debug: run
 
 ifeq ($(MAKECMDGOALS), debug)
-    CFLAGS = -g3 -DDEBUG
+    CFLAGS += -g3 -DDEBUG
 	BUILD = debug
 else
-    CFLAGS = -O3 -DNDEBUG
+    CFLAGS += -O3 -DNDEBUG
 	BUILD = release
 endif
 
