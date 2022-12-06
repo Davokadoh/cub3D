@@ -16,7 +16,7 @@
 static void	hooks(t_data *data)
 {
 	mlx_key_hook(data->win, hook_keydown, &data);
-	mlx_mouse_hook(data->win, hook_mousemove, &data);
+	//ToDo: mousehook
 }
 
 int	main(int ac, char **av)

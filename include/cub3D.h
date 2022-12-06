@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 13:58:09 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:04:49 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define CUB3D_H
 
 # include <unistd.h>
-# include <fcntl.h>
 # include <stddef.h>
 # include <math.h>
 # include <stdlib.h>
+# include <fcntl.h>
 # include "libft.h"
 # include "mlx.h"
 
@@ -26,6 +26,12 @@
 # define MM_W 400
 # define MM_H 400
 # define DR M_PI / 180
+
+typedef struct	s_vec2d
+{
+	float	x;
+	float	y;
+}				t_vec2d;
 
 typedef struct	s_vec2d
 {
@@ -61,6 +67,7 @@ typedef struct	s_img
 }				t_img;
 
 //Main logic
+int		move(int key, t_data *data); //bool
 void	render(t_data *data);
 void	put_pixel_img(t_img *img, int x, int y, int color);
 // float	raycasting(t_cam player, t_data map);
@@ -85,17 +92,19 @@ float	ray_dist_draw(char **map, t_cam const player, float rad_ang, t_img *img);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
-int		get_textures(int fd, char *textures[7]);
-int		get_map(int fd, char ***map);
-t_cam	init_ray(t_cam player, float radius_angle);
+int		get_textures(char *file_path, size_t map_start, char *textures[7]);
+int		get_map(char *file_path, size_t map_start, size_t map_end, char ***map);
+int		get_camera(t_data *data);
 
 //Utils
+t_vec2d	new_vec(float x, float y);
 int		put_error(char *err_msg, int err_code);
 char	*get_next_line(int fd);
 
 //MLX
+void	put_pixel_img(t_img *img, int x, int y, int color);
+void	draw_line(t_img *img, t_vec2d a, t_vec2d b, int color);
 int		rgb_to_int(double r, double g, double b);
-int		hook_keydown(int key, t_data data);
-int		hook_mousemove(int key, t_data data);
+int		hook_keydown(int key, t_data *data);
 
 #endif
