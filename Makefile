@@ -86,6 +86,6 @@ re:
 	@$(MAKE) all
 
 run: all
-	@-./$(NAME) test.cub
+	@-./$(NAME) maps/test.cub
 
 .PHONY: all clean fclean re debug release
