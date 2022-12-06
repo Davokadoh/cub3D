@@ -6,7 +6,7 @@
 /*   By: jleroux <jleroux@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:03 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 13:28:04 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:56:58 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	swap(t_vec2d *a, t_vec2d *b)
 {
 	t_vec2d	c;
+	//Change vec2d to float and change just on coordinate
 
 	c = *a;
 	*a = *b;
@@ -32,6 +33,8 @@ void	draw_line(t_img *img, t_vec2d a, t_vec2d b, int color)
 	put_pixel_img(img, a.y, a.x, color);
 	put_pixel_img(img, b.y, b.x, color);
 	if (a.x > b.x)
+		swap(&a, &b);
+	if (a.y > b.y)
 		swap(&a, &b);
 	dx = b.x - a.x;
 	dy = b.y - a.y;
