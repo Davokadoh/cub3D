@@ -6,7 +6,7 @@
 /*   By: jleroux <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/11/30 17:09:38 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 13:32:01 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,11 @@ static int	add_path(char *line, char *textures[7])
 	index = get_texture_index(splited[0]);
 	if (splited[1])
 	{
-		textures[index] = ft_strdup(splited[1]); //Copies \n too
+		textures[index] = ft_strdup(splited[1]);
 		textures[index][ft_strlen(textures[index]) - 1] = '\0';
 	}
 	ft_free_tab(splited);
 	return (0);
-}
-
-static void	print_textures(char *textures[7])
-{
-	int	path;
-
-	path = -1;
-	while (textures[++path])
-		printf("textures[%i] = %s\n", path, textures[path]);
 }
 
 static int	free_textures(char *textures[7])
@@ -100,7 +91,5 @@ int	get_textures(char *file_path, size_t map_start, char *textures[7])
 	if (!textures[0] || !textures[1] || !textures[2] || !textures[3]
 		|| !textures[4] || !textures[5])
 		textures[6] = "1";
-	print_textures(textures);
-	printf("textures[6] = %s\n\n", textures[6]);
 	return (textures[6] != NULL);
 }

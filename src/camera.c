@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jleroux <jleroux@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/06 13:25:18 by jleroux           #+#    #+#             */
+/*   Updated: 2022/12/06 13:30:06 by jleroux          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "cub3D.h"
 
@@ -32,15 +44,6 @@ static int	check_unique_camera(char **map)
 		camera = new_camera;
 	}
 	return (camera);
-}
-
-static t_vec2d	new_vec(float x, float y)
-{
-	t_vec2d	vec;
-
-	vec.x = x;
-	vec.y = y;
-	return (vec);
 }
 
 static t_vec2d	get_pos(char **map)

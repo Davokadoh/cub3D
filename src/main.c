@@ -13,13 +13,11 @@
 #include "mlx.h"
 #include "cub3D.h"
 
-/*
 static void	hooks(t_data *data)
 {
 	mlx_key_hook(data->win, hook_keydown, &data);
 	//ToDo: mousehook
 }
-*/
 
 int	main(int ac, char **av)
 {
@@ -27,7 +25,6 @@ int	main(int ac, char **av)
 
 	if (parse(ac, av, &data))
 		return (1);
-	/*
 	data.mlx = mlx_init();
 	if (!data.mlx) //Prevents env -i crash
 		return (1);
@@ -37,5 +34,4 @@ int	main(int ac, char **av)
 	render(&data);
 	hooks(&data);
 	mlx_loop(data.mlx);
-	*/
 }

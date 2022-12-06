@@ -6,7 +6,7 @@
 #    By: jleroux <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 11:31:44 by jleroux           #+#    #+#              #
-#    Updated: 2022/11/30 17:10:58 by jleroux          ###   ########.fr        #
+#    Updated: 2022/12/06 13:30:02 by jleroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/move.c \
 				$(SRC_DIR)/render.c \
 				$(SRC_DIR)/hooks.c \
+				$(SRC_DIR)/vector2d.c \
+				$(SRC_DIR)/line.c \
 				$(SRC_DIR)/rgb.c \
 				$(SRC_DIR)/gnl.c \
 				$(SRC_DIR)/error.c \

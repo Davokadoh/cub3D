@@ -6,7 +6,7 @@
 /*   By: jleroux <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/11/30 17:32:08 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 13:36:06 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static int	check_around(char **map, int y, int x)
 	return (0);
 }
 
-//Check around each 0 cell
 static int	check_closed_map(char **map)
 {
 	int	x;
@@ -65,17 +64,6 @@ static int	check_closed_map(char **map)
 	}
 	return (0);
 }
-
-/*
-static void	print_map(char **map)
-{
-	int	x;
-
-	x = -1;
-	while (map[++x])
-		printf("%i %s\\n\n", x, map[x]);
-}
-*/
 
 static size_t	max_length(char **map)
 {
@@ -101,11 +89,6 @@ static void	fill_line(char **line, size_t max)
 
 	filled_line = malloc(max * sizeof(char *));
 	i = ft_strlcpy(filled_line, *line, ft_strlen(*line)) - 1;
-	/* Just in case
-	while(i < max)
-		filled_line[i++] = 'A';
-	filled_line[i++] = '\0';
-	*/
 	free(*line);
 	*line = filled_line;
 }
@@ -146,37 +129,7 @@ int	get_map(char *file_path, size_t map_start, size_t map_end, char ***map)
 	if (get_from_file(file_path, map_start, map_end, map))
 		return (1);
 	fill_map(map);
-	//print_map(*map);
 	if (check_closed_map(*map))
 		return (put_error("Map not closed", 8));
 	return (0);
 }
-
-/*
-int	get_map(char *file_path, size_t map_start, char ***map)
-{
-	char	**tmp_map;
-
-	(void) file_path;
-	(void) map_start;
-	tmp_map = malloc(2048);
-
-	tmp_map[0] = "1111 11111";
-	tmp_map[1] = "1001 10001";
-	tmp_map[2] = "1001 10001";
-	tmp_map[3] = "1001110001";
-	tmp_map[4] = "1000000001";
-	tmp_map[5] = "1000000001";
-	tmp_map[6] = "1000N00001";
-	tmp_map[7] = "1000000001";
-	tmp_map[8] = "1000000001";
-	tmp_map[9] = "1111111111";
-	tmp_map[10] = NULL;
-
-	*map = tmp_map;
-	print_map(*map);
-	if (check_closed_map(*map))
-		return (put_error("Map not closed", 8));
-	return (0);
-}
-*/
