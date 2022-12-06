@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <stdlib.h>
 
 static void	textures_init(char *textures[7])
 {
