@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:07 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/02 14:32:46 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:09:00 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	hooks(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	data;
-	t_img	minimap;
 
 	if (parse(ac, av, &data))
 		return (1);
@@ -33,7 +32,6 @@ int	main(int ac, char **av)
 	if (!data.win)
 		return (1);
 	render(&data);
-	put_minimap(&data, &minimap);
 	hooks(&data);
 	mlx_loop(data.mlx);
 }

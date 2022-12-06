@@ -6,7 +6,7 @@
 /*   By: jleroux <jleroux@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:25:18 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 13:30:06 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:11:06 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "cub3D.h"
 
 //Doesn't check if multiple instance on same line
-static int	get_camera_in_line(char *line)
+static int	get_player_in_line(char *line)
 {
 	if (ft_strchr(line, 'N'))
 		return (1);
@@ -28,22 +28,22 @@ static int	get_camera_in_line(char *line)
 		return (0);
 }
 
-static int	check_unique_camera(char **map)
+static int	check_unique_player(char **map)
 {
 	int		i;
-	int		camera;
-	int		new_camera;
+	int		player;
+	int		new_player;
 
-	camera = 0;
+	player = 0;
 	i = -1;
 	while (map[++i] != NULL)
 	{
-		new_camera = get_camera_in_line(map[i]);
-		if (camera && new_camera)
+		new_player = get_player_in_line(map[i]);
+		if (player && new_player)
 			return (1);
-		camera = new_camera;
+		player = new_player;
 	}
-	return (camera);
+	return (player);
 }
 
 static t_vec2d	get_pos(char **map)
@@ -82,14 +82,14 @@ static t_vec2d	get_dir(char c)
 	return (dir);
 }
 
-int	get_camera(t_data *data)
+int	get_player(t_data *data)
 {
 	t_vec2d	pos;
 
-	if (check_unique_camera(data->map))
+	if (check_unique_player(data->map))
 		return (put_error("", 7));
 	pos = get_pos(data->map);
-	data->cam.pos = pos;
-	data->cam.dir = get_dir(data->map[(int)floor(pos.y)][(int)floor(pos.x)]);
+	data->player.pos = pos;
+	data->player.dir = get_dir(data->map[(int)floor(pos.y)][(int)floor(pos.x)]);
 	return (0);
 }

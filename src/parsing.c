@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 14:02:17 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:09:55 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ int	parse(int ac, char **av, t_data *data)
 		return (put_error("Can't get textures", 4));
 	if (get_map(av[1], map.start, map.end, &data->map) > 0)
 		return (put_error("Can't get map", 5));
-	if (get_camera(data) > 0)
-		return (put_error("Can't get camera", 6));
-	printf("pos: x:%f, y:%f\n", data->cam.pos.x, data->cam.pos.y);
-	printf("dir: x:%f, y:%f\n", data->cam.dir.x, data->cam.dir.y);
+	if (get_player(data) > 0)
+		return (put_error("Can't get playerera", 6));
+	printf("pos: x:%f, y:%f\n", data->player.pos.x, data->player.pos.y);
+	printf("dir: x:%f, y:%f\n", data->player.dir.x, data->player.dir.y);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 14:04:49 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:10:38 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,6 @@
 # define MM_W 400
 # define MM_H 400
 # define DR M_PI / 180
-
-typedef struct	s_vec2d
-{
-	float	x;
-	float	y;
-}				t_vec2d;
 
 typedef struct	s_vec2d
 {
@@ -94,7 +88,7 @@ float	ray_dist_draw(char **map, t_cam const player, float rad_ang, t_img *img);
 int		parse(int ac, char **av, t_data *data);
 int		get_textures(char *file_path, size_t map_start, char *textures[7]);
 int		get_map(char *file_path, size_t map_start, size_t map_end, char ***map);
-int		get_camera(t_data *data);
+int		get_player(t_data *data);
 
 //Utils
 t_vec2d	new_vec(float x, float y);

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 14:01:24 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:08:41 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	render(t_data *data)
 		while (++x < WIN_W)
 			put_pixel_img(&img, x, y, 0xFF0000);
 	}
-	draw_line(&img, (t_vec2d){640, 360}, (t_vec2d){0, 0}, 0xFFFFFF);
+	//draw_line(&img, (t_vec2d){640, 360}, (t_vec2d){0, 0}, 0xFFFFFF);
 	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
+	view_filed(data, data->player, M_PI / 3);
 }
