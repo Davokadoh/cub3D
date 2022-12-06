@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/06 23:56:26 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/07 00:27:29 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,24 @@ int	update_rayh(char **map, t_cam *ray, int ray_dir, float dist_h)
 
 	int_x = (int)(ray->pos.x);
 	int_y = (int)(ray->pos.y);
+	printf("old ray->pos.x %f\n", ray->pos.x);
+	printf("old ray->pos.y %f\n", ray->pos.y);
 	ray->pos.x += cos(ray->angle) * dist_h;
+	printf("new ray->pos.x %f\n", ray->pos.x);
 	if (ray_dir > 2)
 	{
-		ray->pos.y += ray->pos.y - int_y;
+		ray->pos.y = (float)int_y;
+		printf("new ray->pos.y %f\n", ray->pos.y);
 		if (map[int_x][int_y - 1] == '1')
 			return (1);
 		else
 			return (0);
 	}
-	ray->pos.y += int_y + 1 - ray->pos.y;
+	ray->pos.y = (float)(int_y + 1);
+	printf("new ray->pos.y %f\n", ray->pos.y);
 	printf("[abs_x] %d[abs_y] %d  map[abs_x][abs_y + 1] %c\n", int_x, int_y, map[int_x][int_y + 1]);
 	printf("update ray h: ray->angle %f,ray->pos.x%f, ray.pos.y%f, ray.dir.x%f, ray.dir.y%f \n", ray->angle, ray->pos.x,ray->pos.y, ray->dir.x, ray->dir.y );
-	if (map[int_x][int_y + 1] == '1')
+	if (map[int_x][int_y + 1] == '1') 
 		return (1);
 	else
 		return (0);
@@ -84,16 +89,21 @@ int	update_rayv(char **map, t_cam *ray, int ray_dir, float dist_v)
 
 	int_x = (int)ray->pos.x;
 	int_y = (int)ray->pos.y;
+	printf("old ray->pos.y %f\n", ray->pos.y);
+	printf("old ray->pos.x %f\n", ray->pos.x);
 	ray->pos.y += sin(ray->angle) * dist_v;
+	printf("new ray->pos.y %f\n", ray->pos.y);
 	if (ray_dir == 2 || ray_dir == 3)
 	{
-		ray->pos.x += ray->pos.x - int_x;
+		ray->pos.x = (float)int_x;
+		printf("new ray->pos.x %f\n", ray->pos.x);
 		if (map[int_x - 1][int_y] == '1')
 			return (1);
 		else
 			return (0);
 	}
-	ray->pos.x += int_x + 1 - ray->pos.x;
+	ray->pos.x = (float)(int_x + 1);
+	printf("new ray->pos.x %f\n", ray->pos.x);
 		printf("[abs_x] %d[abs_y] %d  map[abs_x][abs_y + 1] %c\n", int_x, int_y, map[int_x][int_y + 1]);
 	printf("update ray v :ray.angle %f,ray.pos.x%f, ray.pos.y%f, ray.dir.x%f, ray.dir.y%f \n", ray->angle, ray->pos.x,ray->pos.y, ray->dir.x, ray->dir.y);
 	if (map[int_x + 1][int_y] == '1')
