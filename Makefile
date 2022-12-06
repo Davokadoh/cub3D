@@ -6,7 +6,7 @@
 #    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 11:31:44 by jleroux           #+#    #+#              #
-#    Updated: 2022/12/02 13:31:39 by vhaefeli         ###   ########.fr        #
+#    Updated: 2022/12/06 14:05:44 by jleroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,13 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/map.c \
 				$(SRC_DIR)/camera.c \
 				$(SRC_DIR)/minimap.c \
+				$(SRC_DIR)/move.c \
 				$(SRC_DIR)/render.c \
+				$(SRC_DIR)/raycasting1.c \
+				$(SRC_DIR)/raycasting2.c \
 				$(SRC_DIR)/hooks.c \
+				$(SRC_DIR)/vector2d.c \
+				$(SRC_DIR)/line.c \
 				$(SRC_DIR)/rgb.c \
 				$(SRC_DIR)/gnl.c \
 				$(SRC_DIR)/error.c \
@@ -44,13 +49,13 @@ MAKEFLAGS   += --no-print-directory #--silent
 
 all: $(NAME)
 
-debug: all
+debug: run
 
 ifeq ($(MAKECMDGOALS), debug)
-    CFLAGS = -g3 -DDEBUG
+    CFLAGS += -g3 -DDEBUG
 	BUILD = debug
 else
-    CFLAGS = -O3 -DNDEBUG
+    CFLAGS += -O3 -DNDEBUG
 	BUILD = release
 endif
 
@@ -86,6 +91,6 @@ re:
 	@$(MAKE) all
 
 run: all
-	@-./$(NAME) test.cub
+	@-./$(NAME) maps/test.cub
 
 .PHONY: all clean fclean re debug release

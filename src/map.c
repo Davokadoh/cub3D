@@ -6,25 +6,36 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/02 14:14:58 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:03:33 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <stdlib.h>
 
+static int	is_map_char(char c)
+{
+	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'W' || c == 'S')
+		return (1);
+	return (0);
+}
+
 static int	check_around(char **map, int y, int x)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
-	while (map[y + i] && i < 2)
+	while (i < 2)
 	{
+		if (y + i < 0 || !map[y + i])
+			return (1);
 		j = -1;
-		while (map[y + i][x + j] && j < 2)
+		while (j < 2)
 		{
-			if (map[y + i][x + j] != '1' && map[y + i][x + j] != ' ')
+			if (x + j < 0 || !map[y + i][x + j])
+				return (1);
+			else if (!is_map_char(map[y + i][x + j]))
 				return (1);
 			j++;
 		}
@@ -33,87 +44,92 @@ static int	check_around(char **map, int y, int x)
 	return (0);
 }
 
-// static void	print_map(char **map)
-// {
-// 	int	x;
+static int	check_closed_map(char **map)
+{
+	int	x;
+	int	y;
 
-<<<<<<< HEAD
-	x = -1;
-	while (map[++x])
-		printf("%i %s\n", x, map[x]);
-}
-=======
-// 	x = -1;
-// 	printf("HELLO\n");
-// 	while (map[++x])
-// 	{
-// 		printf("HELLO\n");
-// 		printf("%i %s\n", x, map[x]);
-// 	}
-// 	printf("BYE\n");
-// }
->>>>>>> 1eb0c13e325230e74e942f8347900d70df6a8195
-
-// static int	check_closed_map(char **map)
-// {
-// 	int	x;
-// 	int	y;
-
-<<<<<<< HEAD
 	y = -1;
 	while (map[++y])
 	{
 		x = -1;
 		while (map[y][++x])
-			if (map[y][x] == ' ')
-				if (check_around(map, x, y))
+		{
+			if (map[y][x] == '0')
+			{
+				if (check_around(map, y, x))
 					return (1);
+			}
+		}
 	}
 	return (0);
 }
-=======
-// 	x = -1;
-// 	while (map[++x][0])
-// 	{
-// 		y = -1;
-// 		while (map[x][++y])
-// 			if (map[x][y] == ' ')
-// 				if (check_around(map, x, y))
-// 					return (1);
-// 	}
-// 	return (0);
-// }
->>>>>>> 1eb0c13e325230e74e942f8347900d70df6a8195
 
-int	get_map(int fd, char ***map)
+static size_t	max_length(char **map)
 {
-	char	**tmp_map;
+	int		i;
+	size_t	len;
+	size_t	max;
 
-	tmp_map = malloc(2048);
+	max = 0;
+	i = -1;
+	while (map[++i])
+	{
+		len = ft_strlen(map[i]);
+		if (len > max)
+			max = len;
+	}
+	return (max);
+}
 
-	tmp_map[0] = "1111111111";
-	tmp_map[1] = "1000000001";
-	tmp_map[2] = "1000000001";
-	tmp_map[3] = "1000000001";
-	tmp_map[4] = "1000N00001";
-	tmp_map[5] = "1000000001";
-	tmp_map[6] = "1000000001";
-	tmp_map[7] = "1000000001";
-	tmp_map[8] = "1000000001";
-	tmp_map[9] = "1111111111";
-	tmp_map[10] = NULL;
+static void	fill_line(char **line, size_t max)
+{
+	int		i;
+	char	*filled_line;
 
-	(void) fd;
-<<<<<<< HEAD
-	*map = tmp_map;
-	print_map(*map);
+	filled_line = malloc(max * sizeof(char *));
+	i = ft_strlcpy(filled_line, *line, ft_strlen(*line)) - 1;
+	free(*line);
+	*line = filled_line;
+}
+
+static void	fill_map(char ***map)
+{
+	int		i;
+	size_t	max;
+
+	max = max_length(*map);
+	i = -1;
+	while ((*map)[++i])
+		fill_line(&(*map)[i], max);
+}
+
+static int	get_from_file(char *file_path, size_t map_start,
+		size_t map_end, char ***map)
+{
+	int	y;
+	int	fd;
+
+	fd = open(file_path, O_RDONLY);
+	if (fd < 0)
+		return (put_error("MAP", 1));
+	y = -1;
+	while (++y <= (int)map_start)
+		free(get_next_line(fd));
+	(*map) = malloc((map_end - map_start) * sizeof(char **));
+	y = -1;
+	(*map)[++y] = get_next_line(fd);
+	while ((*map)[y] != NULL)
+		(*map)[++y] = get_next_line(fd);
+	return (0);
+}
+
+int	get_map(char *file_path, size_t map_start, size_t map_end, char ***map)
+{
+	if (get_from_file(file_path, map_start, map_end, map))
+		return (1);
+	fill_map(map);
 	if (check_closed_map(*map))
 		return (put_error("Map not closed", 8));
-=======
-	map = tmp_map;
-	// print_map(map);
-	// // if (check_closed_map(map))
-	// // 	return (1);
->>>>>>> 1eb0c13e325230e74e942f8347900d70df6a8195
 	return (0);
 }
