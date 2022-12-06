@@ -58,15 +58,19 @@ static int	check_file_extension(char *str)
 		return (put_error("Wrong file extension, need .cub", 2));
 	return (0);
 }
-/*
+
 static void	print_map(t_data *data)
 {
-	int i = 0 -1;
+	int i = -1;
 
+	while (++i < 30)
+		printf("%i", i%10);
+	printf("\n");
+	i = -1;
 	while (data->map[++i])
 		printf("%s\n", data->map[i]);
+	printf("\n");
 }
-*/
 
 int	parse(int ac, char **av, t_data *data)
 {
@@ -81,8 +85,10 @@ int	parse(int ac, char **av, t_data *data)
 		return (put_error("Can't get textures", 4));
 	if (get_map(av[1], map.start, map.end, &data->map) > 0)
 		return (put_error("Can't get map", 5));
-	//print_map(data);
+	print_map(data);
 	if (get_camera(data) > 0) 
 		return (put_error("Can't get camera", 6));
+	printf("pos: x:%f, y:%f\n", data->cam.pos.x, data->cam.pos.y);
+	printf("dir: x:%f, y:%f\n", data->cam.dir.x, data->cam.dir.y);
 	return (0);
 }
