@@ -6,33 +6,22 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:28:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/06 14:12:38 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 15:00:01 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	put_minimap(t_data *data)
+t_img	calculate_minimap(t_data *data)
 {
 	t_img minimap;
-	// data->map = malloc(2048);
-	// data->map[0] = "11111111111111111111";
-	// data->map[1] = "10000000000000000001";
-	// data->map[2] = "10110000000000000001";
-	// data->map[3] = "10000000000000000001";
-	// data->map[4] = "1000N000000000000001";
-	// data->map[5] = "10000000000000001111";
-	// data->map[6] = "10000000000000000001";
-	// data->map[7] = "11111100000000010001";
-	// data->map[8] = "10000000000000010001";
-	// data->map[9] = "11111111111111111111";
-	// data->map[10] = NULL;
+
 	minimap.img = mlx_new_image(data->mlx, MM_W, MM_H);
 	minimap.addr = mlx_get_data_addr(minimap.img, &minimap.bits_per_pixel,
 			&minimap.line_size, &minimap.endian);
 	init_img(&minimap, MM_W, MM_H);
 	draw_minimap(data, &minimap);
-	mlx_put_image_to_window(data->mlx, data->win, minimap.img, 0, 0);
+	return (minimap);
 }
 
 int	wall_size(t_data *map)
