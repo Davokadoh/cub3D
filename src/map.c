@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 14:03:33 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 16:56:41 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,14 @@ static size_t	max_length(char **map)
 
 static void	fill_line(char **line, size_t max)
 {
-	int		i;
+	size_t		i;
 	char	*filled_line;
 
 	filled_line = malloc(max * sizeof(char *));
 	i = ft_strlcpy(filled_line, *line, ft_strlen(*line)) - 1;
+	while (i < max)
+		filled_line[i++] = ' ';
+	filled_line[i] = 0;
 	free(*line);
 	*line = filled_line;
 }

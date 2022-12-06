@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 15:09:14 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 16:36:25 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct	s_cam
 {
 	t_vec2d	pos; //Position vector
 	t_vec2d	dir; //Looking direction verctor
-	float	angle;
+	double	angle;
 }				t_cam;
 
 typedef struct	s_img
@@ -81,10 +81,10 @@ float	dist_next_h(t_cam ray, int ray_dir);
 float	dist_next_v(t_cam ray, int ray_dir);
 int		update_rayh(char **map, t_cam *ray, int ray_dir, float dist_h);
 int		update_rayv(char **map, t_cam *ray, int ray_dir, float dist_v);
-t_cam	init_ray(t_cam player, float radius_angle);
+t_cam	init_ray(t_cam player, double radius_angle);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
-float	ray_dist_draw(char **map, t_cam const player, float rad_ang, t_img *img);
-void	view_field(t_data *data, float rad_tot);
+float	ray_dist_draw(char **map, t_cam const player, double rad_ang, t_img *img);
+void	view_field(t_data *data, double rad_tot);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);

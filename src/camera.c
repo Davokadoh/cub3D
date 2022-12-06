@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleroux <jleroux@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:25:18 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 14:11:06 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 16:06:07 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,8 @@ int	get_player(t_data *data)
 	pos = get_pos(data->map);
 	data->player.pos = pos;
 	data->player.dir = get_dir(data->map[(int)floor(pos.y)][(int)floor(pos.x)]);
+	printf("avant angle\n");
+	data->player.angle = atan(data->player.dir.y / data->player.dir.x);
+	printf("angle:%f\n", data->player.angle);
 	return (0);
 }

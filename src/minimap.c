@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:28:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/06 15:00:01 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 16:58:15 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,8 @@ int	wall_size(t_data *map)
 {
 	map->map_w = ft_strlen(map->map[0]);
 	map->map_h = 0;
-	printf("map->map_w %lu, map->map_h %lu", map->map_w, map->map_h);
 	while (map->map[map->map_h])
 		map->map_h++;
-	printf("map->map_w %lu, map->map_h %lu", map->map_w, map->map_h);
 	if ((MM_W / map->map_w) <= (MM_H / map->map_h))
 		return (MM_W / map->map_w);
 	return (MM_H / map->map_h);
@@ -69,9 +67,10 @@ void	draw_minimap(t_data *map, t_img *minimap)
 			if (map->map[0][x / wallsize] == '\0')
 				break ;
 			if (map->map[y / wallsize][x / wallsize] == '1')
-				put_pixel_img(minimap, x, y, 0x00000FFF);
-			else
+				put_pixel_img(minimap, x, y, 0x000000FF);
+			else if (map->map[y / wallsize][x / wallsize] == '0')
 				put_pixel_img(minimap, x, y, 0x00FFFFFF);
+
 		}
 		y++;
 	}
