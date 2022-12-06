@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/06 13:34:31 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 13:52:23 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	check_wall(char **map, t_cam *ray, int ray_dir)
 		return (update_rayv(map, ray, ray_dir, dist_v));
 }
 
-float	ray_dist(char **map, t_cam const player, t_cam ray, float rad_ang)
+float	ray_dist(char **map, t_cam const player, t_cam *ray, float rad_ang)
 {
 	float	dist;
 
-	while (check_wall(map, &ray, ray_dir(ray)) != 1)
+	while (check_wall(map, &ray, ray_dir(*ray)) != 1)
 		;
-	dist = sqrt(pow(fabs(player.pos.x - ray.pos.x), 2)
-			+ pow(fabs(player.pos.y - ray.pos.y), 2));
+	dist = sqrt(pow(fabs(player.pos.x - ray->pos.x), 2)
+			+ pow(fabs(player.pos.y - ray->pos.y), 2));
 	return (dist);
 }
 
@@ -71,9 +71,12 @@ void	view_field(t_data data, t_cam const player, float rad_tot)
 	rad_ang = -rad_tot / 2;
 	while (rad_ang <= rad_tot / 2)
 	{
-		dist = ray_dist(data.map, player, ray, rad_ang);
-		draw3d(dist, player, rad_ang, p_view3d);
-		draw_line(player.pos, ray.pos, p_view2d);
+		dist = ray_dist(data.map, player, &ray, rad_ang);
+		// draw3d(dist, player, rad_ang, p_view3d);
+		draw_line(player.pos, &ray.pos, p_view2d);
 		rad_ang += DR;
 	}
+	// mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);
+	put_minimap(data);
+	mlx_put_image_to_window(data->mlx, data->win, p_view2d.img, 0, 0);
 }

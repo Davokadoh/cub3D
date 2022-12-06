@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 13:13:48 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 13:50:51 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	put_pixel_img(t_img *img, int x, int y, int color);
 //void	draw_walls();
 
 //Minimap
-void	put_minimap(t_data *map, t_img *minimap);
+void	put_minimap(t_data *data);
 int		wall_size(t_data *map);
 void	init_img(t_img *img, int width, int height);
 void	draw_minimap(t_data *map, t_img *minimap);
