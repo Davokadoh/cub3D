@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 15:00:51 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 15:09:14 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,15 @@ typedef struct	s_cam
 	float	angle;
 }				t_cam;
 
+typedef struct	s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+}				t_img;
+
 typedef struct	s_data
 {
 	void	*mlx;
@@ -51,15 +60,6 @@ typedef struct	s_data
 	t_cam	player;
 	t_img	minimap;
 }				t_data;
-
-typedef struct	s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
-}				t_img;
 
 //Main logic
 int		move(int key, t_data *data); //bool
@@ -84,7 +84,7 @@ int		update_rayv(char **map, t_cam *ray, int ray_dir, float dist_v);
 t_cam	init_ray(t_cam player, float radius_angle);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
 float	ray_dist_draw(char **map, t_cam const player, float rad_ang, t_img *img);
-void	view_field(t_data *data, t_cam const player, float rad_tot);
+void	view_field(t_data *data, float rad_tot);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
