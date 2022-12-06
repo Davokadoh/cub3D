@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/06 17:34:49 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 17:55:13 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ void	view_field(t_data *data, double rad_tot)
 		dist = ray_dist(data->map, data->player, &ray);
 		// draw3d(dist, data->player, rad_ang, p_view3d);
 		printf("player x%f Y%f, ray x%f y%f\n", data->player.pos.x, data->player.pos.y, ray.pos.x, ray.pos.y );
-		put_pixel_img(&p_view2d, data->player.pos.x * wall_size(data), data->player.pos.y * wall_size(data), 0x00000000);
-		draw_line(&p_view2d, data->player.pos, ray.pos, 0x00000000);
+		put_pixel_img(&p_view2d, data->player.pos.x * wall_size(data) + wall_size(data)/2, data->player.pos.y * wall_size(data) + wall_size(data)/2, 0x00000000);
+		draw_line(&p_view2d, data->player.pos, ray.pos, 0x00000000, data);
 		rad_ang += DR;
 	// }
 	// mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);
-	// mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, p_view2d.img, 0, 0);
 }
