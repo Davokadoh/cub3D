@@ -6,13 +6,14 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 13:50:51 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 13:58:09 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <unistd.h>
 # include <fcntl.h>
 # include <stddef.h>
 # include <math.h>

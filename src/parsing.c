@@ -13,47 +13,6 @@
 #include "libft.h"
 #include "cub3D.h"
 
-//Doesn't check if multiple instance on same line
-static int	get_camera_in_line(char *line)
-{
-	if (ft_strchr(line, 'N'))
-		return (1);
-	else if (ft_strchr(line, 'S'))
-		return (1);
-	else if (ft_strchr(line, 'E'))
-		return (1);
-	else if (ft_strchr(line, 'W'))
-		return (1);
-	else
-		return (0);
-}
-static int	check_unique_camera(char **map)
-{
-	int		i;
-	int		camera;
-	int		new_camera;
-
-	camera = 0;
-	i = -1;
-	while (map[++i] != NULL)
-	{
-		new_camera = get_camera_in_line(map[i]);
-		if (camera && new_camera)
-			return (1);
-		camera = new_camera;
-	}
-	return (camera);
-}
-
-//Doesn't add camera pos to data
-//Doesn't add camera dir to data
-static int	get_camera(t_data *data)
-{
-	if (check_unique_camera(data->map))
-		return (put_error("There is more than one camera", 7));
-	return (0);
-}
-
 static int	check_extension(char *str)
 {
 	char	*ext;
@@ -68,23 +27,30 @@ static int	check_extension(char *str)
 
 int	parse(int ac, char **av, t_data *data)
 {
-	int	fd;
+	size_t	map_start;
 
 	if (ac != 2)
 		return (put_error("Usage: cub3D path_to_file", 1));
 	if (check_extension(av[1]))
 		return (2);
-	if ((fd = open(av[1], O_RDONLY)) < 0) //Need to close fd when finished reading
-		return (put_error("Can't open file", 3));
-	/*
-	if (get_textures(fd, data->textures) > 0)
+	map_start = get_map_start(av[1]);
+	if (get_textures(av[1], data->textures, map_start) > 0) //Need to pass map_start
 		return (put_error("Can't get textures", 4));
+<<<<<<< HEAD
+	/*
+	if (get_map(av[1], data->map) > 0) //Need to pass map_start
+		return (put_error("Can't get map", 5));
+	if (get_camera(data) > 0) 
+		return (put_error("Can't get camera", 6)); //Need to pass map_start
+	*/
+=======
 	*/
 	if (get_map(fd, &data->map) > 0)
 		return (put_error("Can't get map", 5));
 	printf("BYE\n");
 	if (get_camera(data) > 0)
 		return (put_error("Can't get camera", 6));
+>>>>>>> 1eb0c13e325230e74e942f8347900d70df6a8195
 	return (0);
 }
 

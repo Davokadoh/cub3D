@@ -25,6 +25,7 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/parsing.c \
 				$(SRC_DIR)/textures.c \
 				$(SRC_DIR)/map.c \
+				$(SRC_DIR)/camera.c \
 				$(SRC_DIR)/minimap.c \
 				$(SRC_DIR)/render.c \
 				$(SRC_DIR)/hooks.c \

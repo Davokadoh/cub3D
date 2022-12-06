@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "mlx.h"
-#include "libft.h"
 #include "cub3D.h"
 
 static void	hooks(t_data *data)
@@ -25,8 +24,8 @@ int	main(int ac, char **av)
 	t_data	data;
 	t_img	minimap;
 
-	//if (parse(ac, av, &data))
-	//	return (1);
+	if (parse(ac, av, &data))
+		return (1);
 	data.mlx = mlx_init();
 	if (!data.mlx) //Prevents env -i crash
 		return (1);
@@ -36,5 +35,5 @@ int	main(int ac, char **av)
 	render(&data);
 	put_minimap(&data, &minimap);
 	hooks(&data);
-    mlx_loop(data.mlx);
+	mlx_loop(data.mlx);
 }
