@@ -30,4 +30,7 @@ int	hook_keydown(int key, t_data *data)
  * int		mlx_mouse_hide();
  * int		mlx_mouse_show();
  * int		mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
+ *
+ * 	mlx_hook(vars.win, 2, 1L<<6, close, &vars);
+ * 	int (*f)(int x, int y, void *param)
 */
