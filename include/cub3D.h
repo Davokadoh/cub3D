@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 14:10:38 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:27:21 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,13 @@ void	draw_minimap(t_data *map, t_img *minimap);
 //Raycasting
 int		ray_dir(t_cam ray);
 float	dist_next_h(t_cam ray, int ray_dir);
-float	dist_next_h(t_cam ray, int ray_dir);
+float	dist_next_v(t_cam ray, int ray_dir);
 int		update_rayh(char **map, t_cam *ray, int ray_dir, float dist_h);
 int		update_rayv(char **map, t_cam *ray, int ray_dir, float dist_v);
 t_cam	init_ray(t_cam player, float radius_angle);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
 float	ray_dist_draw(char **map, t_cam const player, float rad_ang, t_img *img);
+void	view_field(t_data *data, t_cam const player, float rad_tot);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/06 13:52:23 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:33:19 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_cam	init_ray(t_cam player, float radius_angle)
 	ray.pos.y = player.pos.y;
 	ray.dir.x = cos(ray.angle);
 	ray.dir.y = sin(ray.angle);
+	return (ray);
 }
 
 int	check_wall(char **map, t_cam *ray, int ray_dir)
@@ -37,43 +38,44 @@ int	check_wall(char **map, t_cam *ray, int ray_dir)
 	dist_v = dist_next_v(*ray, ray_dir);
 	if (dist_h <= dist_v)
 		return (update_rayh(map, ray, ray_dir, dist_h));
-	if (dist_v < dist_h)
+	else
 		return (update_rayv(map, ray, ray_dir, dist_v));
+
 }
 
-float	ray_dist(char **map, t_cam const player, t_cam *ray, float rad_ang)
+float	ray_dist(char **map, t_cam const player, t_cam *ray)
 {
 	float	dist;
 
-	while (check_wall(map, &ray, ray_dir(*ray)) != 1)
+	while (check_wall(map, ray, ray_dir(*ray)) != 1)
 		;
 	dist = sqrt(pow(fabs(player.pos.x - ray->pos.x), 2)
 			+ pow(fabs(player.pos.y - ray->pos.y), 2));
 	return (dist);
 }
 
-void	view_field(t_data data, t_cam const player, float rad_tot)
+void	view_field(t_data *data, t_cam const player, float rad_tot)
 {
 	float	rad_ang;
-	t_img	*p_view2d;
-	t_img	*p_view3d;
+	t_img	p_view2d;
+	t_img	p_view3d;
 	float	dist;
 	t_cam	ray;
 
-	ray = init_ray(player, rad_ang);
-	p_view2d->img = mlx_new_image(data.mlx, MM_W, MM_H);
-	p_view2d->addr = mlx_get_data_addr(p_view2d->img, &p_view2d->bits_per_pixel,
-			&p_view2d->line_size, &p_view2d->endian);
-	ini_img(p_view2d, MM_W, MM_H);
-	p_view3d->img = mlx_new_image(data.mlx, data.map_w, data.map_h);
-	p_view3d->addr = mlx_get_data_addr(p_view3d->img, &p_view3d->bits_per_pixel,
-			&p_view3d->line_size, &p_view3d->endian);
+	p_view2d.img = mlx_new_image(data->mlx, MM_W, MM_H);
+	p_view2d.addr = mlx_get_data_addr(p_view2d.img, &p_view2d.bits_per_pixel,
+			&p_view2d.line_size, &p_view2d.endian);
+	init_img(&p_view2d, MM_W, MM_H);
+	p_view3d.img = mlx_new_image(data->mlx, data->map_w, data->map_h);
+	p_view3d.addr = mlx_get_data_addr(p_view3d.img, &p_view3d.bits_per_pixel,
+			&p_view3d.line_size, &p_view3d.endian);
 	rad_ang = -rad_tot / 2;
 	while (rad_ang <= rad_tot / 2)
 	{
-		dist = ray_dist(data.map, player, &ray, rad_ang);
+		ray = init_ray(player, rad_ang);
+		dist = ray_dist(data->map, player, &ray);
 		// draw3d(dist, player, rad_ang, p_view3d);
-		draw_line(player.pos, &ray.pos, p_view2d);
+		draw_line(&p_view2d, player.pos, ray.pos, 0x00FFFF);
 		rad_ang += DR;
 	}
 	// mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);

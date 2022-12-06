@@ -6,7 +6,7 @@
 /*   By: jleroux <jleroux@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:15 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 13:26:17 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:12:55 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,43 @@
 
 int	move_forward(t_data *data)
 {
-	data->cam.pos.x += 0.1 * data->cam.dir.x;
-	data->cam.pos.y += 0.1 * data->cam.dir.y;
+	data->player.pos.x += 0.1 * data->player.dir.x;
+	data->player.pos.y += 0.1 * data->player.dir.y;
 	return (1);
 }
 
 int	move_backward(t_data *data)
 {
-	data->cam.pos.x -= 0.1 * data->cam.dir.x;
-	data->cam.pos.y -= 0.1 * data->cam.dir.y;
+	data->player.pos.x -= 0.1 * data->player.dir.x;
+	data->player.pos.y -= 0.1 * data->player.dir.y;
 	return (1);
 }
 
 int	move_left(t_data *data)
 {
-	data->cam.pos.x += 0.1 * data->cam.dir.x;
-	data->cam.pos.y += 0.1 * data->cam.dir.y;
+	data->player.pos.x += 0.1 * data->player.dir.x;
+	data->player.pos.y += 0.1 * data->player.dir.y;
 	return (1);
 }
 
 int	move_right(t_data *data)
 {
-	data->cam.pos.x += 0.1 * data->cam.dir.x;
-	data->cam.pos.y += 0.1 * data->cam.dir.y;
+	data->player.pos.x += 0.1 * data->player.dir.x;
+	data->player.pos.y += 0.1 * data->player.dir.y;
 	return (1);
 }
 
 int	turn_left(t_data *data)
 {
-	data->cam.dir.x += 0.1 * data->cam.dir.x;
-	data->cam.dir.y += 0.1 * data->cam.dir.y;
+	data->player.dir.x += 0.1 * data->player.dir.x;
+	data->player.dir.y += 0.1 * data->player.dir.y;
 	return (1);
 }
 
 int	turn_right(t_data *data)
 {
-	data->cam.dir.x -= 0.1 * data->cam.dir.x;
-	data->cam.dir.y -= 0.1 * data->cam.dir.y;
+	data->player.dir.x -= 0.1 * data->player.dir.x;
+	data->player.dir.y -= 0.1 * data->player.dir.y;
 	return (1);
 }
 

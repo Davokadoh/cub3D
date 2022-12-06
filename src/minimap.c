@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:28:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/06 13:49:09 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:12:38 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	put_minimap(t_data *data)
 	// data->map[9] = "11111111111111111111";
 	// data->map[10] = NULL;
 	minimap.img = mlx_new_image(data->mlx, MM_W, MM_H);
-	minimap.addr = mlx_get_data_addr(minimap.img, minimap.bits_per_pixel,
-			minimap.line_size, minimap.endian);
-	ini_img(&minimap, MM_W, MM_H);
+	minimap.addr = mlx_get_data_addr(minimap.img, &minimap.bits_per_pixel,
+			&minimap.line_size, &minimap.endian);
+	init_img(&minimap, MM_W, MM_H);
 	draw_minimap(data, &minimap);
 	mlx_put_image_to_window(data->mlx, data->win, minimap.img, 0, 0);
 }
