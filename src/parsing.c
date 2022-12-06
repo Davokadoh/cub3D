@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/02 14:15:56 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 11:21:03 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,15 @@ int	parse(int ac, char **av, t_data *data)
 	if (get_camera(data) > 0)
 		return (put_error("Can't get camera", 6));
 	return (0);
+}
+
+t_cam	init_ray(t_cam player, float radius_angle)
+{
+	t_cam	ray;
+
+	ray.angle = player.angle + radius_angle;
+	ray.pos.x = player.pos.x;
+	ray.pos.y = player.pos.y;
+	ray.dir.x = cos(ray.angle);
+	ray.dir.y = sin(ray.angle);
 }

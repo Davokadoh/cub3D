@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/05 18:04:21 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 10:46:16 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,17 @@
 # define MM_H 400
 # define DR	M_PI / 180
 
+typedef struct	s_vec2d
+{
+	float	x;
+	float	y;
+}				t_vec2d;
+
 typedef struct	s_cam
 {
-	float	pos[2]; //Position vector
-	float	dir[2]; //Looking direction verctor
+	t_vec2d	pos; //Position vector
+	t_vec2d	dir; //Looking direction verctor
+	float	angle;
 }				t_cam;
 
 typedef struct	s_data
