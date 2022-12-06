@@ -14,8 +14,9 @@
 # define CUB3D_H
 
 # include <unistd.h>
-# include <fcntl.h>
 # include <stddef.h>
+# include <fcntl.h>
+# include <math.h>
 # include "libft.h"
 
 # define WIN_W 640
@@ -29,8 +30,8 @@ typedef struct	s_vec2d
 
 typedef struct	s_cam
 {
-	vec2d	pos[2]; //Position vector
-	vec2d	dir[2]; //Looking direction verctor
+	t_vec2d	pos; //Position vector
+	t_vec2d	dir; //Looking direction verctor
 }				t_cam;
 
 typedef struct	s_data
@@ -39,7 +40,7 @@ typedef struct	s_data
 	void	*win;
 	char	**map;
 	char	*textures[7];
-	t_cam	camera;
+	t_cam	cam;
 }				t_data;
 
 typedef struct	s_img
