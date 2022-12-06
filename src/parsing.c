@@ -12,11 +12,11 @@
 
 #include "libft.h"
 #include "cub3D.h"
-	
-typedef struct	s_map
+
+typedef struct s_map
 {
 	int	start;
-	int end;
+	int	end;
 }				t_map;
 
 static t_map	get_map_start(char *file_path)
@@ -59,19 +59,6 @@ static int	check_file_extension(char *str)
 	return (0);
 }
 
-static void	print_map(t_data *data)
-{
-	int i = -1;
-
-	while (++i < 30)
-		printf("%i", i%10);
-	printf("\n");
-	i = -1;
-	while (data->map[++i])
-		printf("%s\n", data->map[i]);
-	printf("\n");
-}
-
 int	parse(int ac, char **av, t_data *data)
 {
 	t_map	map;
@@ -85,8 +72,7 @@ int	parse(int ac, char **av, t_data *data)
 		return (put_error("Can't get textures", 4));
 	if (get_map(av[1], map.start, map.end, &data->map) > 0)
 		return (put_error("Can't get map", 5));
-	print_map(data);
-	if (get_camera(data) > 0) 
+	if (get_camera(data) > 0)
 		return (put_error("Can't get camera", 6));
 	printf("pos: x:%f, y:%f\n", data->cam.pos.x, data->cam.pos.y);
 	printf("dir: x:%f, y:%f\n", data->cam.dir.x, data->cam.dir.y);

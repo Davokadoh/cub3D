@@ -14,7 +14,6 @@
 
 int	rgb_to_int(double r, double g, double b)
 {
-	//See mlx_get_color()
 	int	color;
 
 	color = 0;
@@ -22,4 +21,5 @@ int	rgb_to_int(double r, double g, double b)
 	color |= (int)(g * 255) << 8;
 	color |= (int)(r * 255) << 16;
 	return (color);
+	//See mlx_get_color()
 }

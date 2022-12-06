@@ -1,21 +1,20 @@
 #include "libft.h"
 #include "gnl.h"
 
-int init_read(int fd, t_read *strct)
+static int	init_read(int fd, t_read *strct)
 {
 	strct->fd = fd;
 	strct->pos = 0;
 	strct->max = read(fd, strct->backup, BUFFER_SIZE);
-
 	if (strct->max <= 0)
 		return (0);
 	else
 		return (1);
 }
 
-char    check_read(t_read *strct)
+static char	check_read(t_read *strct)
 {
-	char    result;
+	char	result;
 
 	if (strct->pos >= strct->max)
 	{
@@ -29,11 +28,11 @@ char    check_read(t_read *strct)
 	return (result);
 }
 
-char    *add_char_to_str(char *s1, char ch)
+static char	*add_char_to_str(char *s1, char ch)
 {
-	char    *str;
-	int     i;
-	int     len;
+	char	*str;
+	int		i;
+	int		len;
 
 	i = 0;
 	len = ft_strlen(s1);
@@ -52,11 +51,11 @@ char    *add_char_to_str(char *s1, char ch)
 	return (str);
 }
 
-char    *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static	t_read strct = {.fd = -1};
-	char	ch;
-	char	*str;
+	static t_read	strct = {.fd = -1};
+	char			ch;
+	char			*str;
 
 	str = NULL;
 	if (strct.fd != fd)

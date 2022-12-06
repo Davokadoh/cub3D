@@ -15,6 +15,7 @@ static int	get_camera_in_line(char *line)
 	else
 		return (0);
 }
+
 static int	check_unique_camera(char **map)
 {
 	int		i;
@@ -53,7 +54,8 @@ static t_vec2d	get_pos(char **map)
 		j = -1;
 		while (map[i][++j])
 		{
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+			if (map[i][j] == 'N' || map[i][j] == 'S' ||
+					map[i][j] == 'W' || map[i][j] == 'E')
 				return (new_vec(j, i));
 		}
 	}
@@ -62,7 +64,7 @@ static t_vec2d	get_pos(char **map)
 
 static t_vec2d	get_dir(char c)
 {
-	t_vec2d dir;
+	t_vec2d	dir;
 
 	if (c == 'N')
 		dir = new_vec(0, -1);

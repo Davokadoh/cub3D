@@ -15,15 +15,15 @@
 
 static int	is_map_char(char c)
 {
-	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'W' || c =='S')
+	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'W' || c == 'S')
 		return (1);
 	return (0);
 }
 
 static int	check_around(char **map, int y, int x)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (i < 2)
@@ -33,7 +33,6 @@ static int	check_around(char **map, int y, int x)
 		j = -1;
 		while (j < 2)
 		{
-			//printf("y:%i x:%i\n", y+i, x+j);
 			if (x + j < 0 || !map[y + i][x + j])
 				return (1);
 			else if (!is_map_char(map[y + i][x + j]))
@@ -80,7 +79,7 @@ static void	print_map(char **map)
 
 static size_t	max_length(char **map)
 {
-	int	i;
+	int		i;
 	size_t	len;
 	size_t	max;
 

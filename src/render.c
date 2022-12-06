@@ -17,11 +17,11 @@
 static void	put_pixel_img(t_img *img, int x, int y, int color)
 {
 	if (x >= 0 && y >= 0 && x < WIN_W && y < WIN_H)
-		*(unsigned int *)(img->addr + 
-				(y * img->line_size + x * img->bits_per_pixel / 8)) = color;
+		*(unsigned int *)(img->addr
+				+ (y * img->line_size + x * img->bits_per_pixel / 8)) = color;
 }
 
-static int	get_color()
+static int	get_color(void)
 {
 	return (0x00FF0000);
 }
@@ -34,7 +34,7 @@ void	render(t_data *data)
 
 	img.img = mlx_new_image(data->mlx, WIN_W, WIN_H);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_size,
-								&img.endian);
+			&img.endian);
 	y = -1;
 	while (++y < WIN_H)
 	{
