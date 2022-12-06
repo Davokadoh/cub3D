@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 10:46:16 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 13:13:48 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include <math.h>
 # include <stdlib.h>
 # include "libft.h"
-#include "mlx.h"
+# include "mlx.h"
 
 # define WIN_W 1280
 # define WIN_H 720
 # define MM_W 400
 # define MM_H 400
-# define DR	M_PI / 180
+# define DR M_PI / 180
 
 typedef struct	s_vec2d
 {
@@ -47,7 +47,7 @@ typedef struct	s_data
 	size_t	map_w;
 	size_t	map_h;
 	char	*textures[7];
-	t_cam	camera;
+	t_cam	player;
 }				t_data;
 
 typedef struct	s_img
@@ -66,16 +66,27 @@ void	put_pixel_img(t_img *img, int x, int y, int color);
 //void	cast_rays();
 //void	draw_walls();
 
-// minimap
+//Minimap
 void	put_minimap(t_data *map, t_img *minimap);
-int	wall_size(t_data *map);
-void	ini_img(t_img *img, int width, int height);
+int		wall_size(t_data *map);
+void	init_img(t_img *img, int width, int height);
 void	draw_minimap(t_data *map, t_img *minimap);
+
+//Raycasting
+int		ray_dir(t_cam ray);
+float	dist_next_h(t_cam ray, int ray_dir);
+float	dist_next_h(t_cam ray, int ray_dir);
+int		update_rayh(char **map, t_cam *ray, int ray_dir, float dist_h);
+int		update_rayv(char **map, t_cam *ray, int ray_dir, float dist_v);
+t_cam	init_ray(t_cam player, float radius_angle);
+int		check_wall(char **map, t_cam *ray, int ray_dir);
+float	ray_dist_draw(char **map, t_cam const player, float rad_ang, t_img *img);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
 int		get_textures(int fd, char *textures[7]);
 int		get_map(int fd, char ***map);
+t_cam	init_ray(t_cam player, float radius_angle);
 
 //Utils
 int		put_error(char *err_msg, int err_code);
