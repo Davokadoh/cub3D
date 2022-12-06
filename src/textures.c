@@ -6,7 +6,7 @@
 /*   By: jleroux <marvin@42lausanne.ch>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 13:32:01 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/06 14:48:32 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	textures_init(char *textures[7])
 	int	i;
 
 	i = -1;
-	while (textures[++i])
+	while (++i < 7)
 		textures[i] = NULL;
 }
 
