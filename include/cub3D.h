@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 17:55:37 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:21:32 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 
 # define WIN_W 1280
 # define WIN_H 720
-# define MM_W 400
-# define MM_H 400
-# define DR M_PI / 180
+# define MM_W 800
+# define MM_H 600
+# define DR (M_PI / 180)
 
 typedef struct	s_vec2d
 {

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:25:18 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 16:06:07 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/06 19:40:55 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	get_player(t_data *data)
 		return (put_error("", 7));
 	pos = get_pos(data->map);
 	data->player.pos = pos;
+	data->player.pos.x += 0.5;
+	data->player.pos.y += 0.5;
 	data->player.dir = get_dir(data->map[(int)floor(pos.y)][(int)floor(pos.x)]);
 	printf("avant angle\n");
 	data->player.angle = atan(data->player.dir.y / data->player.dir.x);
