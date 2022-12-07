@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/07 15:07:12 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/07 15:08:34 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ int	update_rayh(char **map, t_cam *ray, int ray_dir, float dist_h)
 		printf("new ray->pos.y %f\n", ray->pos.y);
 		printf("map[int_y][int_x] %c\n", map[int_y][int_x]);
 		printf("map[int_y - 1][int_x] %c\n", map[int_y - 1][int_x + 1]);
-		return (map[int_y - 1][int_x] == '1')
+		return (map[int_y - 1][int_x] == '1');
 	}
 	ray->pos.y = (float)(int_y + 1);
 	printf("new ray->pos.y %f\n", ray->pos.y);
 	printf("map[int_y][int_x] %c\n", map[int_y][int_x]);
 	printf("map[int_y + 1][int_x] %c\n", map[int_y + 1][int_x + 1]);
-	return (map[int_y + 1][int_x] == '1') 
+	return (map[int_y + 1][int_x] == '1');
 }
 
 int	update_rayv(char **map, t_cam *ray, int ray_dir, float dist_v)
@@ -109,11 +109,11 @@ int	update_rayv(char **map, t_cam *ray, int ray_dir, float dist_v)
 		printf("int_x - 1 %d\n", int_x - 1);
 		printf("map[int_y][int_x] %c\n", map[int_y][int_x]);
 		printf("map[int_y][int_x - 1] %c\n", map[int_y][int_x - 1]);
-		return (map[int_y][int_x - 1] == '1')
+		return (map[int_y][int_x - 1] == '1');
 	}
 	ray->pos.x = (float)(int_x + 1);
 	printf("new ray->pos.x %f\n", ray->pos.x);
 	printf("map[int_y][int_x] %c\n", map[int_y][int_x]);
 	printf("map[int_y][int_x + 1] %c\n", map[int_y][int_x + 1]);
-	return (map[int_y][int_x + 1]== '1')
+	return (map[int_y][int_x + 1]== '1');
 }
