@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 23:06:29 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/07 14:09:23 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void	render(t_data *data)
 	}
 	// draw_line(&img, (t_vec2d){WIN_H, WIN_W}, (t_vec2d){0, 0}, 0x000000);
 	mlx_put_image_to_window(data->mlx, data->win, img.img, 0, 0);
-	view_field(data, 120 * DR);
+	view_field(data, FOV);
 }
