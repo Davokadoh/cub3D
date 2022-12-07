@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/07 16:55:20 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:59:33 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ double	dist_next_h(t_cam ray, int ray_dir)
 	if (ray_dir > 2)
 		dist = fabs((ray.pos.y - (int)ray.pos.y) / sin(ray.angle));
 	else
-	{
 		dist = (fabs((int)ray.pos.y + 1 - ray.pos.y) / sin(ray.angle));
-	}
 	if (dist == 0)
 		dist = fabs(1 / sin(ray.angle));
 	return (dist);
@@ -73,7 +71,7 @@ int	update_rayh(char **map, t_cam *ray, int ray_dir, double dist_h)
 			ray->pos.y = (double)int_y - 1;
 		else
 			ray->pos.y = (double)int_y;
-			return (map[(int)ray->pos.y - 1][int_x] == '1');
+		return (map[(int)ray->pos.y - 1][int_x] == '1');
 	}
 	ray->pos.y = (double)(int_y + 1);
 	return (map[int_y + 1][int_x] == '1');

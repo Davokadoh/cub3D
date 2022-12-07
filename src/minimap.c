@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:28:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/06 16:58:15 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:55:48 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	draw_minimap(t_data *map, t_img *minimap)
 				put_pixel_img(minimap, x, y, 0x000000FF);
 			else if (map->map[y / wallsize][x / wallsize] == '0')
 				put_pixel_img(minimap, x, y, 0x00FFFFFF);
-
 		}
 		y++;
 	}
