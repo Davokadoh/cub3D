@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:25:18 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/07 15:04:10 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/07 15:29:08 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,23 @@ static t_vec2d	get_dir(char c)
 	return (dir);
 }
 
+static double	get_angle(char c)
+{
+	double	angle;
+
+	if (c == 'N')
+		angle = 3 * M_PI_2;
+	else if (c == 'S')
+		angle = M_PI_2;
+	else if (c == 'W')
+		angle = M_PI;
+	else if (c == 'E')
+		angle = 0;
+	else
+		angle = 0;
+	return (angle);
+}
+
 int	get_player(t_data *data)
 {
 	t_vec2d	pos;
@@ -93,7 +110,7 @@ int	get_player(t_data *data)
 	data->player.pos.x += 0.5;
 	data->player.pos.y += 0.5;
 	data->player.dir = get_dir(data->map[(int)floor(pos.y)][(int)floor(pos.x)]);
-	data->player.angle = atan(data->player.dir.y / data->player.dir.x);
+	data->player.angle = get_angle(data->map[(int)floor(pos.y)][(int)floor(pos.x)]);
 	data->map[(int)floor(pos.y)][(int)floor(pos.x)] = '0';
 	return (0);
 }
