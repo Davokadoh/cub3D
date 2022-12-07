@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/07 16:27:25 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/07 16:56:59 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ int	check_wall(char **map, t_cam *ray, int ray_dir)
 
 	dist_h = dist_next_h(*ray, ray_dir);
 	dist_v = dist_next_v(*ray, ray_dir);
-	//printf("ray->pos.x %f, ray->pos.y %f\n", ray->pos.x, ray->pos.y);
-	//printf("dist_h %f, dist_v%f\n",dist_h, dist_v );
 	if (dist_v <= dist_h)
 		return (update_rayv(map, ray, ray_dir, dist_v));
 	else
@@ -47,11 +45,8 @@ double	ray_dist(char **map, t_cam const player, t_cam *ray)
 	int		i = 10;
 
 	dir_ray = ray_dir(*ray);
-	printf("%d :ray->pos.x: %f, ray->pos.y : %f\n", i, ray->pos.x, ray->pos.y);
 	while (check_wall(map, ray, dir_ray) != 1 && --i > 0)
-	{
-		printf("%d :ray->pos.x: %f, ray->pos.y : %f\n", i, ray->pos.x, ray->pos.y);
-	}
+		;
 	dist = sqrt(pow(fabs(player.pos.x - ray->pos.x), 2)
 			+ pow(fabs(player.pos.y - ray->pos.y), 2));
 	return (dist);
@@ -81,7 +76,7 @@ void	view_field(t_data *data, double rad_tot)
 		draw_line(&p_view2d, data->player.pos, ray.pos, 0x00000000, data);
 		rad_ang += DR / 20;
 	}
-	 mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, p_view2d.img, 0, 0);
 }
