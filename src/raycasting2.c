@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/07 15:06:14 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/07 15:13:20 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	view_field(t_data *data, double rad_tot)
 		ray_dist(data->map, data->player, &ray);
 		// draw3d(dist, data->player, rad_ang, p_view3d);
 		draw_line(&p_view2d, data->player.pos, ray.pos, 0x00000000, data);
-		rad_ang += DR/2;
+		rad_ang += FOV / 2;
 	}
 	 mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
