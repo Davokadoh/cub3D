@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vector2d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleroux <jleroux@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:29:23 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 13:30:52 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:25:51 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_vec2d	new_vec(float x, float y)
+t_vec2d	new_vec(double x, double y)
 {
 	t_vec2d	vec;
 

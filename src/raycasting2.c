@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/07 15:13:20 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/07 16:27:25 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_cam	init_ray(t_cam player, double radius_angle)
 
 int	check_wall(char **map, t_cam *ray, int ray_dir)
 {
-	float	dist_h;
-	float	dist_v;
+	double	dist_h;
+	double	dist_v;
 
 	dist_h = dist_next_h(*ray, ray_dir);
 	dist_v = dist_next_v(*ray, ray_dir);
@@ -40,15 +40,18 @@ int	check_wall(char **map, t_cam *ray, int ray_dir)
 		return (update_rayh(map, ray, ray_dir, dist_h));
 }
 
-float	ray_dist(char **map, t_cam const player, t_cam *ray)
+double	ray_dist(char **map, t_cam const player, t_cam *ray)
 {
-	float	dist;
+	double	dist;
 	int		dir_ray;
-	int		i = 5;
+	int		i = 10;
 
 	dir_ray = ray_dir(*ray);
+	printf("%d :ray->pos.x: %f, ray->pos.y : %f\n", i, ray->pos.x, ray->pos.y);
 	while (check_wall(map, ray, dir_ray) != 1 && --i > 0)
-		;
+	{
+		printf("%d :ray->pos.x: %f, ray->pos.y : %f\n", i, ray->pos.x, ray->pos.y);
+	}
 	dist = sqrt(pow(fabs(player.pos.x - ray->pos.x), 2)
 			+ pow(fabs(player.pos.y - ray->pos.y), 2));
 	return (dist);
@@ -59,7 +62,7 @@ void	view_field(t_data *data, double rad_tot)
 	double	rad_ang;
 	t_img	p_view2d;
 	t_img	p_view3d;
-	// float	dist;
+	// double	dist;
 	t_cam	ray;
 
 	p_view2d.img = mlx_new_image(data->mlx, MM_W, MM_H);
@@ -76,7 +79,7 @@ void	view_field(t_data *data, double rad_tot)
 		ray_dist(data->map, data->player, &ray);
 		// draw3d(dist, data->player, rad_ang, p_view3d);
 		draw_line(&p_view2d, data->player.pos, ray.pos, 0x00000000, data);
-		rad_ang += FOV / 2;
+		rad_ang += DR / 20;
 	}
 	 mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
