@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/07 15:00:34 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/07 15:06:14 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,15 @@ void	view_field(t_data *data, double rad_tot)
 	p_view3d.addr = mlx_get_data_addr(p_view3d.img, &p_view3d.bits_per_pixel,
 			&p_view3d.line_size, &p_view3d.endian);
 	rad_ang = -rad_tot / 2;
-	// while (rad_ang <= rad_tot / 2)
-	// {
+	while (rad_ang <= rad_tot / 2)
+	{
 		ray = init_ray(data->player, rad_ang);
 		ray_dist(data->map, data->player, &ray);
 		// draw3d(dist, data->player, rad_ang, p_view3d);
-		printf("player x%f Y%f, ray x%f y%f\n", data->player.pos.x, data->player.pos.y, ray.pos.x, ray.pos.y );
-		put_pixel_img(&p_view2d, data->player.pos.x * wall_size(data), data->player.pos.y * wall_size(data), 0x00000000);
 		draw_line(&p_view2d, data->player.pos, ray.pos, 0x00000000, data);
-		// rad_ang += FOV / 2;
-	// }
-	// mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);
+		rad_ang += DR/2;
+	}
+	 mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, p_view2d.img, 0, 0);
 }
