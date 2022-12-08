@@ -23,8 +23,8 @@
 
 # define WIN_W 1280
 # define WIN_H 720
-# define MM_W 1280
-# define MM_H 720
+# define MM_W 200
+# define MM_H 100
 # define DR (M_PI / 180)
 # define FOV (M_PI / 2)
 
@@ -86,6 +86,9 @@ t_cam	init_ray(t_cam player, double radius_angle);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
 double	ray_dist_draw(char **map, t_cam const player, double rad_ang, t_img *img);
 void	view_field(t_data *data, double rad_tot);
+
+//?????????
+void	draw3d(t_img *img, double dist, double rad_ang);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);

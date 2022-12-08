@@ -57,22 +57,23 @@ void	view_field(t_data *data, double rad_tot)
 	double	rad_ang;
 	t_img	p_view2d;
 	t_img	p_view3d;
-	// double	dist;
+	double	dist;
 	t_cam	ray;
 
 	p_view2d.img = mlx_new_image(data->mlx, MM_W, MM_H);
 	p_view2d.addr = mlx_get_data_addr(p_view2d.img, &p_view2d.bits_per_pixel,
 			&p_view2d.line_size, &p_view2d.endian);
 	init_img(&p_view2d, MM_W, MM_H);
-	p_view3d.img = mlx_new_image(data->mlx, data->map_w, data->map_h);
+	p_view3d.img = mlx_new_image(data->mlx, WIN_W, WIN_H);
 	p_view3d.addr = mlx_get_data_addr(p_view3d.img, &p_view3d.bits_per_pixel,
 			&p_view3d.line_size, &p_view3d.endian);
 	rad_ang = -rad_tot / 2;
+	int x = -1;
 	while (rad_ang <= rad_tot / 2)
 	{
 		ray = init_ray(data->player, rad_ang);
-		ray_dist(data->map, data->player, &ray);
-		// draw3d(dist, data->player, rad_ang, p_view3d);
+		dist = ray_dist(data->map, data->player, &ray);
+		draw3d(&p_view3d, dist, ++x);
 		draw_line(&p_view2d, data->player.pos, ray.pos, 0x00000000, data);
 		rad_ang += DR / 20;
 	}

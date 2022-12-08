@@ -29,6 +29,7 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/minimap.c \
 				$(SRC_DIR)/move.c \
 				$(SRC_DIR)/render.c \
+				$(SRC_DIR)/draw3d.c \
 				$(SRC_DIR)/raycasting1.c \
 				$(SRC_DIR)/raycasting2.c \
 				$(SRC_DIR)/hooks.c \
