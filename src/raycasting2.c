@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/08 11:12:46 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:08:07 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	view_field(t_data *data, double rad_tot)
 		ray = init_ray(data->player, rad_ang);
 		ray_dist(data->map, data->player, &ray);
 		// draw3d(dist, data->player, rad_ang, data->view3d);
-		draw_line(&data->view2d, data->player.pos, ray.pos, 0x00000000, data);
+		draw_line(data->player.pos, ray.pos, 0x00000000, data);
 		rad_ang += DR / 20;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);

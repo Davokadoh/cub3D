@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/08 11:07:41 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:08:29 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	*get_next_line(int fd);
 
 //MLX
 void	put_pixel_img(t_img *img, int x, int y, int color);
-void	draw_line(t_img *img, t_vec2d a, t_vec2d b, int color, t_data *data);
+void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data);
 int		rgb_to_int(double r, double g, double b);
 int		hook_keydown(int key, t_data *data);
 int		close_hook(int button, t_data *data);

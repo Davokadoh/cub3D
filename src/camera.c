@@ -6,44 +6,34 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:25:18 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/07 15:29:08 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/08 15:02:46 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "cub3D.h"
 
-//Doesn't check if multiple instance on same line
-static int	get_player_in_line(char *line)
-{
-	if (ft_strchr(line, 'N'))
-		return (1);
-	else if (ft_strchr(line, 'S'))
-		return (1);
-	else if (ft_strchr(line, 'W'))
-		return (1);
-	else if (ft_strchr(line, 'E'))
-		return (1);
-	else
-		return (0);
-}
-
 static int	check_unique_player(char **map)
 {
-	int		i;
-	int		player;
-	int		new_player;
+	int	i;
+	int	j;
+	int	player;
 
 	player = 0;
-	i = -1;
-	while (map[++i] != NULL)
+	j = -1;
+	while (map[++j] != NULL)
 	{
-		new_player = get_player_in_line(map[i]);
-		if (player && new_player)
-			return (1);
-		player = new_player;
+		i = -1;
+		while (map[j][++i])
+		{
+			if (map[j][++i] == 'N' || map[j][++i] == 'S' || map[j][++i] == 'E'
+				|| map[j][++i] == 'W')
+			player ++;
+		}
 	}
-	return (player);
+	if (player == 1)
+		return (0);
+	return (1);
 }
 
 static t_vec2d	get_pos(char **map)
@@ -104,13 +94,14 @@ int	get_player(t_data *data)
 	t_vec2d	pos;
 
 	if (check_unique_player(data->map))
-		return (put_error("", 7));
+		return (put_error("there is more or less than one \
+player defined by N, E, S or W", 7));
 	pos = get_pos(data->map);
 	data->player.pos = pos;
 	data->player.pos.x += 0.5;
 	data->player.pos.y += 0.5;
-	data->player.dir = get_dir(data->map[(int)floor(pos.y)][(int)floor(pos.x)]);
-	data->player.angle = get_angle(data->map[(int)floor(pos.y)][(int)floor(pos.x)]);
+	data->player.dir = get_dir(data->map[(int)pos.y][(int)pos.x]);
+	data->player.angle = get_angle(data->map[(int)pos.y][(int)pos.x]);
 	data->map[(int)floor(pos.y)][(int)floor(pos.x)] = '0';
 	return (0);
 }
