@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/07 15:14:40 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/07 17:06:21 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static size_t	max_length(char **map)
 		if (len > max)
 			max = len;
 	}
-	return (max);
+	return (max - 1);
 }
 
 static void	fill_line(char **line, size_t max)
