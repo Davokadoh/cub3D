@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-void	draw3d(t_img *img, double dist, int x) //need to explain name for rad_ang, why not current_angle or something else ?
+void	draw3d(t_img *img, double dist, int x, int orientation) //need to explain name for rad_ang, why not current_angle or something else ?
 {
 	float	wall_bot;
 	float	wall_top;
@@ -14,5 +14,5 @@ void	draw3d(t_img *img, double dist, int x) //need to explain name for rad_ang, 
 	if (wall_bot >= WIN_H)
 		wall_bot = WIN_H - 1;
 	while (--wall_bot > wall_top)
-		put_pixel_img(img, x, (int)wall_bot, 0x00FFFFFF);
+		put_pixel_img(img, x, (int)wall_bot, orientation);
 }

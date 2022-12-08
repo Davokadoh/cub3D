@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/08 15:12:13 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/08 21:56:54 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_cam
 	t_vec2d	pos; //Position vector
 	t_vec2d	dir; //Looking direction verctor
 	double	angle;
+	int		c;
 }				t_cam;
 
 typedef struct	s_img
@@ -98,7 +99,7 @@ double	ray_dist_draw(char **map, t_cam const player, double rad_ang, t_img *img)
 void	view_field(t_data *data, double rad_tot);
 
 //?????????
-void	draw3d(t_img *img, double dist, int x);
+void	draw3d(t_img *img, double dist, int x, int orientation);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
