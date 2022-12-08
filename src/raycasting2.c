@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/08 12:04:39 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/08 13:23:36 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ double	ray_dist(char **map, t_cam const player, t_cam *ray, double rad_ang)
 		;
 	dist = sqrt(pow(fabs(player.pos.x - ray->pos.x), 2)
 			+ pow(fabs(player.pos.y - ray->pos.y), 2));
-	dist = cos(rad_ang) * dist;
+	dist = cos(ray->angle - player.angle) * dist;
+	(void) rad_ang;
 	return (dist);
 }
 
@@ -74,7 +75,6 @@ void	view_field(t_data *data, double rad_tot)
 	{
 		ray = init_ray(data->player, rad_ang);
 		dist = ray_dist(data->map, data->player, &ray, rad_ang);
-		printf("perp dist: %f\n", dist);
 		draw3d(&p_view3d, dist, x);
 		draw_line(&p_view2d, data->player.pos, ray.pos, 0x00000000, data);
 		rad_ang += FOV / WIN_W;

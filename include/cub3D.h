@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/08 12:06:38 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/08 13:17:05 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define WIN_W 1280
-# define WIN_H 720
+# define WIN_W 1920
+# define WIN_H 1080
 # define MM_W 300
 # define MM_H 200
 # define DR (M_PI / 180)

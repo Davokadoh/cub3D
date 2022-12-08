@@ -9,7 +9,7 @@ void	draw3d(t_img *img, double dist, int x) //need to explain name for rad_ang, 
 	line_height = (WIN_H / dist);
 	wall_top = -line_height / 2 + WIN_H / 2;
 	if (wall_top < 0)
-		wall_top = 1;
+		wall_top = 0;
 	wall_bot = line_height / 2 + WIN_H / 2;
 	if (wall_bot >= WIN_H)
 		wall_bot = WIN_H - 1;

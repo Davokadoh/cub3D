@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:03 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/07 16:51:28 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/08 13:20:27 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	draw_line(t_img *img, t_vec2d a, t_vec2d b, int color, t_data *data)
 	b.y *= wall_size(data);
 	deltaX = b.x - a.x;
 	deltaY = b.y - a.y;
-	pixels = 1 + sqrt((deltaX * deltaX) + (deltaY * deltaY));
+	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
 	deltaX /= pixels;
 	deltaY /= pixels;
 	x = a.x;
