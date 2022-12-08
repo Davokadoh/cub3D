@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:25:18 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/08 15:02:46 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:02:08 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static int	check_unique_player(char **map)
 		i = -1;
 		while (map[j][++i])
 		{
-			if (map[j][++i] == 'N' || map[j][++i] == 'S' || map[j][++i] == 'E'
-				|| map[j][++i] == 'W')
+			if (map[j][i] == 'N' || map[j][i] == 'S' || map[j][i] == 'E'
+				|| map[j][i] == 'W')
 			player ++;
 		}
 	}

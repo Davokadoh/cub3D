@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/07 16:59:33 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/08 15:53:13 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ int	update_rayh(char **map, t_cam *ray, int ray_dir, double dist_h)
 		return (map[(int)ray->pos.y - 1][int_x] == '1');
 	}
 	ray->pos.y = (double)(int_y + 1);
-	return (map[int_y + 1][int_x] == '1');
+	if (map[int_y + 1][int_x] == '1')
+		return (1);
+	else
+		return (0);
 }
 
 int	update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v)
@@ -94,5 +97,8 @@ int	update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v)
 		return (map[int_y][(int)ray->pos.x - 1] == '1');
 	}
 	ray->pos.x = (double)(int_x + 1);
-	return (map[int_y][int_x + 1]== '1');
+	if (map[int_y][int_x + 1]== '1')
+		return (2);
+	else
+		return (0);
 }

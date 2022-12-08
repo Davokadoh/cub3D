@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/08 15:11:43 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/08 16:26:32 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,21 @@ double	ray_dist(char **map, t_cam const player, t_cam *ray, double rad_ang)
 {
 	double	dist;
 	int		dir_ray;
+	int		dir;
 
 	dir_ray = ray_dir(*ray);
-	while (check_wall(map, ray, dir_ray) != 1)
-		;
+	dir = check_wall(map, ray, dir_ray);
+	while (dir < 1)
+	{
+		dir = check_wall(map, ray, dir_ray);
+	}
 	dist = sqrt(pow(fabs(player.pos.x - ray->pos.x), 2)
 			+ pow(fabs(player.pos.y - ray->pos.y), 2));
-	dist = cos(rad_ang) * dist;
+	if (dir == 1)
+		dist = cos(ray->angle) * dist + 2 * cos(rad_ang);
+	if (dir == 2)
+		dist = cos(ray->angle) * dist + 2 * cos(rad_ang);
+	(void)rad_ang;
 	return (dist);
 }
 
