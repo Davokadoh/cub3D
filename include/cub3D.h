@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/07 16:25:40 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/08 12:06:38 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 # define WIN_W 1280
 # define WIN_H 720
-# define MM_W 200
-# define MM_H 100
+# define MM_W 300
+# define MM_H 200
 # define DR (M_PI / 180)
 # define FOV (M_PI / 2)
 
@@ -88,7 +88,7 @@ double	ray_dist_draw(char **map, t_cam const player, double rad_ang, t_img *img)
 void	view_field(t_data *data, double rad_tot);
 
 //?????????
-void	draw3d(t_img *img, double dist, double rad_ang);
+void	draw3d(t_img *img, double dist, int x);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);

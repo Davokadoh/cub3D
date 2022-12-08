@@ -1,11 +1,18 @@
 #include "cub3D.h"
 
-void	draw3d(t_img *img, double dist, double rad_ang) //need to explain name for rad_ang, why not current_angle or something else ?
+void	draw3d(t_img *img, double dist, int x) //need to explain name for rad_ang, why not current_angle or something else ?
 {
-	double	wall_bot = 1 / dist * (WIN_H + WIN_H / 2);
-	double	wall_top = 1 / dist * (WIN_H - WIN_H / 2);
+	float	wall_bot;
+	float	wall_top;
+	float	line_height;
 
+	line_height = (WIN_H / dist);
+	wall_top = -line_height / 2 + WIN_H / 2;
+	if (wall_top < 0)
+		wall_top = 1;
+	wall_bot = line_height / 2 + WIN_H / 2;
+	if (wall_bot >= WIN_H)
+		wall_bot = WIN_H - 1;
 	while (--wall_bot > wall_top)
-		put_pixel_img(img, rad_ang, (int)wall_bot, 0x00FFFFFF);
-	(void)rad_ang;
+		put_pixel_img(img, x, (int)wall_bot, 0x00FFFFFF);
 }
