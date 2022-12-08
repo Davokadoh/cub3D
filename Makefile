@@ -6,7 +6,7 @@
 #    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 11:31:44 by jleroux           #+#    #+#              #
-#    Updated: 2022/12/06 15:49:27 by vhaefeli         ###   ########.fr        #
+#    Updated: 2022/12/08 10:50:25 by vhaefeli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/camera.c \
 				$(SRC_DIR)/minimap.c \
 				$(SRC_DIR)/move.c \
+				$(SRC_DIR)/turn.c \
 				$(SRC_DIR)/render.c \
 				$(SRC_DIR)/raycasting1.c \
 				$(SRC_DIR)/raycasting2.c \

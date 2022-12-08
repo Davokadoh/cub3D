@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/07 16:25:40 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:07:41 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_data
 	char	*textures[7];
 	t_cam	player;
 	t_img	minimap;
+	t_img	view2d;
+	t_img	view3d;
 }				t_data;
 
 //Main logic
@@ -69,6 +71,14 @@ void	put_pixel_img(t_img *img, int x, int y, int color);
 // double	raycasting(t_cam player, t_data map);
 //void	cast_rays();
 //void	draw_walls();
+
+//Move and turn
+int	turn_left(t_data *data);
+int	turn_right(t_data *data);
+int	move_forward(t_data *data);
+int	move_backward(t_data *data);
+int	move_left(t_data *data);
+int	move_right(t_data *data);
 
 //Minimap
 t_img	calculate_minimap(t_data *data);
@@ -103,5 +113,8 @@ void	put_pixel_img(t_img *img, int x, int y, int color);
 void	draw_line(t_img *img, t_vec2d a, t_vec2d b, int color, t_data *data);
 int		rgb_to_int(double r, double g, double b);
 int		hook_keydown(int key, t_data *data);
+int		close_hook(int button, t_data *data);
+int		key_hook(int keycode, t_data *data);
+
 
 #endif

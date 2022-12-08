@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleroux <jleroux@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:15 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/06 14:12:55 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/08 13:44:30 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,77 @@
 
 int	move_forward(t_data *data)
 {
-	data->player.pos.x += 0.1 * data->player.dir.x;
-	data->player.pos.y += 0.1 * data->player.dir.y;
+	double	x;
+	double	y;
+
+	x = data->player.pos.x + (0.1 * data->player.dir.x);
+	y = data->player.pos.y + (0.1 * data->player.dir.y);
+	if (data->map[(int)y][(int)x] == '0')
+	{
+		data->player.pos.x = x;
+		data->player.pos.y = y;
+	}
+	else if (data->map[(int)data->player.pos.y][(int)x] == '0')
+		data->player.pos.x = x;
+	else if (data->map[(int)y][(int)data->player.pos.x] == '0')
+		data->player.pos.y = y;
 	return (1);
 }
 
 int	move_backward(t_data *data)
 {
-	data->player.pos.x -= 0.1 * data->player.dir.x;
-	data->player.pos.y -= 0.1 * data->player.dir.y;
+	double	x;
+	double	y;
+
+	x = data->player.pos.x - 0.1 * data->player.dir.x;
+	y = data->player.pos.y - 0.1 * data->player.dir.y;
+	if (data->map[(int)y][(int)x] == '0')
+	{
+		data->player.pos.x = x;
+		data->player.pos.y = y;
+	}
+	else if (data->map[(int)data->player.pos.y][(int)x] == '0')
+		data->player.pos.x = x;
+	else if (data->map[(int)y][(int)data->player.pos.x] == '0')
+		data->player.pos.y = y;
 	return (1);
 }
 
 int	move_left(t_data *data)
 {
-	data->player.pos.x += 0.1 * data->player.dir.x;
-	data->player.pos.y += 0.1 * data->player.dir.y;
+	double	x;
+	double	y;
+
+	x = data->player.pos.x + 0.1 * data->player.dir.y;
+	y = data->player.pos.y - 0.1 * data->player.dir.x;
+	if (data->map[(int)y][(int)x] == '0')
+	{
+		data->player.pos.x = x;
+		data->player.pos.y = y;
+	}
+	else if (data->map[(int)data->player.pos.y][(int)x] == '0')
+		data->player.pos.x = x;
+	else if (data->map[(int)y][(int)data->player.pos.x] == '0')
+		data->player.pos.y = y;
 	return (1);
 }
 
 int	move_right(t_data *data)
 {
-	data->player.pos.x += 0.1 * data->player.dir.x;
-	data->player.pos.y += 0.1 * data->player.dir.y;
-	return (1);
-}
+	double	x;
+	double	y;
 
-int	turn_left(t_data *data)
-{
-	data->player.dir.x += 0.1 * data->player.dir.x;
-	data->player.dir.y += 0.1 * data->player.dir.y;
-	return (1);
-}
-
-int	turn_right(t_data *data)
-{
-	data->player.dir.x -= 0.1 * data->player.dir.x;
-	data->player.dir.y -= 0.1 * data->player.dir.y;
+	x = data->player.pos.x - 0.1 * data->player.dir.y;
+	y = data->player.pos.y + 0.1 * data->player.dir.x;
+	if (data->map[(int)y][(int)x] == '0')
+	{
+		data->player.pos.x = x;
+		data->player.pos.y = y;
+	}
+	else if (data->map[(int)data->player.pos.y][(int)x] == '0')
+		data->player.pos.x = x;
+	else if (data->map[(int)y][(int)data->player.pos.x] == '0')
+		data->player.pos.y = y;
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/07 16:59:40 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/08 11:12:46 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,28 +55,28 @@ double	ray_dist(char **map, t_cam const player, t_cam *ray)
 void	view_field(t_data *data, double rad_tot)
 {
 	double	rad_ang;
-	t_img	p_view2d;
-	t_img	p_view3d;
+	// t_img	data->view2d;
+	// t_img	data->view3d;
 	// double	dist;
 	t_cam	ray;
 
-	p_view2d.img = mlx_new_image(data->mlx, MM_W, MM_H);
-	p_view2d.addr = mlx_get_data_addr(p_view2d.img, &p_view2d.bits_per_pixel,
-			&p_view2d.line_size, &p_view2d.endian);
-	init_img(&p_view2d, MM_W, MM_H);
-	p_view3d.img = mlx_new_image(data->mlx, data->map_w, data->map_h);
-	p_view3d.addr = mlx_get_data_addr(p_view3d.img, &p_view3d.bits_per_pixel,
-			&p_view3d.line_size, &p_view3d.endian);
+	data->view2d.img = mlx_new_image(data->mlx, MM_W, MM_H);
+	data->view2d.addr = mlx_get_data_addr(data->view2d.img, &data->view2d.bits_per_pixel,
+			&data->view2d.line_size, &data->view2d.endian);
+	init_img(&data->view2d, MM_W, MM_H);
+	data->view3d.img = mlx_new_image(data->mlx, data->map_w, data->map_h);
+	data->view3d.addr = mlx_get_data_addr(data->view3d.img, &data->view3d.bits_per_pixel,
+			&data->view3d.line_size, &data->view3d.endian);
 	rad_ang = -rad_tot / 2;
 	while (rad_ang <= rad_tot / 2)
 	{
 		ray = init_ray(data->player, rad_ang);
 		ray_dist(data->map, data->player, &ray);
-		// draw3d(dist, data->player, rad_ang, p_view3d);
-		draw_line(&p_view2d, data->player.pos, ray.pos, 0x00000000, data);
+		// draw3d(dist, data->player, rad_ang, data->view3d);
+		draw_line(&data->view2d, data->player.pos, ray.pos, 0x00000000, data);
 		rad_ang += DR / 20;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, p_view3d.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, p_view2d.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->view2d.img, 0, 0);
 }
