@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/08 21:57:14 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/09 12:54:08 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,12 @@ void	view_field(t_data *data, double rad_tot)
 	//while (rad_ang <= rad_tot / 2)
 	while (++x < WIN_W)
 	{
+		rad_ang = atan((x - WIN_W / 2) / FOV / WIN_W);
 		ray = init_ray(data->player, rad_ang);
 		dist = ray_dist(data->map, data->player, &ray, rad_ang);
 		orientation = compass(ray);
 		draw3d(&data->view3d, dist, x, orientation);
 		draw_line(data->player.pos, ray.pos, orientation, data);
-		rad_ang += FOV / WIN_W;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
