@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/08 21:57:14 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/09 13:52:12 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	compass(t_cam ray)
 		return (0x0090FFFF);
 	else if ((dir_ray == 2 || dir_ray == 3) && ray.c == 1)
 		return (0x00909090);
-	else 
+	else
 		return (0x00000000);
 }
 

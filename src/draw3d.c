@@ -16,3 +16,15 @@ void	draw3d(t_img *img, double dist, int x, int orientation) //need to explain n
 	while (--wall_bot > wall_top)
 		put_pixel_img(img, x, (int)wall_bot, orientation);
 }
+
+void	init_texture(t_data *data)
+{
+	data->textures.img[0] = mlx_xpm_file_to_image(data->mlx,
+			data->t_path[0], &data->textures.h, &data->textures.w);
+	data->textures.img[1] = mlx_xpm_file_to_image(data->mlx,
+			data->t_path[1], &data->textures.h, &data->textures.w);
+	data->textures.img[2] = mlx_xpm_file_to_image(data->mlx,
+			data->t_path[2], &data->textures.h, &data->textures.w);
+	data->textures.img[3] = mlx_xpm_file_to_image(data->mlx,
+			data->t_path[3], &data->textures.h, &data->textures.w);
+}

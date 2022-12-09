@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/08 21:56:54 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/09 13:50:51 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct	s_img
 	int		bits_per_pixel;
 	int		line_size;
 	int		endian;
+	int		h;
+	int		w;
 }				t_img;
 
 typedef struct	s_data
@@ -58,11 +60,12 @@ typedef struct	s_data
 	char	**map;
 	size_t	map_w;
 	size_t	map_h;
-	char	*textures[7];
+	char	*t_path[7];
 	t_cam	player;
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
+	t_img	textures[4];
 }				t_data;
 
 //Main logic
@@ -103,7 +106,7 @@ void	draw3d(t_img *img, double dist, int x, int orientation);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
-int		get_textures(char *file_path, size_t map_start, char *textures[7]);
+int		get_textures(char *file_path, size_t map_start, char *t_path[7]);
 int		get_map(char *file_path, size_t map_start, size_t map_end, char ***map);
 int		get_player(t_data *data);
 
