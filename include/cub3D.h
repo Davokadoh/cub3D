@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/09 13:50:51 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/10 18:42:42 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ double	ray_dist_draw(char **map, t_cam const player, double rad_ang, t_img *img)
 void	view_field(t_data *data, double rad_tot);
 
 //?????????
+void	drawfloorceiling(t_img *img);
 void	draw3d(t_img *img, double dist, int x, int orientation);
 
 //Parsing
@@ -116,7 +117,6 @@ int		put_error(char *err_msg, int err_code);
 char	*get_next_line(int fd);
 
 //MLX
-void	put_pixel_img(t_img *img, int x, int y, int color);
 void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data);
 int		rgb_to_int(double r, double g, double b);
 int		hook_keydown(int key, t_data *data);

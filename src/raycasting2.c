@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/09 13:52:12 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/10 18:52:14 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int	compass(t_cam ray)
 	else if ((dir_ray == 1 || dir_ray == 2) && ray.c == 2)
 		return (0x0090FFFF);
 	else if ((dir_ray == 2 || dir_ray == 3) && ray.c == 1)
-		return (0x00909090);
-	else
-		return (0x00000000);
+		return (0x00FF0000);
+	printf("cas non determine\n");
+	return (0x00000000);
 }
 
 void	view_field(t_data *data, double rad_tot)
@@ -92,6 +92,7 @@ void	view_field(t_data *data, double rad_tot)
 	rad_ang = -rad_tot / 2;
 	int x = -1;
 	//while (rad_ang <= rad_tot / 2)
+	drawfloorceiling(&data->view3d);
 	while (++x < WIN_W)
 	{
 		ray = init_ray(data->player, rad_ang);
