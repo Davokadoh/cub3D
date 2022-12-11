@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/10 18:52:14 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/11 20:12:09 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ int	compass(t_cam ray)
 
 	dir_ray = ray_dir(ray);
 	if ((dir_ray == 3 || dir_ray == 4) && ray.c == 2)
-		return (0x00FFFF90);
+		return (1);
 	else if ((dir_ray == 1 || dir_ray == 4) && ray.c == 1)
-		return (0x00FF90FF);
+		return (2);
 	else if ((dir_ray == 1 || dir_ray == 2) && ray.c == 2)
-		return (0x0090FFFF);
+		return (3);
 	else if ((dir_ray == 2 || dir_ray == 3) && ray.c == 1)
-		return (0x00FF0000);
+		return (4);
 	printf("cas non determine\n");
-	return (0x00000000);
+	return (0);
 }
 
 void	view_field(t_data *data, double rad_tot)
@@ -80,7 +80,6 @@ void	view_field(t_data *data, double rad_tot)
 	double	rad_ang;
 	double	dist;
 	t_cam	ray;
-	int		orientation;
 
 	data->view2d.img = mlx_new_image(data->mlx, MM_W, MM_H);
 	data->view2d.addr = mlx_get_data_addr(data->view2d.img, &data->view2d.bits_per_pixel,
@@ -97,9 +96,8 @@ void	view_field(t_data *data, double rad_tot)
 	{
 		ray = init_ray(data->player, rad_ang);
 		dist = ray_dist(data->map, data->player, &ray, rad_ang);
-		orientation = compass(ray);
-		draw3d(&data->view3d, dist, x, orientation);
-		draw_line(data->player.pos, ray.pos, orientation, data);
+		draw3d_text(data, dist, x, ray);
+		draw_line(data->player.pos, ray.pos, 0x00909090, data);
 		rad_ang += FOV / WIN_W;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
