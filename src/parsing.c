@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/09 13:29:23 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:34:31 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static t_map	get_map_start(char *file_path)
 	{
 		if (*line == '\n')
 			res.start = res.end;
+		free(line);
 		line = get_next_line(fd);
 		res.end++;
 	}
@@ -71,9 +72,17 @@ int	parse(int ac, char **av, t_data *data)
 	if (get_textures(av[1], map.start, data->t_path) > 0)
 		return (put_error("Can't get textures", 4));
 	if (get_map(av[1], map.start, map.end, &data->map) > 0)
+	{
+		int i = -1;
+		while (++i < 7)
+			free(data->t_path[i]);
+		i = -1;
+		while (data->map[++i])
+			free(data->map[i]);
+		free(data->map);
 		return (put_error("Can't get map", 5));
+	}
 	if (get_player(data) > 0)
 		return (put_error("Can't get player", 6));
 	return (0);
 }
-
