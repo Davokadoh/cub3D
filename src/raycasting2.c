@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/11 20:12:09 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:30:34 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ void	view_field(t_data *data, double rad_tot)
 	drawfloorceiling(&data->view3d);
 	while (++x < WIN_W)
 	{
+		rad_ang = atan((x - WIN_W / 2) / FOV / WIN_W);
 		ray = init_ray(data->player, rad_ang);
 		dist = ray_dist(data->map, data->player, &ray, rad_ang);
 		draw3d_text(data, dist, x, ray);
 		draw_line(data->player.pos, ray.pos, 0x00909090, data);
-		rad_ang += FOV / WIN_W;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);

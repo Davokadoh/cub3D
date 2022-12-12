@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/12 11:49:50 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/12 13:33:05 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	compass(t_cam ray);
 void	drawfloorceiling(t_img *img);
 // void	draw3d(t_img *img, double dist, int x, int orientation);
 void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
-void	init_texture(t_data *data);
+int	init_texture(t_data *data);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
