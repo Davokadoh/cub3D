@@ -45,23 +45,24 @@ int	find_x_text(t_data *data, t_cam ray)
 	int		x;
 
 	orientation = compass(ray);
-	texture = data->textures[orientation];
+	texture = data->textures[orientation - 1];
 	if (orientation == 1)
 	{
-		x = (int)(fmod(ray.pos.x, 1.0) * texture.w); 
+		x = (int)(fmod(ray.pos.x, 1.0) * texture.w);
 	}
 	if (orientation == 2)
 	{
-		x = (int)(fmod(ray.pos.y, 1.0) * texture.w); 
+		x = (int)(fmod(ray.pos.y, 1.0) * texture.w);
 	}
 	if (orientation == 3)
 	{
-		x = (int)((1 - fmod(ray.pos.x, 1.0)) * texture.w); 
+		x = (int)((1 - fmod(ray.pos.x, 1.0)) * texture.w);
 	}
 	if (orientation == 4)
 	{
-		x = (int)((1 - fmod(ray.pos.y, 1.0)) * texture.w); 
+		x = (int)((1 - fmod(ray.pos.y, 1.0)) * texture.w);
 	}
+	printf("x = %d, texture_w %d\n", x, texture.w);
 	return (x);
 }
 
@@ -73,18 +74,21 @@ int	find_y_text(t_img texture, float img_y, float wall_top, float line_height)
 	return ((int)y);
 }
 
-int	findcolor(t_img texture, t_vec2d texture_pos)
+unsigned int	get_color_tex(t_img texture, t_vec2d texture_pos)
 {
-	int	color;
-	int position_in_image;
+	unsigned int	clr;
+	int				t;
+	int				r;
+	int				g;
+	int				b;
 
-	printf("salut\n");
-	position_in_image = texture_pos.y * texture.line_size * texture.bits_per_pixel
-		+ texture_pos.x * texture.bits_per_pixel;
-	printf("position_in_image>%d\n", position_in_image);
-	color = *(texture.addr/* + position_in_image*/);
-	printf("color :%d\n", color);
-	return (color);
+	clr = *(unsigned int *)(texture.addr + (((int)texture_pos.y * texture.line_size + (int)texture_pos.x) * (texture.bits_per_pixel / 8)));
+	t = ((clr >> 24) & 0xFF);
+	r = ((clr >> 16) & 0xFF);
+	g = ((clr >> 8) & 0xFF);
+	b = (clr & 0xFF);
+	return (((t & 0xFF) << 24) + ((r & 0xFF) << 16)
+		+ ((g & 0xFF) << 8) + (b & 0xFF));
 }
 
 void	draw3d_text(t_data *data, double dist, int x, t_cam ray) //need to explain name for rad_ang, why not current_angle or something else ?
@@ -96,7 +100,8 @@ void	draw3d_text(t_data *data, double dist, int x, t_cam ray) //need to explain 
 	t_img	texture;
 
 	line_height = (WIN_H / dist);
-	texture = data->textures[compass(ray)];
+	texture = data->textures[compass(ray) - 1];
+	printf("texture: %d\n", compass(ray));
 	texture_pos.x = find_x_text(data, ray);
 	wall_top = -line_height / 2 + WIN_H / 2;
 	if (wall_top < 0)
@@ -107,7 +112,9 @@ void	draw3d_text(t_data *data, double dist, int x, t_cam ray) //need to explain 
 	while (--wall_bot > wall_top)
 	{
 		texture_pos.y = find_y_text(texture, wall_bot, wall_top, line_height);
-		put_pixel_img(data->view2d.img, x, (int)wall_bot, findcolor(texture, texture_pos));
+		printf("y = %f, texture_h %d\n", texture_pos.y, texture.h);
+		printf("color: %u\n",get_color_tex(texture, texture_pos));
+		put_pixel_img(data->view2d.img, x, (int)wall_bot, get_color_tex(texture, texture_pos));
 	}
 }
 
@@ -121,4 +128,5 @@ void	init_texture(t_data *data)
 			data->t_path[2], &data->textures[2].h, &data->textures[2].w);
 	data->textures[3].img = mlx_xpm_file_to_image(data->mlx,
 			data->t_path[3], &data->textures[3].h, &data->textures[3].w);
+	printf("data->t_path[0] %s, data->textures[0].h %d, data->textures[0].w %d\n", data->t_path[0], data->textures[0].h, data->textures[0].w);
 }
