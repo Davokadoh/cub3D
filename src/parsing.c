@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/07 16:59:48 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/09 13:29:23 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	parse(int ac, char **av, t_data *data)
 	if (check_file_extension(av[1]))
 		return (2);
 	map = get_map_start(av[1]);
-	if (get_textures(av[1], map.start, data->textures) > 0)
+	if (get_textures(av[1], map.start, data->t_path) > 0)
 		return (put_error("Can't get textures", 4));
 	if (get_map(av[1], map.start, map.end, &data->map) > 0)
 		return (put_error("Can't get map", 5));

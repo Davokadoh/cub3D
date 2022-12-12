@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./textures/vin2.xpm
+SO ./textures/vin.xpm
+WE ./textures/bois.xpm
+EA ./textures/biblio.xpm
 F 220,100,0
 C 225,30,0
 
@@ -9,7 +9,7 @@ C 225,30,0
 
 1111111111111111111111111
 1000000000110000000000001
-1011000001110000000000001
+10110000011100000E0000001
 100100000000000000000000111111111
 111111111011000001110000000000001
 100E00000011000001110111111111111

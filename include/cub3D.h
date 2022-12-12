@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/08 21:56:54 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:03:41 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define MM_W 300
 # define MM_H 200
 # define DR (M_PI / 180)
-# define FOV (M_PI / 2)
+# define FOV (M_PI / 5)
 
 typedef struct	s_vec2d
 {
@@ -49,6 +49,8 @@ typedef struct	s_img
 	int		bits_per_pixel;
 	int		line_size;
 	int		endian;
+	int		h;
+	int		w;
 }				t_img;
 
 typedef struct	s_data
@@ -58,11 +60,12 @@ typedef struct	s_data
 	char	**map;
 	size_t	map_w;
 	size_t	map_h;
-	char	*textures[7];
+	char	*t_path[7];
 	t_cam	player;
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
+	t_img	textures[4];
 }				t_data;
 
 //Main logic
@@ -97,13 +100,17 @@ t_cam	init_ray(t_cam player, double radius_angle);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
 double	ray_dist_draw(char **map, t_cam const player, double rad_ang, t_img *img);
 void	view_field(t_data *data, double rad_tot);
+int	compass(t_cam ray);
 
 //?????????
-void	draw3d(t_img *img, double dist, int x, int orientation);
+void	drawfloorceiling(t_img *img);
+// void	draw3d(t_img *img, double dist, int x, int orientation);
+void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
+int	init_texture(t_data *data);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
-int		get_textures(char *file_path, size_t map_start, char *textures[7]);
+int		get_textures(char *file_path, size_t map_start, char *t_path[7]);
 int		get_map(char *file_path, size_t map_start, size_t map_end, char ***map);
 int		get_player(t_data *data);
 
@@ -113,7 +120,6 @@ int		put_error(char *err_msg, int err_code);
 char	*get_next_line(int fd);
 
 //MLX
-void	put_pixel_img(t_img *img, int x, int y, int color);
 void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data);
 int		rgb_to_int(double r, double g, double b);
 int		hook_keydown(int key, t_data *data);
