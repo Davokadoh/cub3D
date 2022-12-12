@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/12 13:33:05 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:03:41 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define MM_W 300
 # define MM_H 200
 # define DR (M_PI / 180)
-# define FOV (M_PI / 2)
+# define FOV (M_PI / 5)
 
 typedef struct	s_vec2d
 {
