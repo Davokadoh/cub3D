@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/09 13:29:12 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/12 17:35:24 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,14 @@ int	get_textures(char *file_path, size_t map_start, char *t_path[7])
 	{
 		if (add_path(line, t_path))
 			return (free_textures(t_path));
+		free(line);
 		line = get_next_line(fd);
 		line_nbr++;
 	}
+	free(line);
 	if (!t_path[0] || !t_path[1] || !t_path[2] || !t_path[3]
 		|| !t_path[4] || !t_path[5])
 		t_path[6] = "1";
+	close(fd);
 	return (t_path[6] != NULL);
 }
