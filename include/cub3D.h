@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/13 10:52:11 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/13 17:20:29 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,11 @@ int		get_player(t_data *data);
 //Utils
 t_vec2d	new_vec(double x, double y);
 int		put_error(char *err_msg, int err_code);
-void	end_clean(t_data *data);
 char	*get_next_line(int fd);
 
 //MLX
 void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data);
-int		rgb_to_int(double r, double g, double b);
+int		rgb_to_int(int r, int g, int b);
 int		str_to_rgb_int(char * str_rgb);
 int		hook_keydown(int key, t_data *data);
 int		close_hook(int button, t_data *data);
