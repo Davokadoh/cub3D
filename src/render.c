@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/07 15:03:36 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/13 17:14:53 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	put_pixel_img(t_img *img, int x, int y, int color)
 				+ (y * img->line_size + x * img->bits_per_pixel / 8)) = color;
 }
 
-void	render(t_data *data)
+int		render(t_data *data)
 {
 	view_field(data, FOV);
+	return (0);
 }
