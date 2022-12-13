@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/12 16:42:42 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/13 19:55:16 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,7 @@ void	view_field(t_data *data, double rad_tot)
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->view2d.img, 0, 0);
+	mlx_destroy_image(data->mlx, data->view2d.img);
+	mlx_destroy_image(data->mlx, data->view3d.img);
+
 }

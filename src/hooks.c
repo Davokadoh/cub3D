@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:15:53 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/13 17:32:52 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/13 20:03:58 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ int	keydown_hook(int key, t_data *data)
 	}
 	if (move(key, data))
 	{
-		mlx_destroy_image(data->mlx, data->view2d.img);
-		mlx_destroy_image(data->mlx, data->view3d.img);
 		// mlx_destroy_image(data->mlx, data->minimap.img);
 		mlx_clear_window(data->mlx, data->win);
 		render(data);
@@ -49,9 +47,9 @@ int	mouse_hook(int x, int y, t_data *data)
 {
 	(void) y;
 	mlx_mouse_hide(data);
-	if (x > WIN_W / 2)
+	while (--x > WIN_W / 2)
 		turn_right(data);
-	else if (x < WIN_W / 2)
+	while (++x < WIN_W / 2)
 		turn_left(data);
 	mlx_mouse_move(data->win, WIN_W / 2, WIN_H / 2);
 	return (0);

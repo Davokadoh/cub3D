@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:07 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/13 17:33:31 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/13 20:05:45 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ static void	hooks(t_data *data)
 	mlx_hook(data->win, EVENT_ON_KEYDOWN, 0, keydown_hook, data);
 	mlx_hook(data->win, EVENT_ON_MOUSEMOVE, 0, mouse_hook, data);
 	mlx_loop_hook(data->mlx, render, data);
-	//mlx_loop_h
 }
 
 int	main(int ac, char **av)
