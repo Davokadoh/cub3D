@@ -1,22 +1,26 @@
 #include "cub3D.h"
 
-void	drawfloorceiling(t_img *img)
+void	drawfloorceiling(t_img *img, char *t_path[7])
 {
 	int	x;
 	int	y;
+	int	colorf;
+	int colorc;
 
 	x = -1;
 	y = -1;
+	colorf = str_to_rgb_int(t_path[4]);
+	colorc = str_to_rgb_int(t_path[5]);
 	while (++y <= WIN_H / 2)
 	{
 		while (++x <=WIN_W)
-			put_pixel_img(img, x, y, 0x00333333);
+			put_pixel_img(img, x, y, colorc);
 		x = -1;
 	}
 	while (++y <= WIN_H)
 	{
 		while (++x <=WIN_W)
-			put_pixel_img(img, x, y, 0x00954242);
+			put_pixel_img(img, x, y, colorf);
 		x = -1;
 	}
 }
@@ -85,16 +89,10 @@ void	draw3d_text(t_data *data, double dist, int x, t_cam ray) //need to explain 
 	texture = data->textures[compass(ray) - 1];
 	texture_pos.x = find_x_text(data, ray);
 	wall_top = -line_height / 2 + WIN_H / 2;
-	// if (wall_top < 0)
-	// 	wall_top = 0;
 	wall_bot = line_height / 2 + WIN_H / 2;
-	// if (wall_bot >= WIN_H)
-	// 	wall_bot = WIN_H - 1;
 	while (--wall_bot > wall_top)
 	{
 		texture_pos.y = find_y_text(texture, wall_bot, wall_top, line_height);
-		// printf("y = %f, texture_h %d\n", texture_pos.y, texture.h);
-		// printf("color: %u\n",get_color_tex(texture, texture_pos));
 		put_pixel_img(&data->view3d, x, (int)wall_bot, get_color_tex(texture, texture_pos));
 	}
 }
@@ -125,14 +123,5 @@ int	init_texture(t_data *data)
 		return (put_error("texture error", 7));
 	data->textures[3].addr = mlx_get_data_addr(data->textures[3].img, &data->textures[3].bits_per_pixel,
 			&data->textures[3].line_size, &data->textures[3].endian);
-	printf(" texture 1 %s, h %d, w %d\n", data->t_path[0], data->textures[0].h, data->textures[0].w);
-	printf(" texture 2 %s, h %d, w %d\n", data->t_path[1], data->textures[1].h, data->textures[1].w);
-	printf(" texture 3 %s, h %d, w %d\n", data->t_path[2], data->textures[2].h, data->textures[2].w);
-	printf(" texture 4 %s, h %d, w %d\n", data->t_path[3], data->textures[3].h, data->textures[3].w);
-	printf("img : %p\n", data->textures[0].img);
-	printf("addr : %p\n", data->textures[0].addr);
-	printf("bbp : %d\n", data->textures[0].bits_per_pixel);
-	printf("line_size : %d\n", data->textures[0].line_size);
-	printf("endian : %d\n", data->textures[0].endian);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/12 16:15:11 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/12 16:42:42 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	view_field(t_data *data, double rad_tot)
 	rad_ang = -rad_tot / 2;
 	int x = -1;
 	//while (rad_ang <= rad_tot / 2)
-	drawfloorceiling(&data->view3d);
+	drawfloorceiling(&data->view3d, data->t_path);
 	while (++x < WIN_W)
 	{
 		rad_ang = atan((x - WIN_W / 2) / FOV / WIN_W);

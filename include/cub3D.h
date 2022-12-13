@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/12 16:03:41 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:52:11 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	view_field(t_data *data, double rad_tot);
 int	compass(t_cam ray);
 
 //?????????
-void	drawfloorceiling(t_img *img);
+void	drawfloorceiling(t_img *img, char *t_path[7]);
 // void	draw3d(t_img *img, double dist, int x, int orientation);
 void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
 int	init_texture(t_data *data);
@@ -117,11 +117,13 @@ int		get_player(t_data *data);
 //Utils
 t_vec2d	new_vec(double x, double y);
 int		put_error(char *err_msg, int err_code);
+void	end_clean(t_data *data);
 char	*get_next_line(int fd);
 
 //MLX
 void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data);
 int		rgb_to_int(double r, double g, double b);
+int		str_to_rgb_int(char * str_rgb);
 int		hook_keydown(int key, t_data *data);
 int		close_hook(int button, t_data *data);
 int		key_hook(int keycode, t_data *data);

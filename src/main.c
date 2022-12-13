@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:07 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/12 11:49:43 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/13 10:54:30 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (parse(ac, av, &data))
+	{
+		end_clean(&data);
 		return (1);
+	}
 	data.mlx = mlx_init();
 	if (!data.mlx) //Prevents env -i crash
 		return (1);
