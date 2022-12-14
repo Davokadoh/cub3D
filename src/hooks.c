@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:15:53 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/08 14:00:51 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/13 20:03:58 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,36 @@ int	close_hook(int button, t_data *data)
 	exit(0);
 	return (0);
 }
-int	hook_keydown(int key, t_data *data)
+
+int	keydown_hook(int key, t_data *data)
 {
 	if (key == KEY_ESC)
 	{
-		mlx_destroy_image(data->mlx, data->view2d.img);
-		mlx_destroy_image(data->mlx, data->view3d.img);
+		// mlx_destroy_image(data->mlx, data->view2d.img);
+		// mlx_destroy_image(data->mlx, data->view3d.img);
 		// mlx_destroy_image(data->mlx, data->minimap.img);
 		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
 	if (move(key, data))
 	{
-		mlx_destroy_image(data->mlx, data->view2d.img);
-		mlx_destroy_image(data->mlx, data->view3d.img);
 		// mlx_destroy_image(data->mlx, data->minimap.img);
-		mlx_clear_window(data->mlx, data->win);
-		render(data);
+		// mlx_clear_window(data->mlx, data->win);
+		// render(data);
 	}
+	return (0);
+}
+
+
+int	mouse_hook(int x, int y, t_data *data)
+{
+	(void) y;
+	mlx_mouse_hide(data);
+	while (--x > WIN_W / 2)
+		turn_right(data);
+	while (++x < WIN_W / 2)
+		turn_left(data);
+	mlx_mouse_move(data->win, WIN_W / 2, WIN_H / 2);
 	return (0);
 }
 
