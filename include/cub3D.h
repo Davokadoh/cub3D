@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 16:32:33 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/14 17:29:21 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct	s_data
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
-	t_img	textures[4];
+	t_img	textures[5];
 }				t_data;
 
 //Main logic

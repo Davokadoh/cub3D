@@ -30,10 +30,13 @@ int	get_texel_x(t_data *data, t_cam ray)
 	t_img	texture;
 	int		orientation;
 	int		x;
+	char	c;
 
 	orientation = compass(ray);
-	// printf("map[ray.pos.y][ray.pos.x] %c\n", map[ray.pos.y][ray.pos.x]);
+	c = data->map[(int)ray.pos.y][(int)ray.pos.x];
 	texture = data->textures[orientation - 1];
+	if (c == 'D')
+		texture = data->textures[4];
 	if (orientation == 1)
 		x = (int)(fmod(ray.pos.x, 1.0) * texture.w);
 	if (orientation == 2)
@@ -69,13 +72,16 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	t_vec2d	texel;
 	t_img	texture;
 	int		x;
+	char	c;
 
 	x = -1;
 	while (++x < WIN_W)
 	{
-
+		c = data->map[(int)rays[x].pos.y][(int)rays[x].pos.x];
 		line_height = (WIN_H / rays[x].dist);
 		texture = data->textures[compass(rays[x]) - 1];
+		if (c == 'D')
+			texture = data->textures[4];
 		texel.x = get_texel_x(data, rays[x]);
 		wall_top = -line_height / 2 + WIN_H / 2;
 		wall_bot = line_height / 2 + WIN_H / 2;
@@ -113,5 +119,11 @@ int	init_texture(t_data *data)
 		return (put_error("texture error", 7));
 	data->textures[3].addr = mlx_get_data_addr(data->textures[3].img, &data->textures[3].bits_per_pixel,
 			&data->textures[3].line_size, &data->textures[3].endian);
+	data->textures[4].img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/bois.xpm", &data->textures[4].h, &data->textures[4].w);
+	if (data->textures[4].img == NULL)
+		return (put_error("texture error", 7));
+	data->textures[4].addr = mlx_get_data_addr(data->textures[4].img, &data->textures[4].bits_per_pixel,
+			&data->textures[4].line_size, &data->textures[4].endian);
 	return (0);
 }
