@@ -73,18 +73,18 @@ void	draw3d_text(t_data *data, double dist, int x, t_cam ray)
 	float	wall_bot;
 	float	wall_top;
 	float	line_height;
-	t_vec2d	texture_pos;
+	t_vec2d	texel;
 	t_img	texture;
 
 	line_height = (WIN_H / dist);
 	texture = data->textures[compass(ray) - 1];
-	texture_pos.x = find_x_text(data, ray);
+	texel.x = find_x_text(data, ray);
 	wall_top = -line_height / 2 + WIN_H / 2;
 	wall_bot = line_height / 2 + WIN_H / 2;
 	while (--wall_bot > wall_top)
 	{
-		texture_pos.y = find_y_text(texture, wall_bot, wall_top, line_height);
-		put_pixel_img(&data->view3d, x, (int)wall_bot, get_color_tex(texture, texture_pos));
+		texel.y = find_y_text(texture, wall_bot, wall_top, line_height);
+		put_pixel_img(&data->view3d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
 	}
 }
 

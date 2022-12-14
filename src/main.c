@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:07 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 11:18:48 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/14 11:23:37 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 static void	hooks(t_data *data)
 {
 	mlx_mouse_hide(data);
+	mlx_mouse_move(data->win, WIN_W / 2, WIN_H / 2);
 	mlx_hook(data->win, EVENT_ON_DESTROY, 0, close_hook, data);
 	mlx_hook(data->win, EVENT_ON_KEYDOWN, 0, keydown_hook, data);
 	mlx_hook(data->win, EVENT_ON_MOUSEMOVE, 0, mouse_hook, data);
