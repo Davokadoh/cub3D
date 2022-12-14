@@ -49,6 +49,8 @@ int	get_texel_y(t_img texture, float img_y, float wall_top, float line_height)
 	int		y;
 
 	y = (img_y - wall_top) * texture.h * 0.25 / line_height;
+	if (y < 1 || texture.h < y)
+		y = texture.h;
 	return ((int)y);
 }
 
@@ -72,6 +74,8 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	x = -1;
 	while (++x < WIN_W)
 	{
+		if (rays[x].dist < 0.01)
+			rays[x].dist = 0.01;
 		line_height = (WIN_H / rays[x].dist);
 		texture = data->textures[compass(rays[x]) - 1];
 		texel.x = get_texel_x(data, rays[x]);
@@ -112,4 +116,19 @@ int	init_texture(t_data *data)
 	data->textures[3].addr = mlx_get_data_addr(data->textures[3].img, &data->textures[3].bits_per_pixel,
 			&data->textures[3].line_size, &data->textures[3].endian);
 	return (0);
+}
+
+int	load_from_file()
+{
+}
+
+int	load_textures()
+{
+	for each path
+	{
+		if (is_dir())
+			load_animation();
+		else
+			load_from_file();
+	}
 }
