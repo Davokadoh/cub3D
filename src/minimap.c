@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:28:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/10 18:16:56 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/14 11:40:36 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,6 @@ int	wall_size(t_data *map)
 	if ((MM_W / map->map_w) <= (MM_H / map->map_h))
 		return (MM_W / map->map_w);
 	return (MM_H / map->map_h);
-}
-
-void	init_img(t_img *img, int width, int height)
-{
-	int		x;
-	int		y;
-
-	y = -1;
-	while (++y < height)
-	{
-		x = -1;
-		while (++x < width)
-			put_pixel_img(img, x, y, 0xFF000000);
-	}
 }
 
 void	draw_minimap(t_data *map, t_img *minimap)

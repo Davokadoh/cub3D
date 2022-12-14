@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/13 19:55:16 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/14 11:59:21 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,35 +75,16 @@ int	compass(t_cam ray)
 	return (0);
 }
 
-void	view_field(t_data *data, double rad_tot)
+t_cam	cast_rays(t_data *data)[WIN_W]
 {
 	double	rad_ang;
-	double	dist;
-	t_cam	ray;
+	t_cam	ray[WIN_W];
 
-	data->view2d.img = mlx_new_image(data->mlx, MM_W, MM_H);
-	data->view2d.addr = mlx_get_data_addr(data->view2d.img, &data->view2d.bits_per_pixel,
-			&data->view2d.line_size, &data->view2d.endian);
-	init_img(&data->view2d, MM_W, MM_H); //Change to flood_img, takes color in parameter
-	data->view3d.img = mlx_new_image(data->mlx, WIN_W, WIN_H);
-	data->view3d.addr = mlx_get_data_addr(data->view3d.img, &data->view3d.bits_per_pixel,
-			&data->view3d.line_size, &data->view3d.endian);
-	//Move the above to new function
-	rad_ang = -rad_tot / 2;
 	int x = -1;
-	drawfloorceiling(&data->view3d, data->t_path);
 	while (++x < WIN_W)
 	{
 		rad_ang = atan((x - WIN_W / 2) / FOV / WIN_W);
-		ray = init_ray(data->player, rad_ang);
-		dist = ray_dist(data->map, data->player, &ray, rad_ang);
-		draw3d_text(data, dist, x, ray);
-		draw_line(data->player.pos, ray.pos, 0x00909090, data);
+		rays[x] = init_ray(data->player, rad_ang);
+		rays[x].dist = ray_dist(data->map, data->player, &ray, rad_ang);
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->win, data->view2d.img, 0, 0);
-	mlx_destroy_image(data->mlx, data->view2d.img);
-	mlx_destroy_image(data->mlx, data->view3d.img);
-
 }

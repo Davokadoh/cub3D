@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/13 17:14:43 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/14 12:08:55 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	move_right(t_data *data);
 //Minimap
 t_img	calculate_minimap(t_data *data);
 int		wall_size(t_data *map);
-void	init_img(t_img *img, int width, int height);
 void	draw_minimap(t_data *map, t_img *minimap);
 
 //Raycasting

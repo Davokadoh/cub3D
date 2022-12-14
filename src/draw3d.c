@@ -34,21 +34,13 @@ int	get_texel_x(t_data *data, t_cam ray)
 	orientation = compass(ray);
 	texture = data->textures[orientation - 1];
 	if (orientation == 1)
-	{
 		x = (int)(fmod(ray.pos.x, 1.0) * texture.w);
-	}
 	if (orientation == 2)
-	{
 		x = (int)(fmod(ray.pos.y, 1.0) * texture.w);
-	}
 	if (orientation == 3)
-	{
 		x = (int)((1 - fmod(ray.pos.x, 1.0)) * texture.w);
-	}
 	if (orientation == 4)
-	{
 		x = (int)((1 - fmod(ray.pos.y, 1.0)) * texture.w);
-	}
 	return (x);
 }
 
@@ -68,23 +60,28 @@ unsigned int	get_texel(t_img texture, int x, int y)
 	return (clr);
 }
 
-void	draw3d_text(t_data *data, double dist, int x, t_cam ray)
+void	draw3d_text(t_data *data, int x, t_cam rays[WIN_W])
 {
 	float	wall_bot;
 	float	wall_top;
 	float	line_height;
 	t_vec2d	texel;
 	t_img	texture;
+	int		x;
 
-	line_height = (WIN_H / dist);
-	texture = data->textures[compass(ray) - 1];
-	texel.x = get_texel_x(data, ray);
-	wall_top = -line_height / 2 + WIN_H / 2;
-	wall_bot = line_height / 2 + WIN_H / 2;
-	while (--wall_bot > wall_top)
+	int x = -1;
+	while (++x < WIN_W)
 	{
-		texel.y = get_texel_y(texture, wall_bot, wall_top, line_height);
-		put_pixel_img(&data->view3d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
+		line_height = (WIN_H / rays[x].dist);
+		texture = data->textures[compass(ray) - 1];
+		texel.x = get_texel_x(data, rays[x]);
+		wall_top = -line_height / 2 + WIN_H / 2;
+		wall_bot = line_height / 2 + WIN_H / 2;
+		while (--wall_bot > wall_top)
+		{
+			texel.y = get_texel_y(texture, wall_bot, wall_top, line_height);
+			put_pixel_img(&data->view3d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
+		}
 	}
 }
 
