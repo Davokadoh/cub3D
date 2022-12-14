@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:15:53 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/13 20:03:58 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/14 16:57:58 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ int	keydown_hook(int key, t_data *data)
 		// mlx_destroy_image(data->mlx, data->minimap.img);
 		// mlx_clear_window(data->mlx, data->win);
 		// render(data);
+	}
+	if (key == KEY_O || key == KEY_C)
+	{
+		open_close_door(data, key);
 	}
 	return (0);
 }
