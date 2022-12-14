@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:07 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/13 20:05:45 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/14 11:18:48 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac, char **av)
 	if (!data.win)
 		return (1);
 	data.minimap = calculate_minimap(&data);
-	init_texture(&data);
+	init_texture(&data); //Change to load_textures
 	render(&data);
 	hooks(&data);
 	mlx_loop(data.mlx);

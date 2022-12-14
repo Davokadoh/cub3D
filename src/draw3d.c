@@ -60,15 +60,15 @@ int	find_y_text(t_img texture, float img_y, float wall_top, float line_height) /
 	return ((int)y);
 }
 
-unsigned int	get_color_tex(t_img texture, t_vec2d texture_pos) //Rename get_texel
+unsigned int	get_texel(t_img texture, int x, int y)
 {
 	unsigned int	clr;
 
-	clr = *(unsigned int*)(texture.addr + (((int)texture_pos.y * texture.line_size + (int)texture_pos.x) * (texture.bits_per_pixel / 8)));
+	clr = *(unsigned int*)(texture.addr + (y * texture.line_size + x) * (texture.bits_per_pixel / 8));
 	return (clr);
 }
 
-void	draw3d_text(t_data *data, double dist, int x, t_cam ray) //need to explain name for rad_ang, why not current_angle or something else ?
+void	draw3d_text(t_data *data, double dist, int x, t_cam ray)
 {
 	float	wall_bot;
 	float	wall_top;
