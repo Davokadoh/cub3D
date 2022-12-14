@@ -71,7 +71,7 @@ int	compass(t_cam ray)
 		return (3);
 	else if ((dir_ray == 2 || dir_ray == 3) && ray.c == 1)
 		return (4);
-	printf("cas non determine\n");
+	printf("Undefined case\n");
 	return (0);
 }
 
