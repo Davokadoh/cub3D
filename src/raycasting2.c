@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/14 11:59:21 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/14 13:39:38 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,16 @@ int	compass(t_cam ray)
 	return (0);
 }
 
-t_cam	cast_rays(t_data *data)[WIN_W]
+t_cam	*cast_rays(t_data *data, t_cam *rays)
 {
 	double	rad_ang;
-	t_cam	ray[WIN_W];
 
 	int x = -1;
 	while (++x < WIN_W)
 	{
 		rad_ang = atan((x - WIN_W / 2) / FOV / WIN_W);
 		rays[x] = init_ray(data->player, rad_ang);
-		rays[x].dist = ray_dist(data->map, data->player, &ray, rad_ang);
+		rays[x].dist = ray_dist(data->map, data->player, &rays[x], rad_ang);
 	}
+	return (rays);
 }

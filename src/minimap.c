@@ -6,22 +6,18 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:28:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/14 11:40:36 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/14 14:18:49 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_img	calculate_minimap(t_data *data)
+int	calculate_minimap(t_data *data)
 {
-	t_img minimap;
-
-	minimap.img = mlx_new_image(data->mlx, MM_W, MM_H);
-	minimap.addr = mlx_get_data_addr(minimap.img, &minimap.bits_per_pixel,
-			&minimap.line_size, &minimap.endian);
-	init_img(&minimap, MM_W, MM_H);
-	draw_minimap(data, &minimap);
-	return (minimap);
+	init_img(data->mlx, &data->minimap, MM_W, MM_H);
+	flood_img(&data->minimap, 0xFF000000); //Hex -> macro def
+	draw_minimap(data, &data->minimap);
+	return (0);
 }
 
 int	wall_size(t_data *map)

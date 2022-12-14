@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 12:08:55 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/14 14:10:44 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_cam
 	t_vec2d	pos; //Position vector
 	t_vec2d	dir; //Looking direction verctor
 	double	angle;
+	double	dist;
 	int		c;
 }				t_cam;
 
@@ -85,11 +86,12 @@ int	move_left(t_data *data);
 int	move_right(t_data *data);
 
 //Minimap
-t_img	calculate_minimap(t_data *data);
+int		calculate_minimap(t_data *data);
 int		wall_size(t_data *map);
 void	draw_minimap(t_data *map, t_img *minimap);
 
 //Raycasting
+t_cam	*cast_rays(t_data *data, t_cam *rays);
 int		ray_dir(t_cam ray);
 double	dist_next_h(t_cam ray, int ray_dir);
 double	dist_next_v(t_cam ray, int ray_dir);
@@ -103,8 +105,8 @@ int		compass(t_cam ray);
 
 //Perspective
 void	drawfloorceiling(t_img *img, char *t_path[7]);
-// void	draw3d(t_img *img, double dist, int x, int orientation);
-void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
+void	draw3d(t_data *data, t_cam rays[WIN_W]);
+//void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
 int		init_texture(t_data *data);
 
 //Parsing
@@ -116,8 +118,12 @@ int		get_player(t_data *data);
 //Utils
 t_vec2d	new_vec(double x, double y);
 int		put_error(char *err_msg, int err_code);
-void	end_clean(t_data *data);
+void	end_clean(t_data *data); //What is that ? Where is it used ?
 char	*get_next_line(int fd);
+
+//Images
+int		init_img(void *mlx, t_img *img, int width, int height);
+int		flood_img(t_img *img, int color);
 
 //MLX
 void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data);

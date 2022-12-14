@@ -60,7 +60,7 @@ unsigned int	get_texel(t_img texture, int x, int y)
 	return (clr);
 }
 
-void	draw3d_text(t_data *data, int x, t_cam rays[WIN_W])
+void	draw3d(t_data *data, t_cam rays[WIN_W])
 {
 	float	wall_bot;
 	float	wall_top;
@@ -69,11 +69,11 @@ void	draw3d_text(t_data *data, int x, t_cam rays[WIN_W])
 	t_img	texture;
 	int		x;
 
-	int x = -1;
+	x = -1;
 	while (++x < WIN_W)
 	{
 		line_height = (WIN_H / rays[x].dist);
-		texture = data->textures[compass(ray) - 1];
+		texture = data->textures[compass(rays[x]) - 1];
 		texel.x = get_texel_x(data, rays[x]);
 		wall_top = -line_height / 2 + WIN_H / 2;
 		wall_bot = line_height / 2 + WIN_H / 2;
