@@ -25,7 +25,7 @@ void	drawfloorceiling(t_img *img, char *t_path[7])
 	}
 }
 
-int	find_x_text(t_data *data, t_cam ray)
+int	find_x_text(t_data *data, t_cam ray) //Rename get_texel_x
 {
 	t_img	texture;
 	int		orientation;
@@ -52,7 +52,7 @@ int	find_x_text(t_data *data, t_cam ray)
 	return (x);
 }
 
-int	find_y_text(t_img texture, float img_y, float wall_top, float line_height)
+int	find_y_text(t_img texture, float img_y, float wall_top, float line_height) //Rename get_texel_y
 {
 	int		y;
 
@@ -60,21 +60,12 @@ int	find_y_text(t_img texture, float img_y, float wall_top, float line_height)
 	return ((int)y);
 }
 
-unsigned int	get_color_tex(t_img texture, t_vec2d texture_pos)
+unsigned int	get_color_tex(t_img texture, t_vec2d texture_pos) //Rename get_texel
 {
 	unsigned int	clr;
-	int				t;
-	int				r;
-	int				g;
-	int				b;
 
 	clr = *(unsigned int*)(texture.addr + (((int)texture_pos.y * texture.line_size + (int)texture_pos.x) * (texture.bits_per_pixel / 8)));
-	t = ((clr >> 24) & 0xFF);
-	r = ((clr >> 16) & 0xFF);
-	g = ((clr >> 8) & 0xFF);
-	b = (clr & 0xFF);
-	return (((t & 0xFF) << 24) + ((r & 0xFF) << 16)
-		+ ((g & 0xFF) << 8) + (b & 0xFF));
+	return (clr);
 }
 
 void	draw3d_text(t_data *data, double dist, int x, t_cam ray) //need to explain name for rad_ang, why not current_angle or something else ?

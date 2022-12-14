@@ -84,7 +84,7 @@ void	view_field(t_data *data, double rad_tot)
 	data->view2d.img = mlx_new_image(data->mlx, MM_W, MM_H);
 	data->view2d.addr = mlx_get_data_addr(data->view2d.img, &data->view2d.bits_per_pixel,
 			&data->view2d.line_size, &data->view2d.endian);
-	init_img(&data->view2d, MM_W, MM_H); //Rename to explicit transparency
+	init_img(&data->view2d, MM_W, MM_H); //Change to flood_img, takes color in parameter
 	data->view3d.img = mlx_new_image(data->mlx, WIN_W, WIN_H);
 	data->view3d.addr = mlx_get_data_addr(data->view3d.img, &data->view3d.bits_per_pixel,
 			&data->view3d.line_size, &data->view3d.endian);
