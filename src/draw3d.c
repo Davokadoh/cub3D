@@ -25,7 +25,7 @@ void	drawfloorceiling(t_img *img, char *t_path[7])
 	}
 }
 
-int	find_x_text(t_data *data, t_cam ray) //Rename get_texel_x
+int	get_texel_x(t_data *data, t_cam ray)
 {
 	t_img	texture;
 	int		orientation;
@@ -52,7 +52,7 @@ int	find_x_text(t_data *data, t_cam ray) //Rename get_texel_x
 	return (x);
 }
 
-int	find_y_text(t_img texture, float img_y, float wall_top, float line_height) //Rename get_texel_y
+int	get_texel_y(t_img texture, float img_y, float wall_top, float line_height)
 {
 	int		y;
 
@@ -78,12 +78,12 @@ void	draw3d_text(t_data *data, double dist, int x, t_cam ray)
 
 	line_height = (WIN_H / dist);
 	texture = data->textures[compass(ray) - 1];
-	texel.x = find_x_text(data, ray);
+	texel.x = get_texel_x(data, ray);
 	wall_top = -line_height / 2 + WIN_H / 2;
 	wall_bot = line_height / 2 + WIN_H / 2;
 	while (--wall_bot > wall_top)
 	{
-		texel.y = find_y_text(texture, wall_bot, wall_top, line_height);
+		texel.y = get_texel_y(texture, wall_bot, wall_top, line_height);
 		put_pixel_img(&data->view3d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
 	}
 }
