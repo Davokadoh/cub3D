@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/13 17:20:29 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:51:05 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,13 @@ void	put_pixel_img(t_img *img, int x, int y, int color);
 //void	draw_walls();
 
 //Move and turn
-int	turn_left(t_data *data);
-int	turn_right(t_data *data);
-int	move_forward(t_data *data);
-int	move_backward(t_data *data);
-int	move_left(t_data *data);
-int	move_right(t_data *data);
+int		turn_left(t_data *data);
+int		turn_right(t_data *data);
+int		move_forward(t_data *data);
+int		move_backward(t_data *data);
+int		move_left(t_data *data);
+int		move_right(t_data *data);
+int		open_close_door(t_data *data, int key);
 
 //Minimap
 t_img	calculate_minimap(t_data *data);
@@ -126,6 +127,5 @@ int		str_to_rgb_int(char * str_rgb);
 int		hook_keydown(int key, t_data *data);
 int		close_hook(int button, t_data *data);
 int		key_hook(int keycode, t_data *data);
-
 
 #endif

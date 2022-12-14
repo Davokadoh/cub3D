@@ -85,7 +85,12 @@ void	draw3d_text(t_data *data, double dist, int x, t_cam ray) //need to explain 
 	t_vec2d	texture_pos;
 	t_img	texture;
 
-	line_height = (WIN_H / dist);
+	if (dist > 0.1)
+	{
+		line_height = (WIN_H / dist);
+	}
+	else
+		line_height = 10000;
 	texture = data->textures[compass(ray) - 1];
 	texture_pos.x = find_x_text(data, ray);
 	wall_top = -line_height / 2 + WIN_H / 2;
