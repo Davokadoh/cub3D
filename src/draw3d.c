@@ -73,18 +73,16 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	x = -1;
 	while (++x < WIN_W)
 	{
+
+		line_height = (WIN_H / rays[x].dist);
+		texture = data->textures[compass(rays[x]) - 1];
+		texel.x = get_texel_x(data, rays[x]);
+		wall_top = -line_height / 2 + WIN_H / 2;
+		wall_bot = line_height / 2 + WIN_H / 2;
 		while (--wall_bot > wall_top)
 		{
-			line_height = (WIN_H / rays[x].dist);
-			texture = data->textures[compass(rays[x]) - 1];
-			texel.x = get_texel_x(data, rays[x]);
-			wall_top = -line_height / 2 + WIN_H / 2;
-			wall_bot = line_height / 2 + WIN_H / 2;
-			while (--wall_bot > wall_top)
-			{
-				texel.y = get_texel_y(texture, wall_bot, wall_top, line_height);
-				put_pixel_img(&data->view3d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
-			}
+			texel.y = get_texel_y(texture, wall_bot, wall_top, line_height);
+			put_pixel_img(&data->view3d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
 		}
 	}
 }
