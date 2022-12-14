@@ -70,6 +70,8 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	t_vec2d	texel;
 	t_img	texture;
 	int		x;
+	static int		frame = -1;
+	int				max_frame = 6;
 
 	x = -1;
 	while (++x < WIN_W)
@@ -77,7 +79,9 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 		if (rays[x].dist < 0.01)
 			rays[x].dist = 0.01;
 		line_height = (WIN_H / rays[x].dist);
-		texture = data->textures[compass(rays[x]) - 1];
+		frame++;
+		frame %= max_frame;
+		texture = data->textures[compass(rays[x]) - 1][frame];
 		texel.x = get_texel_x(data, rays[x]);
 		wall_top = -line_height / 2 + WIN_H / 2;
 		wall_bot = line_height / 2 + WIN_H / 2;
@@ -120,15 +124,44 @@ int	init_texture(t_data *data)
 
 int	load_from_file()
 {
+	data->textures[0].img = mlx_xpm_file_to_image(data->mlx,
+			data->t_path[0], &data->textures[0].h, &data->textures[0].w);
+	if (data->textures[0].img == NULL)
+		return (put_error("texture error", 7));
+	data->textures[0].addr = mlx_get_data_addr(data->textures[0].img, &data->textures[0].bits_per_pixel,
+			&data->textures[0].line_size, &data->textures[0].endian);
 }
 
-int	load_textures()
+char	*full_path(char *dir_path, int frame)
+{
+	return (ft_strjoin(dir_path, ft_itoa(frame)));
+}
+
+int	load_animation(char * dir_path)
+{
+	int	frame;
+
+	frame = 0;
+	anim[frame] = load_from_file();
+	while (anim[frame++])
+		anim[frame] = load_from_file(full_path(dir_path, frame));
+}
+
+int	load_static_img(char *path)
+{
+	t_img	anim;
+
+	anim[0] = load_from_file(path);
+	return (anim);
+}
+
+int	load_textures(t_anim *dst, char *path)
 {
 	for each path
 	{
-		if (is_dir())
-			load_animation();
+		if (is_dir(path))
+			load_animation(path);
 		else
-			load_from_file();
+			load_static_img(path);
 	}
 }
