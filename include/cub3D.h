@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/13 17:20:29 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:24:55 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_cam
 	t_vec2d	pos; //Position vector
 	t_vec2d	dir; //Looking direction verctor
 	double	angle;
+	double	dist;
 	int		c;
 }				t_cam;
 
@@ -70,7 +71,7 @@ typedef struct	s_data
 
 //Main logic
 int		move(int key, t_data *data); //bool
-void	render(t_data *data);
+int		render(t_data *data);
 void	put_pixel_img(t_img *img, int x, int y, int color);
 // double	raycasting(t_cam player, t_data map);
 //void	cast_rays();
@@ -85,12 +86,12 @@ int	move_left(t_data *data);
 int	move_right(t_data *data);
 
 //Minimap
-t_img	calculate_minimap(t_data *data);
+int		calculate_minimap(t_data *data);
 int		wall_size(t_data *map);
-void	init_img(t_img *img, int width, int height);
 void	draw_minimap(t_data *map, t_img *minimap);
 
 //Raycasting
+t_cam	*cast_rays(t_data *data, t_cam *rays);
 int		ray_dir(t_cam ray);
 double	dist_next_h(t_cam ray, int ray_dir);
 double	dist_next_v(t_cam ray, int ray_dir);
@@ -100,13 +101,13 @@ t_cam	init_ray(t_cam player, double radius_angle);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
 double	ray_dist_draw(char **map, t_cam const player, double rad_ang, t_img *img);
 void	view_field(t_data *data, double rad_tot);
-int	compass(t_cam ray);
+int		compass(t_cam ray);
 
-//?????????
+//Perspective
 void	drawfloorceiling(t_img *img, char *t_path[7]);
-// void	draw3d(t_img *img, double dist, int x, int orientation);
-void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
-int	init_texture(t_data *data);
+void	draw3d(t_data *data, t_cam rays[WIN_W]);
+//void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
+int		init_texture(t_data *data);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
@@ -117,15 +118,20 @@ int		get_player(t_data *data);
 //Utils
 t_vec2d	new_vec(double x, double y);
 int		put_error(char *err_msg, int err_code);
+void	end_clean(t_data *data); //What is that ? Where is it used ?
 char	*get_next_line(int fd);
+
+//Images
+int		init_img(void *mlx, t_img *img, int width, int height);
+int		flood_img(t_img *img, int color);
 
 //MLX
 void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data);
 int		rgb_to_int(int r, int g, int b);
 int		str_to_rgb_int(char * str_rgb);
-int		hook_keydown(int key, t_data *data);
+int		keydown_hook(int key, t_data *data);
 int		close_hook(int button, t_data *data);
-int		key_hook(int keycode, t_data *data);
+int		mouse_hook(int x, int y, t_data *data);
 
 
 #endif

@@ -6,22 +6,18 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:28:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/10 18:16:56 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:18:49 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-t_img	calculate_minimap(t_data *data)
+int	calculate_minimap(t_data *data)
 {
-	t_img minimap;
-
-	minimap.img = mlx_new_image(data->mlx, MM_W, MM_H);
-	minimap.addr = mlx_get_data_addr(minimap.img, &minimap.bits_per_pixel,
-			&minimap.line_size, &minimap.endian);
-	init_img(&minimap, MM_W, MM_H);
-	draw_minimap(data, &minimap);
-	return (minimap);
+	init_img(data->mlx, &data->minimap, MM_W, MM_H);
+	flood_img(&data->minimap, 0xFF000000); //Hex -> macro def
+	draw_minimap(data, &data->minimap);
+	return (0);
 }
 
 int	wall_size(t_data *map)
@@ -33,20 +29,6 @@ int	wall_size(t_data *map)
 	if ((MM_W / map->map_w) <= (MM_H / map->map_h))
 		return (MM_W / map->map_w);
 	return (MM_H / map->map_h);
-}
-
-void	init_img(t_img *img, int width, int height)
-{
-	int		x;
-	int		y;
-
-	y = -1;
-	while (++y < height)
-	{
-		x = -1;
-		while (++x < width)
-			put_pixel_img(img, x, y, 0xFF000000);
-	}
 }
 
 void	draw_minimap(t_data *map, t_img *minimap)
