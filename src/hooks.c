@@ -36,8 +36,8 @@ int	keydown_hook(int key, t_data *data)
 	if (move(key, data))
 	{
 		// mlx_destroy_image(data->mlx, data->minimap.img);
-		mlx_clear_window(data->mlx, data->win);
-		render(data);
+		// mlx_clear_window(data->mlx, data->win);
+		// render(data);
 	}
 	return (0);
 }
