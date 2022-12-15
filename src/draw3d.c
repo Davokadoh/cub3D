@@ -140,8 +140,8 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 			{
 				new_ray = init_ray(ray, ray.angle);
 				check_wall(new_ray); //Advance one step otherwise same result as old ray
-				new_ray.dist = cast_ray(new_ray);
-				draw3d_slice(data, new_ray);
+				new_ray = cast_ray(new_ray);
+				render_3d_slice(data, new_ray);
 			}
 			put_pixel_img(&data->view3d, x, (int)wall_bot, color);
 		}
