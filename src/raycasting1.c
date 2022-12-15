@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/14 15:34:33 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:31:12 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,26 @@ int	update_rayh(char **map, t_cam *ray, int ray_dir, double dist_h)
 			ray->pos.y = (double)int_y - 1;
 		else
 			ray->pos.y = (double)int_y;
-		return (map[(int)ray->pos.y - 1][int_x] == '1'|| map[(int)ray->pos.y - 1][int_x] == 'D');
+		if (map[(int)ray->pos.y - 1][int_x] == '1')
+			return (1);
+		else if (map[(int)ray->pos.y - 1][int_x] == 'D')
+			return (1);
+		else if (map[(int)ray->pos.y - 1][int_x] == 'c')
+			return (1);
+		else if (map[(int)ray->pos.y - 1][int_x] == 'o')
+			return (1);
+		return (0);
 	}
 	ray->pos.y = (double)(int_y + 1);
-	return (map[int_y + 1][int_x] == '1' || map[int_y + 1][int_x] == 'D');
+	if (map[(int)ray->pos.y][int_x] == '1')
+		return (1);
+	else if (map[(int)ray->pos.y][int_x] == 'D')
+		return (1);
+	else if (map[(int)ray->pos.y][int_x] == 'c')
+		return (1);
+	else if (map[(int)ray->pos.y][int_x] == 'o')
+		return (1);
+	return (0);
 }
 
 int	update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v)
@@ -91,8 +107,25 @@ int	update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v)
 			ray->pos.x = (double)int_x - 1;
 		else
 			ray->pos.x = (double)int_x;
-		return (map[int_y][(int)ray->pos.x - 1] == '1' || map[int_y][(int)ray->pos.x - 1] == 'D');
+		//return (map[int_y][(int)ray->pos.x - 1] == '1' || map[int_y][(int)ray->pos.x - 1] == 'D');
+		if (map[int_y][(int)ray->pos.x - 1] == '1')
+			return (1);
+		else if (map[int_y][(int)ray->pos.x - 1] == 'D')
+			return (1);
+		else if (map[int_y][(int)ray->pos.x - 1] == 'c')
+			return (1);
+		else if (map[int_y][(int)ray->pos.x - 1] == 'o')
+			return (1);
+		return (0);
 	}
 	ray->pos.x = (double)(int_x + 1);
-	return (map[int_y][int_x + 1]== '1' || map[int_y][int_x + 1] == 'D');
+	if (map[int_y][(int)ray->pos.x] == '1')
+		return (1);
+	else if (map[int_y][(int)ray->pos.x] == 'D')
+		return (1);
+	else if (map[int_y][(int)ray->pos.x] == 'c')
+		return (1);
+	else if (map[int_y][(int)ray->pos.x] == 'o')
+		return (1);
+	return (0);
 }

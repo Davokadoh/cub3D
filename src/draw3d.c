@@ -60,8 +60,35 @@ unsigned int	get_texel(t_img texture, int x, int y)
 {
 	unsigned int	clr;
 
+	if (x > texture.w)
+		return (0x00000000); //Change to macro def
 	clr = *(unsigned int*)(texture.addr + (y * texture.line_size + x) * (texture.bits_per_pixel / 8));
 	return (clr);
+}
+
+long	now(int init)
+{
+	struct timeval		time;
+	static long			start = 0;
+	long				milliseconds;
+
+	gettimeofday(&time, NULL);
+	milliseconds = time.tv_sec * 1000L + time.tv_usec / 1000;
+	if (init)
+		start = milliseconds;
+	return (milliseconds - start);
+}
+
+size_t	update(void)
+{
+	static long last_frame = 0;
+
+	if (now(0) - last_frame > 1)
+	{
+		last_frame = now(0);
+		return (1);
+	}
+	return (0);
 }
 
 void	draw3d(t_data *data, t_cam rays[WIN_W])
@@ -73,22 +100,50 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	t_img	texture;
 	int		x;
 	char	c;
+	static int	frame = 0;
+	int		color;
 
 	x = -1;
+	frame += 1 * update();
+	frame %= data->textures[2].w + 1;
 	while (++x < WIN_W)
 	{
 		c = data->map[(int)rays[x].pos.y][(int)rays[x].pos.x];
 		line_height = (WIN_H / rays[x].dist);
 		texture = data->textures[compass(rays[x]) - 1];
-		if (c == 'D')
-			texture = data->textures[4];
 		texel.x = get_texel_x(data, rays[x]);
+		if (c == 'c') //'c' == closing_door
+		{
+			texel.x += frame;
+			if (frame >= texture.w)
+			{
+				frame = texture.w;
+				data->map[(int)rays[x].pos.y][(int)rays[x].pos.x] = 'd'; //Fully opened now
+			}
+		}
+		else if (c == 'o') //'o' == opening_door
+		{
+			texel.x -= frame;
+			if (frame <= 0)
+			{
+				frame = 0;
+				data->map[(int)rays[x].pos.y][(int)rays[x].pos.x] = 'D'; //Fully opened now
+			}
+		}
 		wall_top = -line_height / 2 + WIN_H / 2;
 		wall_bot = line_height / 2 + WIN_H / 2;
 		while (--wall_bot > wall_top)
 		{
 			texel.y = get_texel_y(texture, wall_bot, wall_top, line_height);
-			put_pixel_img(&data->view3d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
+			color = get_texel(texture, (int)texel.x, (int)texel.y);
+			if (color == 0xFF000000) //Should check if t > 0 but now just PoC
+			{
+				new_ray = init_ray(ray, ray.angle);
+				check_wall(new_ray); //Advance one step otherwise same result as old ray
+				new_ray.dist = cast_ray(new_ray);
+				draw3d_slice(data, new_ray);
+			}
+			put_pixel_img(&data->view3d, x, (int)wall_bot, color);
 		}
 	}
 }
