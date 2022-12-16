@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/16 13:49:23 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:53:15 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_cam
 	double	angle;
 	double	dist;
 	int		c;
+	char	wall;
 }				t_cam;
 
 typedef struct	s_img
@@ -92,7 +93,7 @@ int		wall_size(t_data *map);
 void	draw_minimap(t_data *map, t_img *minimap);
 
 //Raycasting
-t_cam	*cast_rays(t_data *data, t_cam *rays);
+t_cam	*cast_rays(t_data *data, t_cam *rays, char w);
 int		ray_dir(t_cam ray);
 double	dist_next_h(t_cam ray, int ray_dir);
 double	dist_next_v(t_cam ray, int ray_dir);
@@ -106,7 +107,7 @@ int		compass(t_cam ray);
 
 //Perspective
 void	drawfloorceiling(t_img *img, char *t_path[7]);
-void	draw3d(t_data *data, t_cam rays[WIN_W]);
+void	draw3d(t_data *data, t_cam rays[WIN_W], t_cam raydoor[WIN_W]);
 //void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
 int		init_texture(t_data *data);
 

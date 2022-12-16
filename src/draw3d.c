@@ -64,11 +64,12 @@ unsigned int	get_texel(t_img texture, int x, int y)
 	return (clr);
 }
 
-void	draw3d(t_data *data, t_cam rays[WIN_W])
+void	draw3d(t_data *data, t_cam rays[WIN_W], t_cam raydoor[WIN_W])
 {
 	float	wall_bot;
 	float	wall_top;
 	float	line_height;
+	float	line_height_door;
 	t_vec2d	texel;
 	t_img	texture;
 	int		x;
@@ -79,6 +80,7 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	{
 		c = data->map[(int)rays[x].pos.y][(int)rays[x].pos.x];
 		line_height = (WIN_H / rays[x].dist);
+		line_height_door = (WIN_H / raydoor[x].dist);
 		texture = data->textures[compass(rays[x]) - 1];
 		if (c == 'D')
 			texture = data->textures[4];
@@ -95,32 +97,21 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 
 int	init_texture(t_data *data)
 {
-	data->textures[0].img = mlx_xpm_file_to_image(data->mlx,
-			data->t_path[0], &data->textures[0].h, &data->textures[0].w);
-	if (data->textures[0].img == NULL)
-		return (put_error(data, "texture error", 7));
-	data->textures[0].addr = mlx_get_data_addr(data->textures[0].img, &data->textures[0].bits_per_pixel,
-			&data->textures[0].line_size, &data->textures[0].endian);
-	data->textures[1].img = mlx_xpm_file_to_image(data->mlx,
-			data->t_path[1], &data->textures[1].h, &data->textures[1].w);
-	if (data->textures[1].img == NULL)
-		return (put_error(data, "texture error", 7));
-	data->textures[1].addr = mlx_get_data_addr(data->textures[1].img, &data->textures[1].bits_per_pixel,
-			&data->textures[1].line_size, &data->textures[1].endian);
-	data->textures[2].img = mlx_xpm_file_to_image(data->mlx,
-			data->t_path[2], &data->textures[2].h, &data->textures[2].w);
-	if (data->textures[2].img == NULL)
-		return (put_error(data, "texture error", 7));
-	data->textures[2].addr = mlx_get_data_addr(data->textures[2].img, &data->textures[2].bits_per_pixel,
-			&data->textures[2].line_size, &data->textures[2].endian);
-	data->textures[3].img = mlx_xpm_file_to_image(data->mlx,
-			data->t_path[3], &data->textures[3].h, &data->textures[3].w);
-	if (data->textures[3].img == NULL)
-		return (put_error(data, "texture error", 7));
-	data->textures[3].addr = mlx_get_data_addr(data->textures[3].img, &data->textures[3].bits_per_pixel,
-			&data->textures[3].line_size, &data->textures[3].endian);
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		data->textures[i].img = mlx_xpm_file_to_image(data->mlx,
+			data->t_path[i], &data->textures[i].h, &data->textures[i].w);
+		if (data->textures[i].img == NULL)
+			return (put_error(data, "texture error", 7));
+		data->textures[i].addr = mlx_get_data_addr(data->textures[i].img, &data->textures[i].bits_per_pixel,
+			&data->textures[i].line_size, &data->textures[i].endian);
+		i++;
+	}
 	data->textures[4].img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/bois.xpm", &data->textures[4].h, &data->textures[4].w);
+			"./textures/porte3.xpm", &data->textures[4].h, &data->textures[4].w);
 	if (data->textures[4].img == NULL)
 		return (put_error(data, "texture error", 7));
 	data->textures[4].addr = mlx_get_data_addr(data->textures[4].img, &data->textures[4].bits_per_pixel,

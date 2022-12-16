@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 14:22:18 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/16 18:54:09 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,16 @@ static int	draw2d(t_data *data, t_cam rays[WIN_W])
 int		render(t_data *data)
 {
 	t_cam	rays[WIN_W];
+	t_cam	raydoor[WIN_W];
 
 	init_img(data->mlx, &data->view2d, MM_W, MM_H);
 	init_img(data->mlx, &data->view3d, WIN_W, WIN_H);
 	flood_img(&data->view2d, 0xFF000000); //Hex -> macro def
 	drawfloorceiling(&data->view3d, data->t_path);
-	cast_rays(data, rays);
+	cast_rays(data, rays, 'D');
+	cast_rays(data, raydoor, 'm');
 	draw2d(data, rays);
-	draw3d(data, rays);
+	draw3d(data, rays, raydoor);
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->view2d.img, 0, 0);
