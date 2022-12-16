@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 17:29:21 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/16 13:49:23 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,11 @@ int		parse(int ac, char **av, t_data *data);
 int		get_textures(char *file_path, size_t map_start, char *t_path[7]);
 int		get_map(char *file_path, size_t map_start, size_t map_end, char ***map);
 int		get_player(t_data *data);
+int		free_textures(char *t_path[7]);
 
 //Utils
 t_vec2d	new_vec(double x, double y);
-int		put_error(char *err_msg, int err_code);
+int		put_error(t_data *data, char *err_msg, int err_code);
 void	end_clean(t_data *data); //What is that ? Where is it used ?
 char	*get_next_line(int fd);
 

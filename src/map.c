@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 14:58:25 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/16 12:17:04 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ static int	get_from_file(char *file_path, size_t map_start,
 
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
-		return (put_error("MAP", 1));
+		return (printf("MAP\n"));
 	y = -1;
 	while (++y <= (int)map_start)
 		free(get_next_line(fd));
@@ -133,6 +133,6 @@ int	get_map(char *file_path, size_t map_start, size_t map_end, char ***map)
 		return (1);
 	fill_map(map);
 	if (check_closed_map(*map))
-		return (put_error("Map not closed", 8));
+		return (printf("Map not closed\n"));
 	return (0);
 }

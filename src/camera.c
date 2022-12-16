@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:25:18 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/10 17:45:02 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/16 11:35:19 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	get_player(t_data *data)
 	t_vec2d	pos;
 
 	if (check_unique_player(data->map))
-		return (put_error("there is more or less than one \
+		return (put_error(data, "there is more or less than one \
 player defined by N, E, S or W", 7));
 	pos = get_pos(data->map);
 	data->player.pos = pos;

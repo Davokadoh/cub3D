@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/12 17:35:24 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/16 14:21:29 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,15 @@ static int	add_path(char *line, char *t_path[7])
 	return (0);
 }
 
-static int	free_textures(char *t_path[7])
+int	free_textures(char *t_path[7])
 {
 	int	i;
 
 	i = -1;
 	while (++i < 7)
-		free(t_path[i]);
-	free(t_path);
+	{
+		ft_free(t_path[i]);
+	}
 	return (1);
 }
 
@@ -79,7 +80,7 @@ int	get_textures(char *file_path, size_t map_start, char *t_path[7])
 	line_nbr = 0;
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
-		return (put_error("Can't open file", 1));
+		return (printf("Can't open file\n"));
 	line = get_next_line(fd);
 	while (line != NULL && line_nbr < map_start)
 	{

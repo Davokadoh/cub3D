@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:07 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 13:28:01 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/16 13:11:27 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,18 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
+	data.map = NULL;
 	if (parse(ac, av, &data))
 		return (1);
 	data.mlx = mlx_init();
 	if (!data.mlx) //Prevents env -i crash
 		return (1);
+	if (init_texture(&data)) //Change to load_textures
+		return (1);
 	data.win = mlx_new_window(data.mlx, WIN_W, WIN_H, av[1]);
 	if (!data.win)
 		return (1);
 	calculate_minimap(&data); //Check for errors
-	init_texture(&data); //Change to load_textures
 	render(&data);
 	hooks(&data);
 	mlx_loop(data.mlx);
