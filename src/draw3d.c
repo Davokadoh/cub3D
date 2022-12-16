@@ -25,9 +25,8 @@ void	drawfloorceiling(t_img *img, char *t_path[7])
 	}
 }
 
-int	get_texel_x(t_data *data, t_cam ray)
+int	get_texel_x(t_img texture, t_cam ray)
 {
-	t_img	texture;
 	int		orientation;
 	int		x;
 	char	c;
@@ -48,103 +47,62 @@ int	get_texel_x(t_data *data, t_cam ray)
 	return (x);
 }
 
-int	get_texel_y(t_img texture, float img_y, float wall_top, float line_height)
+int	get_texel_y(t_img texture, float img_y, float wall_top, t_cam ray)
 {
 	int		y;
+	float	line_height;
+	float	wall_top;
 
+
+	line_height = (WIN_H / ray.dist);
+	wall_top = -line_height / 2 + WIN_H / 2;
 	y = (img_y - wall_top) * texture.h * 0.25 / line_height;
-	return ((int)y);
+	return ((int)y); //why cast ???
 }
 
-unsigned int	get_texel(t_img texture, int x, int y)
+unsigned int	get_texel_color(t_img texture, int x, int y)
 {
-	unsigned int	clr;
+	unsigned int	color;
 
-	if (x > texture.w)
-		return (0x00000000); //Change to macro def
-	clr = *(unsigned int*)(texture.addr + (y * texture.line_size + x) * (texture.bits_per_pixel / 8));
-	return (clr);
+	if (x > texture.w) // >= ???
+		return (0x00000000); //Hex -> macro def
+	color = *(unsigned int*)(texture.addr + (y * texture.line_size + x) * (texture.bits_per_pixel / 8));
+	return (color);
 }
 
-long	now(int init)
+void	draw_pixel(t_data *data, int x, int y, t_cam ray)
 {
-	struct timeval		time;
-	static long			start = 0;
-	long				milliseconds;
-
-	gettimeofday(&time, NULL);
-	milliseconds = time.tv_sec * 1000L + time.tv_usec / 1000;
-	if (init)
-		start = milliseconds;
-	return (milliseconds - start);
-}
-
-size_t	update(void)
-{
-	static long last_frame = 0;
-
-	if (now(0) - last_frame > 1)
+	texture = data->textures[compass(ray) - 1];
+	texel.x = get_texel_x(texture, ray);
+	texel.y = get_texel_y(texture, ray);
+	color = get_texel_color(texture, texel.x, texel.y);
+	put_pixel_img(&data->view3d, x, y, get_texel_color(texture, (int)texel.x, (int)texel.y));
+	if (color == transparent)
 	{
-		last_frame = now(0);
-		return (1);
+		new_ray = init_ray(ray.pos, ray.angle);
+		check_wall(); //Otherwise instant collision
+		new_ray = cast_ray();
+		new_ray.dist += ray.dist;
+		draw_pixel(data, x, y, new_ray);
 	}
-	return (0);
 }
 
-void	draw3d(t_data *data, t_cam rays[WIN_W])
+void	draw3d_slice(t_data *data, t_cam rays[WIN_W])
 {
 	float	wall_bot;
 	float	wall_top;
 	float	line_height;
-	t_vec2d	texel;
-	t_img	texture;
 	int		x;
-	char	c;
-	static int	frame = 0;
 	int		color;
 
 	x = -1;
-	frame += 1 * update();
-	frame %= data->textures[2].w + 1;
 	while (++x < WIN_W)
 	{
-		c = data->map[(int)rays[x].pos.y][(int)rays[x].pos.x];
 		line_height = (WIN_H / rays[x].dist);
-		texture = data->textures[compass(rays[x]) - 1];
-		texel.x = get_texel_x(data, rays[x]);
-		if (c == 'c') //'c' == closing_door
-		{
-			texel.x += frame;
-			if (frame >= texture.w)
-			{
-				frame = texture.w;
-				data->map[(int)rays[x].pos.y][(int)rays[x].pos.x] = 'd'; //Fully opened now
-			}
-		}
-		else if (c == 'o') //'o' == opening_door
-		{
-			texel.x -= frame;
-			if (frame <= 0)
-			{
-				frame = 0;
-				data->map[(int)rays[x].pos.y][(int)rays[x].pos.x] = 'D'; //Fully opened now
-			}
-		}
 		wall_top = -line_height / 2 + WIN_H / 2;
 		wall_bot = line_height / 2 + WIN_H / 2;
 		while (--wall_bot > wall_top)
-		{
-			texel.y = get_texel_y(texture, wall_bot, wall_top, line_height);
-			color = get_texel(texture, (int)texel.x, (int)texel.y);
-			if (color == 0xFF000000) //Should check if t > 0 but now just PoC
-			{
-				new_ray = init_ray(ray, ray.angle);
-				check_wall(new_ray); //Advance one step otherwise same result as old ray
-				new_ray = cast_ray(new_ray);
-				render_3d_slice(data, new_ray);
-			}
-			put_pixel_img(&data->view3d, x, (int)wall_bot, color);
-		}
+			draw_pixel(data, x, wall_bot, rays[x]);
 	}
 }
 

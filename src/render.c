@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/15 18:15:28 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/16 12:33:14 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	put_pixel_img(t_img *img, int x, int y, int color)
 				+ (y * img->line_size + x * img->bits_per_pixel / 8)) = color;
 }
 
-int	flood_img(t_img *img, int color)
+static int	fill_img(t_img *img, int color)
 {
 	int	x;
 	int	y;
@@ -58,33 +58,16 @@ static int	draw2d(t_data *data, t_cam rays[WIN_W])
 	return (0);
 }
 
-static int	render_slice(t_cam ray, int x_screen)
-{
-	check_wall(new_ray); //Advance one step otherwise same result as old ray
-	new_ray.dist = cast_ray(new_ray);
-	draw3d_slice(data, new_ray);
-}
-
 int		render(t_data *data)
 {
 	t_cam	rays[WIN_W];
 
 	init_img(data->mlx, &data->view2d, MM_W, MM_H);
 	init_img(data->mlx, &data->view3d, WIN_W, WIN_H);
-	flood_img(&data->view2d, 0xFF000000); //Hex -> macro def
+	fill_img(&data->view2d, 0xFF000000); //Hex -> macro def
 
 	drawfloorceiling(&data->view3d, data->t_path);
-
-	while(++x < WIN_W)
-	{
-		angle = formule;
-		ray = init_ray(player.pos, angle);
-		ray = cast_ray(ray);
-		draw_line(player.pos, ray.pos);
-		render_3d_slice(ray);
-	}
-
-	cast_ray(data, rays);
+	cast_rays(data, rays);
 	draw2d(data, rays);
 	draw3d(data, rays);
 
