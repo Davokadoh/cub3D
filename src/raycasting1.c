@@ -96,3 +96,43 @@ int	update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v)
 	ray->pos.x = (double)(int_x + 1);
 	return (map[int_y][int_x + 1]== '1' || map[int_y][int_x + 1] == 'D');
 }
+
+int	update_rayh2(char **map, t_cam *ray, int ray_dir, double dist_h)
+{
+	int		int_x;
+	int		int_y;
+
+	ray->pos.x += cos(ray->angle) * dist_h;
+	int_x = (int)(ray->pos.x);
+	int_y = (int)(ray->pos.y);
+	if (ray_dir > 2)
+	{
+		if (ray->pos.y == (double)int_y)
+			ray->pos.y = (double)int_y - 1;
+		else
+			ray->pos.y = (double)int_y;
+		return (map[(int)ray->pos.y - 1][int_x] == '1');
+	}
+	ray->pos.y = (double)(int_y + 1);
+	return (map[int_y + 1][int_x] == '1');
+}
+
+int	update_rayv2(char **map, t_cam *ray, int ray_dir, double dist_v)
+{
+	int		int_x;
+	int		int_y;
+
+	ray->pos.y += sin(ray->angle) * dist_v;
+	int_x = (int)ray->pos.x;
+	int_y = (int)ray->pos.y;
+	if (ray_dir == 2 || ray_dir == 3)
+	{
+		if (ray->pos.x == (double)int_x)
+			ray->pos.x = (double)int_x - 1;
+		else
+			ray->pos.x = (double)int_x;
+		return (map[int_y][(int)ray->pos.x - 1] == '1');
+	}
+	ray->pos.x = (double)(int_x + 1);
+	return (map[int_y][int_x + 1]== '1');
+}

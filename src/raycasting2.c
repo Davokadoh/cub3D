@@ -44,6 +44,25 @@ int	check_wall(char **map, t_cam *ray, int ray_dir)
 	}
 }
 
+int	check_wall2(char **map, t_cam *ray, int ray_dir)
+{
+	double	dist_h;
+	double	dist_v;
+
+	dist_h = dist_next_h(*ray, ray_dir);
+	dist_v = dist_next_v(*ray, ray_dir);
+	if (dist_v <= dist_h)
+	{
+		ray->c = 1;
+		return (update_rayv2(map, ray, ray_dir, dist_v));
+	}
+	else
+	{
+		ray->c = 2;
+		return (update_rayh2(map, ray, ray_dir, dist_h));
+	}
+}
+
 double	ray_dist(char **map, t_cam const player, t_cam *ray, double rad_ang)
 {
 	double	dist;
@@ -51,6 +70,20 @@ double	ray_dist(char **map, t_cam const player, t_cam *ray, double rad_ang)
 
 	dir_ray = ray_dir(*ray);
 	while (check_wall(map, ray, dir_ray) != 1)
+		;
+	dist = sqrt(pow(fabs(player.pos.x - ray->pos.x), 2)
+			+ pow(fabs(player.pos.y - ray->pos.y), 2));
+	dist = cos(rad_ang) * dist;
+	return (dist);
+}
+
+double	ray_dist2(char **map, t_cam const player, t_cam *ray, double rad_ang)
+{
+	double	dist;
+	int		dir_ray;
+
+	dir_ray = ray_dir(*ray);
+	while (check_wall2(map, ray, dir_ray) != 1)
 		;
 	dist = sqrt(pow(fabs(player.pos.x - ray->pos.x), 2)
 			+ pow(fabs(player.pos.y - ray->pos.y), 2));
@@ -84,6 +117,20 @@ t_cam	*cast_rays(t_data *data, t_cam *rays)
 		rad_ang = atan((x - WIN_W / 2) / FOV / WIN_W);
 		rays[x] = init_ray(data->player, rad_ang);
 		rays[x].dist = ray_dist(data->map, data->player, &rays[x], rad_ang);
+	}
+	return (rays);
+}
+
+t_cam	*cast_rays2(t_data *data, t_cam *rays)
+{
+	double	rad_ang;
+
+	int x = -1;
+	while (++x < WIN_W)
+	{
+		rad_ang = atan((x - WIN_W / 2) / FOV / WIN_W);
+		rays[x] = init_ray(data->player, rad_ang);
+		rays[x].dist = ray_dist2(data->map, data->player, &rays[x], rad_ang);
 	}
 	return (rays);
 }

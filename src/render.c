@@ -61,18 +61,25 @@ static int	draw2d(t_data *data, t_cam rays[WIN_W])
 int		render(t_data *data)
 {
 	t_cam	rays[WIN_W];
+	t_cam	rays2[WIN_W];
 
 	init_img(data->mlx, &data->view2d, MM_W, MM_H);
 	init_img(data->mlx, &data->view3d, WIN_W, WIN_H);
+	init_img(data->mlx, &data->view4d, WIN_W, WIN_H);
 	flood_img(&data->view2d, 0xFF000000); //Hex -> macro def
 	drawfloorceiling(&data->view3d, data->t_path);
+	drawfloorceiling(&data->view4d, data->t_path);
 	cast_rays(data, rays);
+	cast_rays2(data, rays2);
 	draw2d(data, rays);
 	draw3d(data, rays);
+	draw4d(data, rays2);
+	mlx_put_image_to_window(data->mlx, data->win, data->view4d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->view2d.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->view2d.img);
 	mlx_destroy_image(data->mlx, data->view3d.img);
+	mlx_destroy_image(data->mlx, data->view4d.img);
 	return (0);
 }

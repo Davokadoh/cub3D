@@ -60,8 +60,35 @@ unsigned int	get_texel(t_img texture, int x, int y)
 {
 	unsigned int	clr;
 
+	if (x > texture.h)
+		return (0xFF000000); // Hex -> Macro def
 	clr = *(unsigned int*)(texture.addr + (y * texture.line_size + x) * (texture.bits_per_pixel / 8));
 	return (clr);
+}
+
+long	now(int init)
+{
+	struct timeval		time;
+	static long			start;
+	long				milliseconds;
+
+	gettimeofday(&time, NULL);
+	milliseconds = time.tv_sec * 1000L + time.tv_usec / 1000;
+	if (init)
+		start = milliseconds;
+	return (milliseconds - start);
+}
+
+int	update()
+{
+	static long last_check = 0;
+
+	if (now(0) - last_check > 10)
+	{
+		last_check = now(0);
+		return (1);
+	}
+	return (0);
 }
 
 void	draw3d(t_data *data, t_cam rays[WIN_W])
@@ -75,9 +102,42 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	char	c;
 
 	x = -1;
+	static int frame = 0;
 	while (++x < WIN_W)
 	{
-		c = data->map[(int)rays[x].pos.y][(int)rays[x].pos.x];
+		c = data->map[(int)(rays[x].pos.y)][(int)(rays[x].pos.x + 0.1)];
+		line_height = (WIN_H / rays[x].dist);
+		texture = data->textures[compass(rays[x]) - 1];
+		texel.x = get_texel_x(data, rays[x]);
+		if (c == 'D')
+		{
+			frame += update();
+			texel.x += frame;
+		}
+		wall_top = -line_height / 2 + WIN_H / 2;
+		wall_bot = line_height / 2 + WIN_H / 2;
+		while (--wall_bot > wall_top)
+		{
+			texel.y = get_texel_y(texture, wall_bot, wall_top, line_height);
+			put_pixel_img(&data->view3d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
+		}
+	}
+}
+
+void	draw4d(t_data *data, t_cam rays[WIN_W])
+{
+	float	wall_bot;
+	float	wall_top;
+	float	line_height;
+	t_vec2d	texel;
+	t_img	texture;
+	int		x;
+	char	c;
+
+	x = -1;
+	while (++x < WIN_W)
+	{
+		c = data->map[(int)(rays[x].pos.y)][(int)(rays[x].pos.x + 0.1)];
 		line_height = (WIN_H / rays[x].dist);
 		texture = data->textures[compass(rays[x]) - 1];
 		if (c == 'D')
@@ -88,7 +148,7 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 		while (--wall_bot > wall_top)
 		{
 			texel.y = get_texel_y(texture, wall_bot, wall_top, line_height);
-			put_pixel_img(&data->view3d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
+			put_pixel_img(&data->view4d, x, (int)wall_bot, get_texel(texture, (int)texel.x, (int)texel.y));
 		}
 	}
 }

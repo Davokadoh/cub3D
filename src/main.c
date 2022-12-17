@@ -38,6 +38,7 @@ int	main(int ac, char **av)
 		return (1);
 	calculate_minimap(&data); //Check for errors
 	init_texture(&data); //Change to load_textures
+	now(1);
 	render(&data);
 	hooks(&data);
 	mlx_loop(data.mlx);

@@ -18,11 +18,12 @@
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <sys/time.h>
 # include "libft.h"
 # include "mlx.h"
 
-# define WIN_W 1920
-# define WIN_H 1080
+# define WIN_W 1200
+# define WIN_H 720
 # define MM_W 300
 # define MM_H 200
 # define DR (M_PI / 180)
@@ -66,6 +67,7 @@ typedef struct	s_data
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
+	t_img	view4d;
 	t_img	textures[5];
 }				t_data;
 
@@ -93,13 +95,17 @@ void	draw_minimap(t_data *map, t_img *minimap);
 
 //Raycasting
 t_cam	*cast_rays(t_data *data, t_cam *rays);
+t_cam	*cast_rays2(t_data *data, t_cam *rays);
 int		ray_dir(t_cam ray);
 double	dist_next_h(t_cam ray, int ray_dir);
 double	dist_next_v(t_cam ray, int ray_dir);
+int		update_rayh2(char **map, t_cam *ray, int ray_dir, double dist_h);
+int		update_rayv2(char **map, t_cam *ray, int ray_dir, double dist_v);
 int		update_rayh(char **map, t_cam *ray, int ray_dir, double dist_h);
 int		update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v);
 t_cam	init_ray(t_cam player, double radius_angle);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
+int		check_wall2(char **map, t_cam *ray, int ray_dir);
 double	ray_dist_draw(char **map, t_cam const player, double rad_ang, t_img *img);
 void	view_field(t_data *data, double rad_tot);
 int		compass(t_cam ray);
@@ -107,6 +113,7 @@ int		compass(t_cam ray);
 //Perspective
 void	drawfloorceiling(t_img *img, char *t_path[7]);
 void	draw3d(t_data *data, t_cam rays[WIN_W]);
+void	draw4d(t_data *data, t_cam rays[WIN_W]);
 //void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
 int		init_texture(t_data *data);
 
@@ -133,5 +140,7 @@ int		str_to_rgb_int(char * str_rgb);
 int		keydown_hook(int key, t_data *data);
 int		close_hook(int button, t_data *data);
 int		mouse_hook(int x, int y, t_data *data);
+
+long	now(int init);
 
 #endif
