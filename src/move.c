@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:15 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 16:35:31 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 11:38:57 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	move_right(t_data *data)
 
 	x = data->player.pos.x - 0.2 * data->player.dir.y;
 	y = data->player.pos.y + 0.2 * data->player.dir.x;
-	if (data->map[(int)y][(int)x] == '0'|| data->map[(int)y][(int)x] == 'd')
+	if (data->map[(int)y][(int)x] == '0' || data->map[(int)y][(int)x] == 'd')
 	{
 		data->player.pos.x = data->player.pos.x - 0.1 * data->player.dir.y;
 		data->player.pos.y = data->player.pos.y + 0.1 * data->player.dir.x;

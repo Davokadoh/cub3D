@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vhaefeli <marvin@42lausanne.ch>             +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 14:59:05 by trossel           #+#    #+#             */
-/*   Updated: 2022/04/22 10:10:39 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 11:08:24 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KEYS_H
 # define KEYS_H
-
 
 /* Event 9 and 10 are not supported on MacOS, only on X11
  * See https://harm-smits.github.io/42docs/libs/minilibx/events.html

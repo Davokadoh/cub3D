@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/16 12:17:04 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 11:37:06 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 static int	is_map_char(char c)
 {
-	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'W' || c == 'E' || c == 'D')
+	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'W'
+		|| c == 'E' || c == 'D')
 		return (1);
 	return (0);
 }
@@ -85,7 +86,7 @@ static size_t	max_length(char **map)
 static void	fill_line(char **line, size_t max)
 {
 	size_t		i;
-	char	*filled_line;
+	char		*filled_line;
 
 	filled_line = malloc(max * sizeof(char *));
 	i = ft_strlcpy(filled_line, *line, ft_strlen(*line)) - 1;

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 09:39:09 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 11:27:24 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,30 @@
 # define DR (M_PI / 180)
 # define FOV (M_PI / 5)
 
-typedef struct	s_vec2d
+typedef struct s_vec2d
 {
 	double	x;
 	double	y;
 }				t_vec2d;
 
-typedef struct	s_cam
+typedef struct s_wall
+{
+	float	top;
+	float	bot;
+	float	line_h;
+}				t_wall;
+
+typedef struct s_cam
 {
 	t_vec2d	pos; //Position vector
 	t_vec2d	dir; //Looking direction verctor
 	double	angle;
 	double	dist;
 	int		c;
+	char	wall;
 }				t_cam;
 
-typedef struct	s_wall
-{
-	float	bot;
-	float	top;
-	float	line_h;
-}				t_wall;
-
-typedef struct	s_img
+typedef struct s_img
 {
 	void	*img;
 	char	*addr;
@@ -61,7 +62,7 @@ typedef struct	s_img
 	int		w;
 }				t_img;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
@@ -73,7 +74,7 @@ typedef struct	s_data
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
-	t_img	textures[6];
+	t_img	textures[5];
 }				t_data;
 
 //Main logic
@@ -107,8 +108,6 @@ int		update_rayh(char **map, t_cam *ray, int ray_dir, double dist_h);
 int		update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v);
 t_cam	init_ray(t_cam player, double radius_angle);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
-double	ray_dist_draw(char **map, t_cam const player, double rad_ang, t_img *img);
-void	view_field(t_data *data, double rad_tot);
 int		compass(t_cam ray);
 
 //Perspective
@@ -137,7 +136,7 @@ int		flood_img(t_img *img, int color);
 //MLX
 void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data);
 int		rgb_to_int(int r, int g, int b);
-int		str_to_rgb_int(char * str_rgb);
+int		str_to_rgb_int(char *str_rgb);
 int		keydown_hook(int key, t_data *data);
 int		close_hook(int button, t_data *data);
 int		mouse_hook(int x, int y, t_data *data);

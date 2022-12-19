@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:10:16 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 16:27:57 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 11:44:50 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	rgb_to_int(int r, int g, int b)
 	//See mlx_get_color()
 }
 
-int	str_to_rgb_int(char * str_rgb)
+int	str_to_rgb_int(char *str_rgb)
 {
 	char	**rgb;
 	int		color;

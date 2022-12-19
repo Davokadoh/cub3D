@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:15:53 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 16:57:58 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 11:11:20 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	keydown_hook(int key, t_data *data)
 	}
 	return (0);
 }
-
 
 int	mouse_hook(int x, int y, t_data *data)
 {

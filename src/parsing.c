@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/16 15:19:14 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 11:39:06 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	check_textures(char *t_path[])
 	}
 	return (0);
 }
-
 
 int	parse(int ac, char **av, t_data *data)
 {

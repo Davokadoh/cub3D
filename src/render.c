@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/14 14:22:18 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/19 11:44:22 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int	init_img(void *mlx, t_img *img, int width, int height)
 	img->img = mlx_new_image(mlx, width, height);
 	// if (img->img == NULL)
 	// 	return (1); //Change to (clean_)exit() ?
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_size, &img->endian);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_size, &img->endian);
 	img->h = height;
 	img->w = width;
 	// do more error checking here
@@ -58,7 +59,7 @@ static int	draw2d(t_data *data, t_cam rays[WIN_W])
 	return (0);
 }
 
-int		render(t_data *data)
+int	render(t_data *data)
 {
 	t_cam	rays[WIN_W];
 
