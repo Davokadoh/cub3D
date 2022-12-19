@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 18:08:03 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 19:37:56 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_data
 	t_img	textures[5];
 	int		color_floor;
 	int		color_ceiling;
+	int		mouse;
 }				t_data;
 
 //Main logic
