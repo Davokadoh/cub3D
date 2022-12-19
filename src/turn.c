@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:15 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 11:47:04 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:23:00 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int	open_close_door(t_data *data, int key)
 	py = data->player.pos.y;
 	dx = data->player.dir.x;
 	dy = data->player.dir.y;
-	if (key == KEY_O && data->map[(int)(py + dy)][(int)(px + dx)] == 'D')
+	if (key == KEY_SPACE && data->map[(int)(py + dy)][(int)(px + dx)] == 'D')
 		data->map[(int)(py + dy)][(int)(px + dx)] = 'd';
-	else if (key == KEY_C && data->map[(int)(py + dy)][(int)(px + dx)] == 'd')
+	else if (key == KEY_SPACE && data->map[(int)(py + dy)][(int)(px + dx)] == 'd')
 		data->map[(int)(py + dy)][(int)(px + dx)] = 'D';
-	else if (key == KEY_O && data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)]
+	else if (key == KEY_SPACE && data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)]
 			== 'D')
 		data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)] = 'd';
-	else if (key == KEY_C && data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)]
+	else if (key == KEY_SPACE && data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)]
 			== 'd')
 		data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)] = 'D';
 	else

@@ -6,33 +6,29 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:09:10 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/19 11:10:36 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:35:45 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	drawfloorceiling(t_img *img, char *t_path[7])
+void	drawfloorceiling(t_img *img, t_data *data)
 {
 	int	x;
 	int	y;
-	int	colorf;
-	int	colorc;
 
 	x = -1;
 	y = -1;
-	colorf = str_to_rgb_int(t_path[4]);
-	colorc = str_to_rgb_int(t_path[5]);
 	while (++y <= WIN_H / 2)
 	{
 		while (++x <= WIN_W)
-			put_pixel_img(img, x, y, colorc);
+			put_pixel_img(img, x, y, data->color_ceiling);
 		x = -1;
 	}
 	while (++y <= WIN_H)
 	{
 		while (++x <= WIN_W)
-			put_pixel_img(img, x, y, colorf);
+			put_pixel_img(img, x, y, data->color_floor);
 		x = -1;
 	}
 }

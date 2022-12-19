@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 11:27:24 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 16:33:46 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 
 # define WIN_W 1920
 # define WIN_H 1080
-# define MM_W 300
-# define MM_H 200
+# define MM_W 400
+# define MM_H 300
 # define DR (M_PI / 180)
 # define FOV (M_PI / 5)
 
@@ -75,6 +75,8 @@ typedef struct s_data
 	t_img	view2d;
 	t_img	view3d;
 	t_img	textures[5];
+	int		color_floor;
+	int		color_ceiling;
 }				t_data;
 
 //Main logic
@@ -111,7 +113,7 @@ int		check_wall(char **map, t_cam *ray, int ray_dir);
 int		compass(t_cam ray);
 
 //Perspective
-void	drawfloorceiling(t_img *img, char *t_path[7]);
+void	drawfloorceiling(t_img *img, t_data *data);
 void	draw3d(t_data *data, t_cam rays[WIN_W]);
 //void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
 int		init_texture(t_data *data);
@@ -134,7 +136,9 @@ int		init_img(void *mlx, t_img *img, int width, int height);
 int		flood_img(t_img *img, int color);
 
 //MLX
+void	textures_init(char *t_path[7]);
 void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data);
+int		check_colors(t_data *data);
 int		rgb_to_int(int r, int g, int b);
 int		str_to_rgb_int(char *str_rgb);
 int		keydown_hook(int key, t_data *data);

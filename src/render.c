@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 11:44:22 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:33:11 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	render(t_data *data)
 	init_img(data->mlx, &data->view2d, MM_W, MM_H);
 	init_img(data->mlx, &data->view3d, WIN_W, WIN_H);
 	flood_img(&data->view2d, 0xFF000000); //Hex -> macro def
-	drawfloorceiling(&data->view3d, data->t_path);
+	drawfloorceiling(&data->view3d, data);
 	cast_rays(data, rays);
 	draw2d(data, rays);
 	draw3d(data, rays);

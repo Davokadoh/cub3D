@@ -6,7 +6,7 @@
 #    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 11:31:44 by jleroux           #+#    #+#              #
-#    Updated: 2022/12/16 14:30:04 by vhaefeli         ###   ########.fr        #
+#    Updated: 2022/12/19 15:38:40 by vhaefeli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ SRCS		:=	$(SRC_DIR)/main.c \
 
 CC          :=	gcc
 CFLAGS      :=	-Wall -Wextra -Werror
-CPPFLAGS    :=	$(addprefix -I,$(INCS)) -MMD -MP #-fsanitize=address -g
+CPPFLAGS    :=	$(addprefix -I,$(INCS)) -MMD -MP -fsanitize=address -g
 LDFLAGS     :=	$(addprefix -L,$(dir $(LIBS_TARGET)))
 LDLIBS      :=	$(addprefix -l,$(LIBS)) -framework OpenGL -framework Appkit
 

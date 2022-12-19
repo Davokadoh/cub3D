@@ -6,14 +6,14 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 11:46:39 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 17:02:23 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <stdlib.h>
 
-static void	textures_init(char *t_path[7])
+void	textures_init(char *t_path[7])
 {
 	int	i;
 
@@ -51,6 +51,8 @@ static int	add_path(char *line, char *t_path[7])
 	index = get_texture_index(splited[0]);
 	if (splited[1])
 	{
+		if (t_path[index])
+			return (printf("A texture is defined twice\n"));
 		t_path[index] = ft_strdup(splited[1]);
 		t_path[index][ft_strlen(t_path[index]) - 1] = '\0';
 	}
@@ -63,8 +65,9 @@ int	free_textures(char *t_path[7])
 	int	i;
 
 	i = -1;
-	while (++i < 7)
+	while (++i < 6) //t_path[6] n'est pas forcement a NULL car utilise pour le controle d'erreur mais il n-est jamais malloc donc ne doit pas etre free
 	{
+		printf("free(t_path[%d] %s\n", i, t_path[i]);
 		ft_free(t_path[i]);
 	}
 	return (1);
@@ -102,7 +105,6 @@ int	get_textures(char *file_path, size_t map_start, char *t_path[7])
 	size_t	line_nbr;
 	int		fd;
 
-	textures_init(t_path);
 	line_nbr = 0;
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
@@ -111,7 +113,7 @@ int	get_textures(char *file_path, size_t map_start, char *t_path[7])
 	while (line != NULL && line_nbr < map_start)
 	{
 		if (add_path(line, t_path))
-			return (free_textures(t_path));
+			return (1);
 		free(line);
 		line = get_next_line(fd);
 		line_nbr++;

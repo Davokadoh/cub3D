@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 11:37:06 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 14:09:50 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,15 @@ static int	check_closed_map(char **map)
 	int	x;
 	int	y;
 
+	if (!map)
+		return (1);
 	y = -1;
 	while (map[++y])
 	{
 		x = -1;
 		while (map[y][++x])
 		{
-			if (map[y][x] == '0')
+			if (map[y][x] != '1' && map[y][x] != ' ')
 			{
 				if (check_around(map, y, x))
 					return (1);
