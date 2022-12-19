@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 17:02:23 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:21:17 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,19 @@ int	init_texture(t_data *data)
 		i++;
 	}
 	data->textures[4].img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/porte.xpm", &data->textures[4].h, &data->textures[4].w);
+			"./textures/porterouge.xpm", &data->textures[4].h, &data->textures[4].w);
 	if (data->textures[4].img == NULL)
 		return (put_error(data, "texture error", 7));
 	data->textures[4].addr = mlx_get_data_addr(data->textures[4].img,
 			&data->textures[4].bits_per_pixel,
 			&data->textures[4].line_size, &data->textures[4].endian);
+	data->textures[5].img = mlx_xpm_file_to_image(data->mlx,
+			"./textures/perenoel.xpm", &data->textures[5].h, &data->textures[5].w);
+	if (data->textures[5].img == NULL)
+		return (put_error(data, "texture error", 7));
+	data->textures[5].addr = mlx_get_data_addr(data->textures[5].img,
+			&data->textures[5].bits_per_pixel,
+			&data->textures[5].line_size, &data->textures[5].endian);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/19 11:40:19 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 00:20:19 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,12 @@ int	update_rayh(char **map, t_cam *ray, int ray_dir, double dist_h)
 		else
 			ray->pos.y = (double)int_y;
 		return (map[(int)ray->pos.y - 1][int_x] == '1'
-			|| map[(int)ray->pos.y - 1][int_x] == 'D');
+			|| map[(int)ray->pos.y - 1][int_x] == 'D'
+			|| map[(int)ray->pos.y - 1][int_x] == 'P');
 	}
 	ray->pos.y = (double)(int_y + 1);
-	return (map[int_y + 1][int_x] == '1' || map[int_y + 1][int_x] == 'D');
+	return (map[int_y + 1][int_x] == '1' || map[int_y + 1][int_x] == 'D'
+			|| map[int_y + 1][int_x] == 'P');
 }
 
 int	update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v)
@@ -93,8 +95,10 @@ int	update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v)
 		else
 			ray->pos.x = (double)int_x;
 		return (map[int_y][(int)ray->pos.x - 1] == '1'
-			|| map[int_y][(int)ray->pos.x - 1] == 'D');
+			|| map[int_y][(int)ray->pos.x - 1] == 'D'
+			|| map[int_y][(int)ray->pos.x - 1] == 'P');
 	}
 	ray->pos.x = (double)(int_x + 1);
-	return (map[int_y][int_x + 1] == '1' || map[int_y][int_x + 1] == 'D');
+	return (map[int_y][int_x + 1] == '1' || map[int_y][int_x + 1] == 'D'
+			|| map[int_y][int_x + 1] == 'P');
 }
