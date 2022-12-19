@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 15:19:19 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/19 11:44:22 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,18 @@ static int	draw2d(t_data *data, t_cam rays[WIN_W])
 int	render(t_data *data)
 {
 	t_cam	rays[WIN_W];
-	t_cam	rays_clear[WIN_W];
 
 	init_img(data->mlx, &data->view2d, MM_W, MM_H);
-	init_img(data->mlx, &data->view3dclear, WIN_W, WIN_H);
 	init_img(data->mlx, &data->view3d, WIN_W, WIN_H);
 	flood_img(&data->view2d, 0xFF000000); //Hex -> macro def
-	flood_img(&data->view3d, 0xFF000000); //Hex -> macro def
-	drawfloorceiling(&data->view3dclear, data->t_path);
-	cast_rays(data, rays, 0);
-	cast_rays(data, rays_clear, 1);
+	drawfloorceiling(&data->view3d, data->t_path);
+	cast_rays(data, rays);
 	draw2d(data, rays);
-	draw3d(data, &data->view3dclear, rays_clear);
-	draw3d(data, &data->view3d, rays);
-	mlx_put_image_to_window(data->mlx, data->win, data->view3dclear.img, 0, 0);
+	draw3d(data, rays);
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->view2d.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->view2d.img);
 	mlx_destroy_image(data->mlx, data->view3d.img);
-	mlx_destroy_image(data->mlx, data->view3dclear.img);
 	return (0);
 }

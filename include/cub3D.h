@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 13:45:40 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:20:41 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_cam
 	double	angle;
 	double	dist;
 	int		c;
-	int		clear;
 }				t_cam;
 
 typedef struct s_img
@@ -74,7 +73,6 @@ typedef struct s_data
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
-	t_img	view3dclear;
 	t_img	textures[5];
 }				t_data;
 
@@ -101,19 +99,19 @@ int		wall_size(t_data *map);
 void	draw_minimap(t_data *map, t_img *minimap);
 
 //Raycasting
-t_cam	*cast_rays(t_data *data, t_cam *rays, int clear);
+t_cam	*cast_rays(t_data *data, t_cam *rays);
 int		ray_dir(t_cam ray);
 double	dist_next_h(t_cam ray, int ray_dir);
 double	dist_next_v(t_cam ray, int ray_dir);
 int		update_rayh(char **map, t_cam *ray, int ray_dir, double dist_h);
 int		update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v);
-//t_cam	init_ray(t_cam player, double radius_angle);
+t_cam	init_ray(t_cam player, double radius_angle);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
 int		compass(t_cam ray);
 
 //Perspective
 void	drawfloorceiling(t_img *img, char *t_path[7]);
-void	draw3d(t_data *data, t_img *view, t_cam rays[WIN_W]);
+void	draw3d(t_data *data, t_cam rays[WIN_W]);
 //void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
 int		init_texture(t_data *data);
 
