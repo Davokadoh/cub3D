@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/16 13:49:23 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 09:39:09 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ typedef struct	s_cam
 	int		c;
 }				t_cam;
 
+typedef struct	s_wall
+{
+	float	bot;
+	float	top;
+	float	line_h;
+}				t_wall;
+
 typedef struct	s_img
 {
 	void	*img;
@@ -66,7 +73,7 @@ typedef struct	s_data
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
-	t_img	textures[5];
+	t_img	textures[6];
 }				t_data;
 
 //Main logic
