@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:09:10 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/19 12:35:45 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:08:10 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ int	get_texel_x(t_data *data, t_cam ray)
 	t_img	texture;
 	int		orientation;
 	int		x;
-	char	c;
 
 	orientation = compass(ray);
-	c = data->map[(int)ray.pos.y][(int)ray.pos.x];
 	texture = data->textures[orientation - 1];
-	if (c == 'D')
+	if (data->map[(int)ray.pos.y][(int)ray.pos.x] == 'D')
 		texture = data->textures[4];
 	if (orientation == 1)
 		x = (int)(fmod(ray.pos.x, 1.0) * texture.w);
@@ -79,16 +77,18 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	t_vec2d	texel;
 	t_img	texture;
 	int		x;
-	char	c;
 
 	x = -1;
 	while (++x < WIN_W)
 	{
-		c = data->map[(int)rays[x].pos.y][(int)rays[x].pos.x];
 		wall.line_h = (WIN_H / rays[x].dist);
 		texture = data->textures[compass(rays[x]) - 1];
-		if (c == 'D')
-			texture = data->textures[4];
+		if (rays[x].c == 2) //Change 2 to HORIZONTAL macro
+			if (data->map[(int)(rays[x].pos.y + 0.5 * rays[x].dir.y)][(int)(rays[x].pos.x)] == 'D')
+				texture = data->textures[4];
+		if (rays[x].c == 1) //Change 1 to VERTICAL macro
+			if (data->map[(int)(rays[x].pos.y)][(int)(rays[x].pos.x + 0.5 * rays[x].dir.x)] == 'D')
+				texture = data->textures[4];
 		texel.x = get_texel_x(data, rays[x]);
 		wall.top = -wall.line_h / 2 + WIN_H / 2;
 		wall.bot = wall.line_h / 2 + WIN_H / 2;
