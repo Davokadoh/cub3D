@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:09:10 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/19 12:23:51 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/19 12:57:44 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,12 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	{
 		wall.line_h = (WIN_H / rays[x].dist);
 		texture = data->textures[compass(rays[x]) - 1];
-		if (data->map[(int)round(rays[x].pos.y)][(int)round(rays[x].pos.x)] == 'D')
-			texture = data->textures[4];
+		if (rays[x].c == 2) //Change 2 to HORIZONTAL macro
+			if (data->map[(int)(rays[x].pos.y + 0.5 * rays[x].dir.y)][(int)(rays[x].pos.x)] == 'D')
+				texture = data->textures[4];
+		if (rays[x].c == 1) //Change 1 to VERTICAL macro
+			if (data->map[(int)(rays[x].pos.y)][(int)(rays[x].pos.x + 0.5 * rays[x].dir.x)] == 'D')
+				texture = data->textures[4];
 		texel.x = get_texel_x(data, rays[x]);
 		wall.top = -wall.line_h / 2 + WIN_H / 2;
 		wall.bot = wall.line_h / 2 + WIN_H / 2;
