@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 11:27:24 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/19 12:20:41 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_cam
 	double	angle;
 	double	dist;
 	int		c;
-	char	wall;
 }				t_cam;
 
 typedef struct s_img
