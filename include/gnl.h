@@ -6,13 +6,12 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:18:18 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/19 11:19:13 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:35:46 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-
-# define GET_NEXT_LINE_H
+#ifndef GNL_H
+# define GNL_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 2
