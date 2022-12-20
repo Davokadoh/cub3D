@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:09:10 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/20 09:54:27 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 11:50:23 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,12 @@ void	drawfloorceiling(t_img *img, t_data *data)
 	}
 }
 
-int	get_texel_x(t_data *data, t_cam ray)
+int	get_texel_x(t_img texture, t_cam ray)
 {
-	t_img	texture;
 	int		orientation;
 	int		x;
 
 	orientation = compass(ray);
-	texture = data->textures[orientation - 1];
-	if (data->map[(int)ray.pos.y][(int)ray.pos.x] == 'D')
-		texture = data->textures[4];
-	if (data->map[(int)ray.pos.y][(int)ray.pos.x] == 'P')
-		texture = data->textures[5];
-	if (data->map[(int)ray.pos.y][(int)ray.pos.x] == 'A')
-		texture = data->textures[6];
 	if (orientation == 1)
 		x = (int)(fmod(ray.pos.x, 1.0) * texture.w);
 	if (orientation == 2)
@@ -105,7 +97,7 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 		if (rays[x].c == 1) //Change 1 to VERTICAL macro
 			if (data->map[(int)(rays[x].pos.y)][(int)(rays[x].pos.x + 0.5 * rays[x].dir.x)] == 'A')
 				texture = data->textures[6];
-		texel.x = get_texel_x(data, rays[x]);
+		texel.x = get_texel_x(texture, rays[x]);
 		wall.top = -wall.line_h / 2 + WIN_H / 2;
 		wall.bot = wall.line_h / 2 + WIN_H / 2;
 		while (--wall.bot > wall.top)
