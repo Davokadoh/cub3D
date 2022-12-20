@@ -6,7 +6,7 @@
 #    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 11:31:44 by jleroux           #+#    #+#              #
-#    Updated: 2022/12/19 15:38:40 by vhaefeli         ###   ########.fr        #
+#    Updated: 2022/12/20 11:48:14 by jleroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,5 +94,8 @@ re:
 
 run: all
 	@-./$(NAME) maps/test.cub
+
+noel: all
+	@-./$(NAME) maps/noel.cub
 
 .PHONY: all clean fclean re debug release
