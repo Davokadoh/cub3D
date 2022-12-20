@@ -6,11 +6,10 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:25:18 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 15:13:12 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:54:33 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "cub3D.h"
 
 static int	check_unique_player(char **map)

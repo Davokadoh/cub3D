@@ -6,13 +6,13 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:03 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 11:12:50 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:44:02 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data)
+static void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data)
 {
 	double	x;
 	double	y;
@@ -38,4 +38,14 @@ void	draw_line(t_vec2d a, t_vec2d b, int color, t_data *data)
 		y += delta_y;
 		--pixels;
 	}
+}
+
+int	draw2d(t_data *data, t_cam rays[WIN_W])
+{
+	int	x;
+
+	x = -1;
+	while (++x < WIN_W)
+		draw_line(data->player.pos, rays[x].pos, 0x00909090, data); //Hex -> macro def
+	return (0);
 }

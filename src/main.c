@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:07 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 19:50:16 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:34:57 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 
 	data.map = NULL;
 	data.mouse = 1;
-	textures_init(data.t_path);
+	textures_init(data.paths);
 	if (parse(ac, av, &data))
 		return (1);
 	data.mlx = mlx_init();

@@ -6,34 +6,13 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:09:10 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/20 11:50:23 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/20 16:11:10 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	drawfloorceiling(t_img *img, t_data *data)
-{
-	int	x;
-	int	y;
-
-	x = -1;
-	y = -1;
-	while (++y <= WIN_H / 2)
-	{
-		while (++x <= WIN_W)
-			put_pixel_img(img, x, y, data->color_ceiling);
-		x = -1;
-	}
-	while (++y <= WIN_H)
-	{
-		while (++x <= WIN_W)
-			put_pixel_img(img, x, y, data->color_floor);
-		x = -1;
-	}
-}
-
-int	get_texel_x(t_img texture, t_cam ray)
+static int	get_texel_x(t_img texture, t_cam ray)
 {
 	int		orientation;
 	int		x;
@@ -50,21 +29,35 @@ int	get_texel_x(t_img texture, t_cam ray)
 	return (x);
 }
 
-int	get_texel_y(t_img texture, float img_y, float wall_top, float line_height)
+static int	get_texel_y(t_img tex, float img_y, float w_top, float line_height)
 {
 	int		y;
 
-	y = (img_y - wall_top) * texture.h * 0.25 / line_height;
+	y = (img_y - w_top) * tex.h * 0.25 / line_height;
 	return ((int)y);
 }
 
-unsigned int	get_texel(t_img texture, int x, int y)
+static unsigned int	get_color(t_img texture, int x, int y)
 {
 	unsigned int	clr;
 
 	clr = *(unsigned int *)(texture.addr + (y * texture.line_size + x)
 			* (texture.bits_per_pixel / 8));
 	return (clr);
+}
+
+static t_img	get_texture(t_data *data, t_cam rays)
+{
+	t_img	texture;
+
+	texture = data->textures[compass(rays) - 1];
+	if (rays.wall_type == 'D')
+		texture = data->textures[4];
+	if (rays.wall_type == 'P')
+		texture = data->textures[5];
+	if (rays.wall_type == 'A')
+		texture = data->textures[6];
+	return (texture);
 }
 
 void	draw3d(t_data *data, t_cam rays[WIN_W])
@@ -78,25 +71,7 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 	while (++x < WIN_W)
 	{
 		wall.line_h = (WIN_H / rays[x].dist);
-		texture = data->textures[compass(rays[x]) - 1];
-		if (rays[x].c == 2) //Change 2 to HORIZONTAL macro
-			if (data->map[(int)(rays[x].pos.y + 0.5 * rays[x].dir.y)][(int)(rays[x].pos.x)] == 'D')
-				texture = data->textures[4];
-		if (rays[x].c == 1) //Change 1 to VERTICAL macro
-			if (data->map[(int)(rays[x].pos.y)][(int)(rays[x].pos.x + 0.5 * rays[x].dir.x)] == 'D')
-				texture = data->textures[4];
-		if (rays[x].c == 2) //Change 2 to HORIZONTAL macro
-			if (data->map[(int)(rays[x].pos.y + 0.5 * rays[x].dir.y)][(int)(rays[x].pos.x)] == 'P')
-				texture = data->textures[5];
-		if (rays[x].c == 1) //Change 1 to VERTICAL macro
-			if (data->map[(int)(rays[x].pos.y)][(int)(rays[x].pos.x + 0.5 * rays[x].dir.x)] == 'P')
-				texture = data->textures[5];
-		if (rays[x].c == 2) //Change 2 to HORIZONTAL macro
-			if (data->map[(int)(rays[x].pos.y + 0.5 * rays[x].dir.y)][(int)(rays[x].pos.x)] == 'A')
-				texture = data->textures[6];
-		if (rays[x].c == 1) //Change 1 to VERTICAL macro
-			if (data->map[(int)(rays[x].pos.y)][(int)(rays[x].pos.x + 0.5 * rays[x].dir.x)] == 'A')
-				texture = data->textures[6];
+		texture = get_texture(data, rays[x]);
 		texel.x = get_texel_x(texture, rays[x]);
 		wall.top = -wall.line_h / 2 + WIN_H / 2;
 		wall.bot = wall.line_h / 2 + WIN_H / 2;
@@ -104,7 +79,7 @@ void	draw3d(t_data *data, t_cam rays[WIN_W])
 		{
 			texel.y = get_texel_y(texture, wall.bot, wall.top, wall.line_h);
 			put_pixel_img(&data->view3d, x, (int)wall.bot,
-				get_texel(texture, (int)texel.x, (int)texel.y));
+				get_color(texture, (int)texel.x, (int)texel.y));
 		}
 	}
 }

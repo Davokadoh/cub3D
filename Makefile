@@ -6,7 +6,7 @@
 #    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 11:31:44 by jleroux           #+#    #+#              #
-#    Updated: 2022/12/20 11:48:14 by jleroux          ###   ########.fr        #
+#    Updated: 2022/12/20 16:58:00 by vhaefeli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ SRC_DIR		:=	src
 SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/parsing.c \
 				$(SRC_DIR)/textures.c \
+				$(SRC_DIR)/paths.c \
 				$(SRC_DIR)/map.c \
+				$(SRC_DIR)/map_check.c \
 				$(SRC_DIR)/camera.c \
 				$(SRC_DIR)/minimap.c \
 				$(SRC_DIR)/move.c \

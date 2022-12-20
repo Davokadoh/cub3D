@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:15:53 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 19:47:00 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 14:20:45 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ int	keydown_hook(int key, t_data *data)
 {
 	if (key == KEY_ESC)
 	{
-		// mlx_destroy_image(data->mlx, data->view2d.img);
-		// mlx_destroy_image(data->mlx, data->view3d.img);
-		// mlx_destroy_image(data->mlx, data->minimap.img);
 		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
@@ -51,7 +48,6 @@ int	keydown_hook(int key, t_data *data)
 			mlx_mouse_show();
 			data->mouse = 0;
 		}
-			
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:10:16 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 15:54:41 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:50:47 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	check_colors(t_data *data)
 {
-	data->color_floor = str_to_rgb_int(data->t_path[4]);
+	data->color_floor = str_to_rgb_int(data->paths[4]);
 	if (data->color_floor == -1)
 		return (1);
-	data->color_ceiling = str_to_rgb_int(data->t_path[5]);
+	data->color_ceiling = str_to_rgb_int(data->paths[5]);
 	if (data->color_ceiling == -1)
 		return (1);
 	return (0);
 }
 
-int	rgb_to_int(int r, int g, int b)
+static int	rgb_to_int(int r, int g, int b)
 {
 	int	color;
 
@@ -44,7 +44,7 @@ static int	checkintcolor(char **rgb, int (*intrgb)[3])
 	i = 0;
 	while (rgb[n] && n < 3)
 	{
-		while((rgb[n][i]))
+		while ((rgb[n][i]))
 		{
 			if (!ft_isdigit(rgb[n][i]))
 				return (-1);

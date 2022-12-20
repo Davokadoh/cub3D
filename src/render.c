@@ -6,13 +6,32 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 12:33:11 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:45:31 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx.h"
-#include "libft.h"
 #include "cub3D.h"
+
+static void	draw_floor_ceiling(t_img *img, t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = -1;
+	y = -1;
+	while (++y <= WIN_H / 2)
+	{
+		while (++x <= WIN_W)
+			put_pixel_img(img, x, y, data->color_ceiling);
+		x = -1;
+	}
+	while (++y <= WIN_H)
+	{
+		while (++x <= WIN_W)
+			put_pixel_img(img, x, y, data->color_floor);
+		x = -1;
+	}
+}
 
 void	put_pixel_img(t_img *img, int x, int y, int color)
 {
@@ -21,7 +40,7 @@ void	put_pixel_img(t_img *img, int x, int y, int color)
 				+ (y * img->line_size + x * img->bits_per_pixel / 8)) = color;
 }
 
-int	flood_img(t_img *img, int color)
+int	fill_img(t_img *img, int color)
 {
 	int	x;
 	int	y;
@@ -49,24 +68,14 @@ int	init_img(void *mlx, t_img *img, int width, int height)
 	return (0);
 }
 
-static int	draw2d(t_data *data, t_cam rays[WIN_W])
-{
-	int	x;
-
-	x = -1;
-	while (++x < WIN_W)
-		draw_line(data->player.pos, rays[x].pos, 0x00909090, data); //Hex -> macro def
-	return (0);
-}
-
 int	render(t_data *data)
 {
 	t_cam	rays[WIN_W];
 
 	init_img(data->mlx, &data->view2d, MM_W, MM_H);
 	init_img(data->mlx, &data->view3d, WIN_W, WIN_H);
-	flood_img(&data->view2d, 0xFF000000); //Hex -> macro def
-	drawfloorceiling(&data->view3d, data);
+	fill_img(&data->view2d, 0xFF000000); //Hex -> macro def
+	draw_floor_ceiling(&data->view3d, data);
 	cast_rays(data, rays);
 	draw2d(data, rays);
 	draw3d(data, rays);

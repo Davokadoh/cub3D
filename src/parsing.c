@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 15:00:50 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:35:00 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int	check_file_extension(char *str, char *extension)
 	return (0);
 }
 
-int	check_textures(char *t_path[])
+static int	check_textures(char *paths[])
 {
 	int	i;
 	int	fd;
@@ -60,9 +60,9 @@ int	check_textures(char *t_path[])
 	i = 0;
 	while (i < 4)
 	{
-		if (check_file_extension(t_path[i], ".xpm"))
+		if (check_file_extension(paths[i], ".xpm"))
 			return (1);
-		fd = open(t_path[i], O_RDONLY);
+		fd = open(paths[i], O_RDONLY);
 		if (fd < 0)
 			return (1);
 		close(fd);
@@ -86,9 +86,9 @@ int	parse(int ac, char **av, t_data *data)
 	map = get_map_start(fd);
 	if (map.end - map.start < 4)
 		return (put_error(data, "Can't get map", 5));
-	if (get_textures(av[1], map.start, data->t_path) > 0)
+	if (get_paths(av[1], map.start, data->paths) > 0)
 		return (put_error(data, "Can't get textures", 4));
-	if (check_textures(data->t_path) > 0)
+	if (check_textures(data->paths) > 0)
 		return (put_error(data, "Can't open textures", 4));
 	if (check_colors(data) > 0)
 		return (put_error(data, "Ceilling or/and floor wrong declared", 4));
