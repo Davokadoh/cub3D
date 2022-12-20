@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 16:24:49 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:44:28 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,12 @@ static int	get_from_file(char *file_path, size_t map_start,
 	return (0);
 }
 
-int	get_map(char *file_path, size_t map_start, size_t map_end, char ***map)
+int	get_map(char *file_path, size_t map_start, size_t map_end, t_data *data)
 {
-	if (get_from_file(file_path, map_start, map_end, map))
+	if (get_from_file(file_path, map_start, map_end, &data->map))
 		return (1);
-	fill_map(map);
-	if (check_closed_map(*map))
+	fill_map(&data->map);
+	if (check_closed_map(data->map, data->paths))
 		return (printf("Map not closed\n"));
 	return (0);
 }

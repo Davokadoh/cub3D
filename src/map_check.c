@@ -6,21 +6,29 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 16:23:52 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:48:35 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static int	is_map_char(char c)
+static int	is_map_char(char c, char **paths)
 {
+
 	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'W'
-		|| c == 'E' || c == 'D' || c == 'P' || c == 'A')
+		|| c == 'E')
 		return (1);
+	if (c == 'D' && paths[6])
+		return (1);
+	if (c == 'P' && paths[7])
+		return (1);
+	if (c == 'A' && paths[8])
+		return (1);
+	printf("caracter not allowed or not defined in map\n");
 	return (0);
 }
 
-static int	check_around(char **map, int y, int x)
+static int	check_around(char **map, int y, int x, char **paths)
 {
 	int	i;
 	int	j;
@@ -35,7 +43,7 @@ static int	check_around(char **map, int y, int x)
 		{
 			if (x + j < 0 || !map[y + i][x + j])
 				return (1);
-			else if (!is_map_char(map[y + i][x + j]))
+			else if (!is_map_char(map[y + i][x + j], paths))
 				return (1);
 			j++;
 		}
@@ -44,7 +52,7 @@ static int	check_around(char **map, int y, int x)
 	return (0);
 }
 
-int	check_closed_map(char **map)
+int	check_closed_map(char **map, char **paths)
 {
 	int	x;
 	int	y;
@@ -59,7 +67,7 @@ int	check_closed_map(char **map)
 		{
 			if (map[y][x] != '1' && map[y][x] != ' ')
 			{
-				if (check_around(map, y, x))
+				if (check_around(map, y, x, paths))
 					return (1);
 			}
 		}

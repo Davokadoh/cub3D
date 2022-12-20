@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 17:02:16 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:40:26 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ int		mouse_hook(int x, int y, t_data *data);
 int		draw2d(t_data *data, t_cam rays[WIN_W]);
 
 //map_check.c - 3 fcts
-int		check_closed_map(char **map);
+int		check_closed_map(char **map, char **paths);
 
 //map.c - 5 fcts
-int		get_map(char *file_path, size_t map_start, size_t map_end, char ***map);
+int		get_map(char *file_path, size_t map_start, size_t map_end, t_data *data);
 
 // minimap.c - 3 fcts
 int		calculate_minimap(t_data *data);

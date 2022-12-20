@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 16:35:00 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 19:42:24 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	parse(int ac, char **av, t_data *data)
 		return (put_error(data, "Can't open textures", 4));
 	if (check_colors(data) > 0)
 		return (put_error(data, "Ceilling or/and floor wrong declared", 4));
-	if (get_map(av[1], map.start, map.end, &data->map) > 0)
+	if (get_map(av[1], map.start, map.end, data) > 0)
 		return (put_error(data, "Can't get map", 5));
 	if (get_player(data) > 0)
 		return (put_error(data, "Can't get player", 6));
