@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 12:33:11 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:53:40 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,21 +59,44 @@ static int	draw2d(t_data *data, t_cam rays[WIN_W])
 	return (0);
 }
 
+void	anim(t_img *texture)
+{
+	if (texture->state == '(')
+		texture->frame += 100;
+	else if (texture->state == ')')
+		texture->frame -= 100;
+	if (texture->frame > texture->w)
+		texture->frame = texture->w + 100;
+	else if (texture->frame < 0)
+	{
+		texture->frame = 0;
+		texture->state = 0;
+	}
+}
+
 int	render(t_data *data)
 {
 	t_cam	rays[WIN_W];
+	t_cam	rays_back[WIN_W];
 
+	anim(&data->textures[4]);
 	init_img(data->mlx, &data->view2d, MM_W, MM_H);
 	init_img(data->mlx, &data->view3d, WIN_W, WIN_H);
+	init_img(data->mlx, &data->view3dback, WIN_W, WIN_H);
 	flood_img(&data->view2d, 0xFF000000); //Hex -> macro def
-	drawfloorceiling(&data->view3d, data);
-	cast_rays(data, rays);
+	flood_img(&data->view3d, 0xFF000000); //Hex -> macro def
+	drawfloorceiling(&data->view3dback, data);
+	cast_rays(data, rays, 0);
+	cast_rays(data, rays_back, 1);
 	draw2d(data, rays);
-	draw3d(data, rays);
+	draw3d(data, &data->view3d, rays);
+	draw3d(data, &data->view3dback, rays_back);
+	mlx_put_image_to_window(data->mlx, data->win, data->view3dback.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->view2d.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->view2d.img);
 	mlx_destroy_image(data->mlx, data->view3d.img);
+	mlx_destroy_image(data->mlx, data->view3dback.img);
 	return (0);
 }

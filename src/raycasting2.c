@@ -6,14 +6,14 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/19 11:41:30 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 13:13:40 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include "libft.h"
 
-t_cam	init_ray(t_cam player, double radius_angle)
+t_cam	init_ray(t_cam player, double radius_angle, int back)
 {
 	t_cam	ray;
 
@@ -22,6 +22,7 @@ t_cam	init_ray(t_cam player, double radius_angle)
 	ray.pos.y = player.pos.y;
 	ray.dir.x = cos(ray.angle);
 	ray.dir.y = sin(ray.angle);
+	ray.back = back;
 	return (ray);
 }
 
@@ -74,7 +75,7 @@ int	compass(t_cam ray)
 	return (0);
 }
 
-t_cam	*cast_rays(t_data *data, t_cam *rays)
+t_cam	*cast_rays(t_data *data, t_cam *rays, int back)
 {
 	double	rad_ang;
 	int		x;
@@ -83,7 +84,7 @@ t_cam	*cast_rays(t_data *data, t_cam *rays)
 	while (++x < WIN_W)
 	{
 		rad_ang = atan((x - WIN_W / 2) / FOV / WIN_W);
-		rays[x] = init_ray(data->player, rad_ang);
+		rays[x] = init_ray(data->player, rad_ang, back);
 		rays[x].dist = ray_dist(data->map, data->player, &rays[x], rad_ang);
 	}
 	return (rays);

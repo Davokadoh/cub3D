@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:15 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/19 17:23:00 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 16:20:03 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int	open_close_door(t_data *data, int key)
 	dx = data->player.dir.x;
 	dy = data->player.dir.y;
 	if (key == KEY_SPACE && data->map[(int)(py + dy)][(int)(px + dx)] == 'D')
-		data->map[(int)(py + dy)][(int)(px + dx)] = 'd';
+		data->textures[4].state = '(';
 	else if (key == KEY_SPACE && data->map[(int)(py + dy)][(int)(px + dx)] == 'd')
-		data->map[(int)(py + dy)][(int)(px + dx)] = 'D';
+		{data->map[(int)(py + dy)][(int)(px + dx)] = 'D'; data->textures[4].state = ')';}
 	else if (key == KEY_SPACE && data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)]
 			== 'D')
-		data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)] = 'd';
+		data->textures[4].state = '(';
 	else if (key == KEY_SPACE && data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)]
 			== 'd')
-		data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)] = 'D';
+		{data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)] = 'D'; data->textures[4].state = ')';}
 	else
 		return (1);
 	return (0);

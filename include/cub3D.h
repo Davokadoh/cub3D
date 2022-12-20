@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 00:16:11 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:50:59 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_cam
 	double	angle;
 	double	dist;
 	int		c;
+	int		back;
 }				t_cam;
 
 typedef struct s_img
@@ -59,6 +60,8 @@ typedef struct s_img
 	int		endian;
 	int		h;
 	int		w;
+	int		frame;
+	char	state;
 }				t_img;
 
 typedef struct s_data
@@ -68,12 +71,13 @@ typedef struct s_data
 	char	**map;
 	size_t	map_w;
 	size_t	map_h;
-	char	*t_path[7];
+	char	*t_path[10];
 	t_cam	player;
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
-	t_img	textures[6];
+	t_img	view3dback;
+	t_img	textures[7];
 	int		color_floor;
 	int		color_ceiling;
 	int		mouse;
@@ -102,28 +106,28 @@ int		wall_size(t_data *map);
 void	draw_minimap(t_data *map, t_img *minimap);
 
 //Raycasting
-t_cam	*cast_rays(t_data *data, t_cam *rays);
+t_cam	*cast_rays(t_data *data, t_cam *rays, int back);
 int		ray_dir(t_cam ray);
 double	dist_next_h(t_cam ray, int ray_dir);
 double	dist_next_v(t_cam ray, int ray_dir);
 int		update_rayh(char **map, t_cam *ray, int ray_dir, double dist_h);
 int		update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v);
-t_cam	init_ray(t_cam player, double radius_angle);
+t_cam	init_ray(t_cam player, double radius_angle, int back);
 int		check_wall(char **map, t_cam *ray, int ray_dir);
 int		compass(t_cam ray);
 
 //Perspective
 void	drawfloorceiling(t_img *img, t_data *data);
-void	draw3d(t_data *data, t_cam rays[WIN_W]);
+void	draw3d(t_data *data, t_img *view, t_cam rays[WIN_W]);
 //void	draw3d_text(t_data *data, double dist, int x, t_cam ray);
 int		init_texture(t_data *data);
 
 //Parsing
 int		parse(int ac, char **av, t_data *data);
-int		get_textures(char *file_path, size_t map_start, char *t_path[7]);
+int		get_textures(char *file_path, size_t map_start, char *t_path[10]);
 int		get_map(char *file_path, size_t map_start, size_t map_end, char ***map);
 int		get_player(t_data *data);
-int		free_textures(char *t_path[7]);
+int		free_textures(char *t_path[10]);
 
 //Utils
 t_vec2d	new_vec(double x, double y);

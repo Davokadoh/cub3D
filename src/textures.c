@@ -6,19 +6,19 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 00:21:17 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 15:50:38 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 #include <stdlib.h>
 
-void	textures_init(char *t_path[7])
+void	textures_init(char *t_path[10])
 {
 	int	i;
 
 	i = -1;
-	while (++i < 7)
+	while (++i < 10)
 		t_path[i] = NULL;
 }
 
@@ -36,8 +36,14 @@ static int	get_texture_index(char *line)
 		return (4);
 	else if (!ft_strncmp("C", line, 1))
 		return (5);
-	else
+	else if (!ft_strncmp("D", line, 1))
 		return (6);
+	else if (!ft_strncmp("P", line, 1))
+		return (7);
+	else if (!ft_strncmp("A", line, 1))
+		return (8);
+	else
+		return (9);
 }
 
 static int	add_path(char *line, char *t_path[7])
@@ -65,9 +71,8 @@ int	free_textures(char *t_path[7])
 	int	i;
 
 	i = -1;
-	while (++i < 6) //t_path[6] n'est pas forcement a NULL car utilise pour le controle d'erreur mais il n-est jamais malloc donc ne doit pas etre free
+	while (++i < 9) //t_path[6] n'est pas forcement a NULL car utilise pour le controle d'erreur mais il n-est jamais malloc donc ne doit pas etre free
 	{
-		printf("free(t_path[%d] %s\n", i, t_path[i]);
 		ft_free(t_path[i]);
 	}
 	return (1);
@@ -77,8 +82,8 @@ int	init_texture(t_data *data)
 {
 	int	i;
 
-	i = 0;
-	while (i < 4)
+	i = -1;
+	while (++i < 4)
 	{
 		data->textures[i].img = mlx_xpm_file_to_image(data->mlx,
 				data->t_path[i], &data->textures[i].h, &data->textures[i].w);
@@ -87,22 +92,20 @@ int	init_texture(t_data *data)
 		data->textures[i].addr = mlx_get_data_addr(data->textures[i].img,
 				&data->textures[i].bits_per_pixel,
 				&data->textures[i].line_size, &data->textures[i].endian);
+		data->textures[i].frame = 0;
+	}
+	while (i < 7 && data->t_path[i +2])
+	{
+		data->textures[i].img = mlx_xpm_file_to_image(data->mlx,
+				data->t_path[i + 2], &data->textures[i].h, &data->textures[i].w);
+		if (data->textures[i].img == NULL)
+			return (put_error(data, "texture error", 7));
+		data->textures[i].addr = mlx_get_data_addr(data->textures[i].img,
+				&data->textures[i].bits_per_pixel,
+				&data->textures[i].line_size, &data->textures[i].endian);
+		data->textures[i].frame = 0;
 		i++;
 	}
-	data->textures[4].img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/porterouge.xpm", &data->textures[4].h, &data->textures[4].w);
-	if (data->textures[4].img == NULL)
-		return (put_error(data, "texture error", 7));
-	data->textures[4].addr = mlx_get_data_addr(data->textures[4].img,
-			&data->textures[4].bits_per_pixel,
-			&data->textures[4].line_size, &data->textures[4].endian);
-	data->textures[5].img = mlx_xpm_file_to_image(data->mlx,
-			"./textures/perenoel.xpm", &data->textures[5].h, &data->textures[5].w);
-	if (data->textures[5].img == NULL)
-		return (put_error(data, "texture error", 7));
-	data->textures[5].addr = mlx_get_data_addr(data->textures[5].img,
-			&data->textures[5].bits_per_pixel,
-			&data->textures[5].line_size, &data->textures[5].endian);
 	return (0);
 }
 
@@ -128,7 +131,7 @@ int	get_textures(char *file_path, size_t map_start, char *t_path[7])
 	free(line);
 	if (!t_path[0] || !t_path[1] || !t_path[2] || !t_path[3]
 		|| !t_path[4] || !t_path[5])
-		t_path[6] = "1";
+		t_path[9] = "1";
 	close(fd);
-	return (t_path[6] != NULL);
+	return (t_path[9] != NULL);
 }
