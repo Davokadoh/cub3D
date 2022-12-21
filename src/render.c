@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 14:07:50 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:57:12 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,10 @@ int	fill_img(t_img *img, int color)
 int	init_img(void *mlx, t_img *img, int width, int height)
 {
 	img->img = mlx_new_image(mlx, width, height);
-	// if (img->img == NULL)
-	// 	return (1); //Change to (clean_)exit() ?
 	img->addr = mlx_get_data_addr(img->img, &img->bpp,
 			&img->line_size, &img->endian);
 	img->h = height;
 	img->w = width;
-	// do more error checking here
 	return (0);
 }
 
@@ -76,8 +73,8 @@ int	render(t_data *data)
 	init_img(data->mlx, &data->view2d, MM_W, MM_H);
 	init_img(data->mlx, &data->view3d, WIN_W, WIN_H);
 	init_img(data->mlx, &data->view_doors, WIN_W, WIN_H);
-	fill_img(&data->view2d, 0xFF000000); //Hex -> macro def
-	fill_img(&data->view_doors, 0xFF000000); //Hex -> macro def
+	fill_img(&data->view2d, 0xFF000000);
+	fill_img(&data->view_doors, 0xFF000000);
 	draw_floor_ceiling(&data->view3d, data);
 	cast_rays(data, rays, 0);
 	cast_rays(data, rays_doors, 1);

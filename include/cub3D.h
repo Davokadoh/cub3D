@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 14:07:31 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:52:18 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct s_wall
 
 typedef struct s_cam
 {
-	t_vec2d	pos; //Position vector
-	t_vec2d	dir; //Looking direction verctor
+	t_vec2d	pos;
+	t_vec2d	dir;
 	double	angle;
 	double	dist;
 	int		axis;
@@ -105,7 +105,7 @@ int		draw2d(t_data *data, t_cam rays[WIN_W]);
 int		check_closed_map(char **map, char **paths);
 
 //map.c - 5 fcts
-int		get_map(char *file_path, size_t map_start, size_t map_end, t_data *data);
+int		get_map(char *f_path, size_t map_start, size_t map_end, t_data *data);
 
 // minimap.c - 3 fcts
 int		calculate_minimap(t_data *data);

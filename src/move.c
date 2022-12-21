@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:15 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 16:32:57 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:55:54 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ static int	move_right(t_data *data)
 	return (1);
 }
 
-int	move(int key, t_data *data) //bool ?
+int	move(int key, t_data *data)
 {
 	if (key == KEY_W)
 		return (move_forward(data));
@@ -116,8 +116,8 @@ int	move(int key, t_data *data) //bool ?
 	else if (key == KEY_D)
 		return (move_right(data));
 	else if (key == KEY_Q || key == KEY_LEFT)
-		return (turn_left(data)); //Need to call this multiple time to turn a greater angle
+		return (turn_left(data));
 	else if (key == KEY_E || key == KEY_RIGHT)
-		return (turn_right(data)); //SAME
+		return (turn_right(data));
 	return (0);
 }

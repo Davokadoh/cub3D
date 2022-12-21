@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 12:05:41 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/21 14:52:36 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ static void	fill_map(char ***map)
 		fill_line(&(*map)[i], max);
 }
 
-static int	get_from_file(char *file_path, size_t map_start,
+static int	get_from_file(char *f_path, size_t map_start,
 		size_t map_end, char ***map)
 {
 	int	y;
 	int	fd;
 
-	fd = open(file_path, O_RDONLY);
+	fd = open(f_path, O_RDONLY);
 	if (fd < 0)
 		return (printf("MAP\n"));
 	y = -1;

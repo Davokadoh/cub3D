@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:03 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 16:44:02 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:54:12 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ int	draw2d(t_data *data, t_cam rays[WIN_W])
 
 	x = -1;
 	while (++x < WIN_W)
-		draw_line(data->player.pos, rays[x].pos, 0x00909090, data); //Hex -> macro def
+		draw_line(data->player.pos, rays[x].pos, 0x00909090, data);
 	return (0);
 }

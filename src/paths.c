@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 14:09:56 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:56:51 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	free_textures(char *paths[10])
 	int	i;
 
 	i = -1;
-	while (++i < 9) //paths[6] n'est pas forcement a NULL car utilise pour le controle d'erreur mais il n-est jamais malloc donc ne doit pas etre free
+	while (++i < 9)
 	{
 		ft_free(paths[i]);
 	}

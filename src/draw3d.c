@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:09:10 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/21 14:07:35 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:53:57 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static unsigned int	get_color(t_img texture, int x, int y)
 	unsigned int	clr;
 
 	if (x > texture.h)
-		return (0xFF000000); //Hex -> macro def
+		return (0xFF000000);
 	clr = *(unsigned int *)(texture.addr + (y * texture.line_size + x)
 			* (texture.bpp / 8));
 	return (clr);

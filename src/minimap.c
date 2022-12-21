@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 16:28:55 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/20 17:27:27 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:55:06 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	calculate_minimap(t_data *data)
 {
 	init_img(data->mlx, &data->minimap, MM_W, MM_H);
-	fill_img(&data->minimap, 0xFF000000); //Hex -> macro def
+	fill_img(&data->minimap, 0xFF000000);
 	draw_minimap(data, &data->minimap);
 	return (0);
 }

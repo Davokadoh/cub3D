@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:10:16 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 14:15:57 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:52:50 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	rgb_to_int(int r, int g, int b)
 	color |= (int)(g) << 8;
 	color |= (int)(r) << 16;
 	return (color);
-	//See mlx_get_color()
 }
 
 static int	checkintcolor(char **rgb, int (*intrgb)[3])

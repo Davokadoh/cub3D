@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 19:48:35 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:54:55 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	is_map_char(char c, char **paths)
 {
-
 	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'W'
 		|| c == 'E')
 		return (1);

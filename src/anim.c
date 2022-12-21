@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   anim.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jleroux <jleroux@student.42lausanne.ch>    +#+  +:+       +#+        */
+/*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 13:24:54 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 13:26:38 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/21 14:53:41 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	anim(t_data *data, t_img *texture)
 		x = -1;
 		while (++x < data->map_w)
 		{
-			if (data->map[y][x] == 'o') //opening
+			if (data->map[y][x] == 'o')
 				texture->frame += 0.01 * texture->w;
-			if (data->map[y][x] == 'c') //closing
+			if (data->map[y][x] == 'c')
 				texture->frame -= 0.01 * texture->w;
-			if (data->map[y][x] == 'o' && texture->frame > texture->w) //opening
-				data->map[y][x] = '-'; //open
-			if (data->map[y][x] == 'c' && texture->frame < 0) //closing
+			if (data->map[y][x] == 'o' && texture->frame > texture->w)
+				data->map[y][x] = '-';
+			if (data->map[y][x] == 'c' && texture->frame < 0)
 			{
 				texture->frame = 0;
-				data->map[y][x] = 'D'; //closed
+				data->map[y][x] = 'D';
 			}
 		}
 	}

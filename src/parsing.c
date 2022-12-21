@@ -6,11 +6,10 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 14:13:59 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:56:21 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "cub3D.h"
 
 typedef struct s_map
