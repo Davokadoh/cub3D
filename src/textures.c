@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 17:00:55 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/20 17:52:24 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	init_texture(t_data *data)
 				&data->textures[i].bits_per_pixel,
 				&data->textures[i].line_size, &data->textures[i].endian);
 	}
-	while (i < 7 && data->paths[i +2])
+	while (i < 7 && data->paths[i + 2])
 	{
 		data->textures[i].img = mlx_xpm_file_to_image(data->mlx,
 				data->paths[i + 2], &data->textures[i].h, &data->textures[i].w);
