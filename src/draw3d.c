@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:09:10 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/20 16:11:10 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:55:21 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static unsigned int	get_color(t_img texture, int x, int y)
 	unsigned int	clr;
 
 	clr = *(unsigned int *)(texture.addr + (y * texture.line_size + x)
-			* (texture.bits_per_pixel / 8));
+			* (texture.bpp / 8));
 	return (clr);
 }
 

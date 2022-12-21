@@ -6,17 +6,17 @@
 #    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 11:31:44 by jleroux           #+#    #+#              #
-#    Updated: 2022/12/20 16:58:00 by vhaefeli         ###   ########.fr        #
+#    Updated: 2022/12/21 12:57:36 by vhaefeli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	cub3D
 
-LIBS        :=	m ft mlx
+LIBS		:=	m ft mlx
 LIBS_TARGET :=	lib/libft/libft.a \
 				lib/minilibx_opengl_20191021/libmlx.a \
 
-INCS        :=	include \
+INCS		:=	include \
 				lib/libft/include \
 				lib/minilibx_opengl_20191021/ \
 
@@ -42,30 +42,30 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/gnl.c \
 				$(SRC_DIR)/error.c \
 
-CC          :=	gcc
-CFLAGS      :=	-Wall -Wextra -Werror
-CPPFLAGS    :=	$(addprefix -I,$(INCS)) -MMD -MP -fsanitize=address -g
-LDFLAGS     :=	$(addprefix -L,$(dir $(LIBS_TARGET)))
-LDLIBS      :=	$(addprefix -l,$(LIBS)) -framework OpenGL -framework Appkit
+CC			:=	gcc
+CFLAGS		:=	-Wall -Wextra -Werror
+CPPFLAGS	:=	$(addprefix -I,$(INCS)) -MMD -MP -fsanitize=address -g
+LDFLAGS		:=	$(addprefix -L,$(dir $(LIBS_TARGET)))
+LDLIBS		:=	$(addprefix -l,$(LIBS)) -framework OpenGL -framework Appkit
 
 RM			:= rm -rf
-MAKEFLAGS   += --no-print-directory #--silent
+MAKEFLAGS	+= --no-print-directory #--silent
 
 all: $(NAME)
 
 debug: run
 
 ifeq ($(MAKECMDGOALS), debug)
-    CFLAGS += -g3 -DDEBUG
+	CFLAGS += -g3 -DDEBUG
 	BUILD = debug
 else
-    CFLAGS += -O3 -DNDEBUG
+	CFLAGS += -O3 -DNDEBUG
 	BUILD = release
 endif
 
-BUILD_DIR   :=	.build/$(BUILD)
+BUILD_DIR	:=	.build/$(BUILD)
 OBJS		:=	$(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
-DEPS        :=	$(OBJS:.o=.d)
+DEPS		:=	$(OBJS:.o=.d)
 
 $(NAME): $(OBJS) $(LIBS_TARGET)
 	@$(CC) -o $(NAME) $(CPPFLAGS) $(OBJS) $(LDFLAGS) $(LDLIBS)

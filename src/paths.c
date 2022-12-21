@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:37 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 19:40:41 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:07:13 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	textures_init(char *paths[10])
 static int	get_texture_index(char *line)
 {
 	if (!ft_strncmp("NO", line, 2))
-		return (0);
-	else if (!ft_strncmp("EA", line, 2))
-		return (1);
-	else if (!ft_strncmp("SO", line, 2))
 		return (2);
-	else if (!ft_strncmp("WE", line, 2))
+	else if (!ft_strncmp("EA", line, 2))
 		return (3);
-	else if (!ft_strncmp("F", line, 1))
+	else if (!ft_strncmp("SO", line, 2))
 		return (4);
-	else if (!ft_strncmp("C", line, 1))
+	else if (!ft_strncmp("WE", line, 2))
 		return (5);
+	else if (!ft_strncmp("F", line, 1))
+		return (0);
+	else if (!ft_strncmp("C", line, 1))
+		return (1);
 	else if (!ft_strncmp("D", line, 1))
 		return (6);
 	else if (!ft_strncmp("P", line, 1))
@@ -57,7 +57,10 @@ static int	add_path(char *line, char *paths[10])
 	if (splited[1])
 	{
 		if (paths[index])
+		{
+			ft_free_tab(splited);
 			return (printf("A texture is defined twice\n"));
+		}
 		paths[index] = ft_strdup(splited[1]);
 		paths[index][ft_strlen(paths[index]) - 1] = '\0';
 	}

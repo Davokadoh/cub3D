@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:23:40 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 19:42:24 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 13:10:11 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static int	check_textures(char *paths[])
 	int	i;
 	int	fd;
 
-	i = 0;
-	while (i < 4)
+	i = 2;
+	while (i < 7 && paths[i])
 	{
 		if (check_file_extension(paths[i], ".xpm"))
 			return (1);
