@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 12:33:44 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/21 14:07:50 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	put_pixel_img(t_img *img, int x, int y, int color)
 {
 	if (x >= 0 && y >= 0 && x < WIN_W && y < WIN_H)
 		*(unsigned int *)(img->addr
-				+ (y * img->line_size + x * img->bits_per_pixel / 8)) = color;
+				+ (y * img->line_size + x * img->bpp / 8)) = color;
 }
 
 int	fill_img(t_img *img, int color)
@@ -60,7 +60,7 @@ int	init_img(void *mlx, t_img *img, int width, int height)
 	img->img = mlx_new_image(mlx, width, height);
 	// if (img->img == NULL)
 	// 	return (1); //Change to (clean_)exit() ?
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+	img->addr = mlx_get_data_addr(img->img, &img->bpp,
 			&img->line_size, &img->endian);
 	img->h = height;
 	img->w = width;

@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:10:16 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 16:50:47 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:15:57 by vhaefeli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	check_colors(t_data *data)
 {
-	data->color_floor = str_to_rgb_int(data->paths[4]);
+	data->color_floor = str_to_rgb_int(data->paths[0]);
 	if (data->color_floor == -1)
 		return (1);
-	data->color_ceiling = str_to_rgb_int(data->paths[5]);
+	data->color_ceiling = str_to_rgb_int(data->paths[1]);
 	if (data->color_ceiling == -1)
 		return (1);
 	return (0);
