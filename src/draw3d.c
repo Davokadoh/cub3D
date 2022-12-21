@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:09:10 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/21 12:44:49 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/21 13:24:59 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,32 +62,6 @@ static t_img	get_texture(t_data *data, t_cam rays)
 	if (rays.wall_type == 'A')
 		texture = data->textures[6];
 	return (texture);
-}
-
-static void	anim(t_data *data, t_img *texture)
-{
-	size_t	y;
-	size_t	x;
-
-	y = -1;
-	while (++y < data->map_h)
-	{
-		x = -1;
-		while (++x < data->map_w)
-		{
-			if (data->map[y][x] == 'o') //opening
-				texture->frame += 50;
-			if (data->map[y][x] == 'c') //closing
-				texture->frame -= 50;
-			if (data->map[y][x] == 'o' && texture->frame > texture->w) //opening
-				data->map[y][x] = '-'; //open
-			if (data->map[y][x] == 'c' && texture->frame < 0) //closing
-			{
-				texture->frame = 0;
-				data->map[y][x] = 'D'; //closed
-			}
-		}
-	}
 }
 
 void	draw3d(t_data *data, t_img *view, t_cam rays[WIN_W])

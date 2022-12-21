@@ -6,7 +6,7 @@
 #    By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 11:31:44 by jleroux           #+#    #+#              #
-#    Updated: 2022/12/20 16:58:00 by vhaefeli         ###   ########.fr        #
+#    Updated: 2022/12/21 13:25:38 by jleroux          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS		:=	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/turn.c \
 				$(SRC_DIR)/render.c \
 				$(SRC_DIR)/draw3d.c \
+				$(SRC_DIR)/anim.c \
 				$(SRC_DIR)/raycasting1.c \
 				$(SRC_DIR)/raycasting2.c \
 				$(SRC_DIR)/hooks.c \
@@ -44,7 +45,7 @@ SRCS		:=	$(SRC_DIR)/main.c \
 
 CC          :=	gcc
 CFLAGS      :=	-Wall -Wextra -Werror
-CPPFLAGS    :=	$(addprefix -I,$(INCS)) -MMD -MP -fsanitize=address -g
+CPPFLAGS    :=	$(addprefix -I,$(INCS)) -MMD -MP -O2 #-fsanitize=address -g
 LDFLAGS     :=	$(addprefix -L,$(dir $(LIBS_TARGET)))
 LDLIBS      :=	$(addprefix -l,$(LIBS)) -framework OpenGL -framework Appkit
 

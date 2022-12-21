@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 12:37:45 by jleroux          ###   ########.fr       */
+/*   Updated: 2022/12/21 13:28:37 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ typedef struct s_data
 	int		mouse;
 }				t_data;
 
-//camera.c - 5fcts
+//camera.c - 5 fcts
 int		get_player(t_data *data);
 
-//draw3d.c - 5fcts
+//draw3d.c - 5 fcts
 void	draw3d(t_data *data, t_img *view, t_cam rays[WIN_W]);
 
-//error.c - 1fct
+//error.c - 1 fct
 int		put_error(t_data *data, char *err_msg, int err_code);
 
 //gnl.c
@@ -115,7 +115,7 @@ void	draw_minimap(t_data *map, t_img *minimap);
 //move.c - 5 fcts
 int		move(int key, t_data *data);
 
-//turn.c
+//turn.c - 3 fcts
 int		turn_left(t_data *data);
 int		turn_right(t_data *data);
 int		open_close_door(t_data *data, int key);
@@ -148,12 +148,15 @@ int		str_to_rgb_int(char *str_rgb);
 //textures.c - 1 fct
 int		init_texture(t_data *data);
 
-//paths.c - -5 fcts
+//paths.c - 5 fcts
 void	textures_init(char *paths[10]);
 int		free_textures(char *paths[10]);
 int		get_paths(char *file_path, size_t map_start, char *paths[10]);
 
 //vector2d.c - 1 fct
 t_vec2d	new_vec(double x, double y);
+
+//anim.c - 1 fct
+void	anim(t_data *data, t_img *texture);
 
 #endif
