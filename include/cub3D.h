@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/21 12:55:12 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:46:25 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cam
 	double	dist;
 	int		axis;
 	int		wall_type;
+	int		doors;
 }				t_cam;
 
 typedef struct s_img
@@ -58,6 +59,7 @@ typedef struct s_img
 	int		endian;
 	int		h;
 	int		w;
+	int		frame;
 }				t_img;
 
 typedef struct s_data
@@ -72,19 +74,20 @@ typedef struct s_data
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
+	t_img	view_doors;
 	t_img	textures[7];
 	int		color_floor;
 	int		color_ceiling;
 	int		mouse;
 }				t_data;
 
-//camera.c - 5fcts
+//camera.c - 5 fcts
 int		get_player(t_data *data);
 
-//draw3d.c - 5fcts
-void	draw3d(t_data *data, t_cam rays[WIN_W]);
+//draw3d.c - 5 fcts
+void	draw3d(t_data *data, t_img *view, t_cam rays[WIN_W]);
 
-//error.c - 1fct
+//error.c - 1 fct
 int		put_error(t_data *data, char *err_msg, int err_code);
 
 //gnl.c
@@ -112,7 +115,7 @@ void	draw_minimap(t_data *map, t_img *minimap);
 //move.c - 5 fcts
 int		move(int key, t_data *data);
 
-//turn.c
+//turn.c - 3 fcts
 int		turn_left(t_data *data);
 int		turn_right(t_data *data);
 int		open_close_door(t_data *data, int key);
@@ -130,7 +133,7 @@ int		update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v);
 // raycasting2.c - 5 fcts
 double	ray_dist(char **map, t_cam const player, t_cam *ray, double rad_ang);
 int		compass(t_cam ray);
-t_cam	*cast_rays(t_data *data, t_cam *rays);
+t_cam	*cast_rays(t_data *data, t_cam *rays, int doors);
 
 //render.c - 5 fcts
 void	put_pixel_img(t_img *img, int x, int y, int color);
@@ -145,12 +148,15 @@ int		str_to_rgb_int(char *str_rgb);
 //textures.c - 1 fct
 int		init_texture(t_data *data);
 
-//paths.c - -5 fcts
+//paths.c - 5 fcts
 void	textures_init(char *paths[10]);
 int		free_textures(char *paths[10]);
 int		get_paths(char *file_path, size_t map_start, char *paths[10]);
 
 //vector2d.c - 1 fct
 t_vec2d	new_vec(double x, double y);
+
+//anim.c - 1 fct
+void	anim(t_data *data, t_img *texture);
 
 #endif

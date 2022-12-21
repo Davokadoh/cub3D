@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 16:07:02 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 19:44:28 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:05:41 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@ int	get_map(char *file_path, size_t map_start, size_t map_end, t_data *data)
 	fill_map(&data->map);
 	if (check_closed_map(data->map, data->paths))
 		return (printf("Map not closed\n"));
+	data->map_w = max_length(data->map);
+	data->map_h = map_end - map_start;
 	return (0);
 }

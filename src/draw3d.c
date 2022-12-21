@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 11:09:10 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/21 12:55:21 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:46:11 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ static unsigned int	get_color(t_img texture, int x, int y)
 {
 	unsigned int	clr;
 
+	if (x > texture.h)
+		return (0xFF000000); //Hex -> macro def
 	clr = *(unsigned int *)(texture.addr + (y * texture.line_size + x)
 			* (texture.bpp / 8));
 	return (clr);
@@ -51,7 +53,7 @@ static t_img	get_texture(t_data *data, t_cam rays)
 	t_img	texture;
 
 	texture = data->textures[compass(rays) - 1];
-	if (rays.wall_type == 'D')
+	if (rays.wall_type == 'D' || rays.wall_type == 'o' || rays.wall_type == 'c')
 		texture = data->textures[4];
 	if (rays.wall_type == 'P')
 		texture = data->textures[5];
@@ -60,25 +62,28 @@ static t_img	get_texture(t_data *data, t_cam rays)
 	return (texture);
 }
 
-void	draw3d(t_data *data, t_cam rays[WIN_W])
+void	draw3d(t_data *data, t_img *view, t_cam rays[WIN_W])
 {
 	t_wall	wall;
 	t_vec2d	texel;
 	t_img	texture;
 	int		x;
 
+	anim(data, &data->textures[4]);
 	x = -1;
 	while (++x < WIN_W)
 	{
 		wall.line_h = (WIN_H / rays[x].dist);
 		texture = get_texture(data, rays[x]);
 		texel.x = get_texel_x(texture, rays[x]);
+		if (rays[x].wall_type == 'c' || rays[x].wall_type == 'o')
+			texel.x += texture.frame;
 		wall.top = -wall.line_h / 2 + WIN_H / 2;
 		wall.bot = wall.line_h / 2 + WIN_H / 2;
 		while (--wall.bot > wall.top)
 		{
 			texel.y = get_texel_y(texture, wall.bot, wall.top, wall.line_h);
-			put_pixel_img(&data->view3d, x, (int)wall.bot,
+			put_pixel_img(view, x, (int)wall.bot,
 				get_color(texture, (int)texel.x, (int)texel.y));
 		}
 	}
