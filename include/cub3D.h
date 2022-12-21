@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:59:26 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 19:40:26 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:37:45 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_cam
 	double	dist;
 	int		axis;
 	int		wall_type;
+	int		doors;
 }				t_cam;
 
 typedef struct s_img
@@ -58,6 +59,7 @@ typedef struct s_img
 	int		endian;
 	int		h;
 	int		w;
+	int		frame;
 }				t_img;
 
 typedef struct s_data
@@ -72,6 +74,7 @@ typedef struct s_data
 	t_img	minimap;
 	t_img	view2d;
 	t_img	view3d;
+	t_img	view_doors;
 	t_img	textures[7];
 	int		color_floor;
 	int		color_ceiling;
@@ -82,7 +85,7 @@ typedef struct s_data
 int		get_player(t_data *data);
 
 //draw3d.c - 5fcts
-void	draw3d(t_data *data, t_cam rays[WIN_W]);
+void	draw3d(t_data *data, t_img *view, t_cam rays[WIN_W]);
 
 //error.c - 1fct
 int		put_error(t_data *data, char *err_msg, int err_code);
@@ -130,7 +133,7 @@ int		update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v);
 // raycasting2.c - 5 fcts
 double	ray_dist(char **map, t_cam const player, t_cam *ray, double rad_ang);
 int		compass(t_cam ray);
-t_cam	*cast_rays(t_data *data, t_cam *rays);
+t_cam	*cast_rays(t_data *data, t_cam *rays, int doors);
 
 //render.c - 5 fcts
 void	put_pixel_img(t_img *img, int x, int y, int color);

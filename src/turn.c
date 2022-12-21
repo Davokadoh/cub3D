@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:26:15 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 17:40:00 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:07:15 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ int	open_close_door(t_data *data, int key)
 	dx = data->player.dir.x;
 	dy = data->player.dir.y;
 	if (key == space && data->map[(int)(py + dy)][(int)(px + dx)] == 'D')
-		data->map[(int)(py + dy)][(int)(px + dx)] = '-';
+		data->map[(int)(py + dy)][(int)(px + dx)] = 'o';
 	else if (key == space && data->map[(int)(py + dy)][(int)(px + dx)] == '-')
-		data->map[(int)(py + dy)][(int)(px + dx)] = 'D';
+		data->map[(int)(py + dy)][(int)(px + dx)] = 'c';
 	else if (key == space && data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)]
 			== 'D')
-		data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)] = '-';
+		data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)] = 'o';
 	else if (key == space && data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)]
 			== '-')
-		data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)] = 'D';
+		data->map[(int)(py + 2 * dy)][(int)(px + 2 * dx)] = 'c';
 	else
 		return (1);
 	return (0);

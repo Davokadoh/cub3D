@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 14:33:30 by jleroux           #+#    #+#             */
-/*   Updated: 2022/12/20 16:45:31 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:33:44 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,25 @@ int	init_img(void *mlx, t_img *img, int width, int height)
 int	render(t_data *data)
 {
 	t_cam	rays[WIN_W];
+	t_cam	rays_doors[WIN_W];
 
 	init_img(data->mlx, &data->view2d, MM_W, MM_H);
 	init_img(data->mlx, &data->view3d, WIN_W, WIN_H);
+	init_img(data->mlx, &data->view_doors, WIN_W, WIN_H);
 	fill_img(&data->view2d, 0xFF000000); //Hex -> macro def
+	fill_img(&data->view_doors, 0xFF000000); //Hex -> macro def
 	draw_floor_ceiling(&data->view3d, data);
-	cast_rays(data, rays);
+	cast_rays(data, rays, 0);
+	cast_rays(data, rays_doors, 1);
 	draw2d(data, rays);
-	draw3d(data, rays);
+	draw3d(data, &data->view3d, rays);
+	draw3d(data, &data->view_doors, rays_doors);
 	mlx_put_image_to_window(data->mlx, data->win, data->view3d.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->win, data->view_doors.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->win, data->view2d.img, 0, 0);
 	mlx_destroy_image(data->mlx, data->view2d.img);
 	mlx_destroy_image(data->mlx, data->view3d.img);
+	mlx_destroy_image(data->mlx, data->view_doors.img);
 	return (0);
 }

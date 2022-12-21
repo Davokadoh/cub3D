@@ -6,7 +6,7 @@
 /*   By: vhaefeli <vhaefeli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:50:05 by vhaefeli          #+#    #+#             */
-/*   Updated: 2022/12/20 14:44:34 by vhaefeli         ###   ########.fr       */
+/*   Updated: 2022/12/21 12:36:23 by jleroux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,14 @@ int	update_rayh(char **map, t_cam *ray, int ray_dir, double dist_h)
 		else
 			ray->pos.y = (double)int_y;
 		ray->wall_type = map[(int)ray->pos.y - 1][int_x];
+		if (ray->doors == 0 && (ray->wall_type == 'o' || ray->wall_type == 'c'))
+			return (0);
 		return (ray->wall_type - 48);
 	}
 	ray->pos.y = (double)(int_y + 1);
 	ray->wall_type = map[int_y + 1][int_x];
+	if (ray->doors == 0 && (ray->wall_type == 'o' || ray->wall_type == 'c'))
+		return (0);
 	return (ray->wall_type - 48);
 }
 
@@ -94,9 +98,13 @@ int	update_rayv(char **map, t_cam *ray, int ray_dir, double dist_v)
 		else
 			ray->pos.x = (double)int_x;
 		ray->wall_type = map[int_y][(int)ray->pos.x - 1];
+		if (ray->doors == 0 && (ray->wall_type == 'o' || ray->wall_type == 'c'))
+			return (0);
 		return (ray->wall_type - 48);
 	}
 	ray->pos.x = (double)(int_x + 1);
 	ray->wall_type = map[int_y][int_x + 1];
+	if (ray->doors == 0 && (ray->wall_type == 'o' || ray->wall_type == 'c'))
+		return (0);
 	return (ray->wall_type - 48);
 }
